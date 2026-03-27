@@ -1,221 +1,724 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Angga Pradana Putra | Chief Software Architect & Digital Strategist</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angga Pradana Putra | VVIP Digital Monetization</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@400;600;700&family=Exo+2:wght@300;600;800&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['"Cinzel Decorative"', 'cursive'],
+                        body: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#0a0a0c',
+                        gold: {
+                            light: '#f9e596',
+                            DEFAULT: '#d4af37',
+                            dark: '#998100',
+                        },
+                        cyber: '#1a1a24'
+                    }
+                }
+            }
+        }
+    </script>
 
-<style>
-:root {
-    --gold: #DAAB2D; --gold-bright: #FFE002; --obsidian: #020B13;
-    --border: rgba(218, 171, 45, 0.3); --cyan: #00f5ff;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-body { background: var(--obsidian); color: #e2e8f0; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+    <style>
+        body {
+            background-color: #0a0a0c;
+            color: #e2e8f0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            cursor: none; /* For custom cursor */
+        }
 
-/* 1. LAYER MANAGEMENT (ANTI-BUG) */
-.deco-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.interactive-content { position: relative; z-index: 50; }
+        /* Typography */
+        h1, h2, h3, .font-heading { font-family: '"Cinzel Decorative"', cursive; }
 
-/* 2. ULTIMATE CURSOR SYSTEM (LERP) */
-#cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--gold-bright); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--gold-bright); }
-#cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s ease-out; }
-#cursor-aura { position: fixed; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(218,171,45,0.05) 0%, transparent 70%); pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.2s ease-out; }
+        /* Custom Cursor */
+        #custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.2s, height 0.2s, background 0.2s;
+        }
+        #custom-cursor.active {
+            width: 40px; height: 40px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #d4af37;
+        }
 
-/* 3. PREMIUM UI EFFECTS */
-.glass-gold { background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(25px); border: 1px solid var(--border); box-shadow: 0 10px 50px rgba(0,0,0,0.8); }
-.shimmer { background: linear-gradient(90deg, var(--gold), #fff, var(--gold)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shim 3s linear infinite; }
-@keyframes shim { to { background-position: 200% center; } }
+        /* Background Effects (Zero Click Interference) */
+        .bg-particles {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            background-image: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: -1;
+        }
 
-/* 4. FOMO TICKER */
-.ticker-wrap { width: 100%; overflow: hidden; background: rgba(7, 7, 16, 0.95); border-bottom: 1px solid rgba(0, 245, 255, 0.2); padding: 10px 0; position: fixed; top: 0; z-index: 500; }
-.ticker-move { display: flex; animation: ticker 40s linear infinite; white-space: nowrap; }
-@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        /* Premium Glassmorphism */
+        .glass-gold {
+            background: rgba(26, 26, 36, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .glass-gold:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1), 0 0 30px rgba(212, 175, 55, 0.2);
+        }
 
-/* 5. DRAWER MOBILE */
-.mobile-drawer { position: fixed; top: 0; right: 0; width: 300px; height: 100vh; background: #050505; z-index: 2000; transform: translateX(100%); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 40px; }
-.mobile-drawer.open { transform: translateX(0); }
+        /* Text Effects */
+        .text-glow-gold {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(to right, #f9e596, #d4af37, #998100);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* 6. TOAST sales */
-.toast { position: fixed; bottom: 30px; left: 30px; background: rgba(10,10,10,0.9); border-left: 4px solid var(--gold); padding: 15px 25px; border-radius: 12px; z-index: 500; animation: slideIn 0.5s ease forwards; }
-@keyframes slideIn { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        /* Scroll Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* 7. BOT */
-#bot-window { position: fixed; bottom: 100px; right: 30px; width: 350px; background: rgba(10,10,10,0.98); border: 1px solid var(--gold); border-radius: 20px; display: none; flex-direction: column; z-index: 1000; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,1); }
-#bot-window.open { display: flex; }
-</style>
-</head>
-<body>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0c; }
+        ::-webkit-scrollbar-thumb { background: #998100; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
 
-<div id="cursor-aura"></div>
-<div id="cursor-ring"></div>
-<div id="cursor-dot"></div>
+        /* Map Filter */
+        .map-gold-filter {
+            filter: grayscale(100%) sepia(100%) hue-rotate(5deg) saturate(300%) contrast(0.8) brightness(0.7);
+        }
 
-<div class="deco-layer"><canvas id="particles"></canvas></div>
-
-<div class="ticker-wrap">
-    <div class="ticker-move">
-        <span class="px-10 text-[10px] font-bold text-cyan-400">🚨 ALGORITMA UPDATE 2026: FACEBOOK REELS MEMPRIORITASKAN VIDEO VEO 3</span>
-        <span class="px-10 text-[10px] font-bold text-amber-400">🔥 500+ MURID SUDAH CUAN • MENTOR LANGSUNG KE RUMAH •</span>
-        <span class="px-10 text-[10px] font-bold text-cyan-400">🚨 ALGORITMA UPDATE 2026: FACEBOOK REELS MEMPRIORITASKAN VIDEO VEO 3</span>
-        <span class="px-10 text-[10px] font-bold text-amber-400">🔥 500+ MURID SUDAH CUAN • MENTOR LANGSUNG KE RUMAH •</span>
-    </div>
-</div>
-
-<nav class="fixed top-12 w-full z-[400] px-8 py-6 interactive-content">
-    <div class="max-w-7xl mx-auto flex justify-between items-center glass-gold p-4 rounded-3xl">
-        <div class="font-black text-xl tracking-tighter shimmer" style="font-family:'Cinzel Decorative'">ANGGA PRADANA</div>
-        <div class="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[3px]">
-            <a href="#hero" class="hover:text-gold transition">Beranda</a>
-            <a href="#visualizer" class="hover:text-gold transition">Proyeksi</a>
-            <a href="#pricing" class="hover:text-gold transition">Kurikulum</a>
-        </div>
-        <div id="google_translate_element"></div>
-        <div class="md:hidden text-gold text-2xl" id="menu-trigger">☰</div>
-    </div>
-</nav>
-
-<main class="interactive-content">
-    <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-40">
-        <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[0.85] shimmer" style="font-family:'Cinzel Decorative'">RAHASIA<br>ALGORITMA</h1>
-        <p class="text-xl text-slate-400 max-w-3xl mx-auto mb-16 font-medium">Hasilkan Jutaan Rupiah dari YouTube, TikTok & Facebook secara Otomatis. <br><span class="text-gold">Satu-satunya di Aceh Tenggara dengan Full AI Workflow.</span></p>
+        /* Interactive z-index fixes */
+        .interactive-layer { position: relative; z-index: 50; }
         
-        <div class="flex gap-6 justify-center mb-16">
-            <div class="glass-gold p-6 min-w-[100px]"><span id="h" class="text-4xl font-black">23</span><p class="text-[10px] text-slate-500">JAM</p></div>
-            <div class="glass-gold p-6 min-w-[100px]"><span id="m" class="text-4xl font-black">59</span><p class="text-[10px] text-slate-500">MENIT</p></div>
-            <div class="glass-gold p-6 min-w-[100px]"><span id="s" class="text-4xl font-black">59</span><p class="text-[10px] text-slate-500">DETIK</p></div>
-        </div>
+        /* Payment Chips */
+        .payment-chip:checked + label {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            color: #f9e596;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body class="relative">
 
-        <button onclick="document.getElementById('pricing').scrollIntoView()" class="bg-gold text-black font-black px-14 py-6 rounded-full text-lg shadow-2xl hover:scale-110 transition cursor-none">PILIH SENJATA CUAN LU →</button>
-    </section>
+    <div id="custom-cursor"></div>
 
-    <section id="visualizer" class="py-32 px-4 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4" style="font-family:'Cinzel Decorative'">CUAN VISUALIZER PRO</h2>
-            <p class="text-slate-500 tracking-[5px] uppercase text-xs">Lintasan Pertumbuhan Pasif Income 12 Bulan</p>
-        </div>
-        <div class="glass-gold p-10 rounded-[40px]">
-            <canvas id="cuanChart"></canvas>
-        </div>
-    </section>
+    <div class="bg-particles"></div>
+    <div class="glow-orb w-[50vw] h-[50vw] bg-gold-dark/10 top-[-10%] left-[-10%]"></div>
+    <div class="glow-orb w-[40vw] h-[40vw] bg-gold-dark/10 bottom-[-10%] right-[-10%]"></div>
 
-    <section id="pricing" class="py-32 px-4 max-w-7xl mx-auto">
-        <div id="content-fb" class="grid md:grid-cols-3 gap-8">
-            <div class="glass-gold p-10 rounded-[50px] border-2 border-gold scale-105 relative">
-                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-black px-6 py-2 rounded-full font-black text-[10px]">REKOMENDASI UTAMA</span>
-                <h3 class="text-gold font-bold text-xs tracking-[4px] uppercase mb-4">Master Class</h3>
-                <h2 class="text-4xl font-black mb-8">VVIP LEVEL</h2>
-                <div class="text-5xl font-black text-white mb-10">Rp 5jt</div>
-                <ul class="text-sm space-y-4 mb-12 text-slate-300">
-                    <li><i class="fas fa-crown text-gold mr-3"></i> 1-on-1 Home Visit / Zoom</li>
-                    <li><i class="fas fa-crown text-gold mr-3"></i> Full Done-For-You Setup</li>
-                    <li><i class="fas fa-crown text-gold mr-3"></i> Rahasia Veo 3 & Sora 2</li>
-                </ul>
-                <button onclick="openModal('VVIP Mastery', '5.000.000')" class="w-full py-6 bg-gold text-black font-black rounded-3xl hover:bg-white transition cursor-none uppercase tracking-widest">Amankan Slot Lu</button>
-            </div>
-            <div class="glass-gold p-10 rounded-[50px] opacity-70">
-                 <h2 class="text-3xl font-bold mb-4">STARTER</h2>
-                 <p class="text-3xl font-black mb-8">Rp 499k</p>
-                 <button onclick="openModal('Starter Pack', '499.000')" class="w-full py-4 border border-gold text-gold font-bold rounded-2xl cursor-none">PILIH</button>
-            </div>
-            <div class="glass-gold p-10 rounded-[50px] opacity-70">
-                 <h2 class="text-3xl font-bold mb-4">PRO AI</h2>
-                 <p class="text-3xl font-black mb-8">Rp 999k</p>
-                 <button onclick="openModal('Pro AI Pack', '999.000')" class="w-full py-4 border border-gold text-gold font-bold rounded-2xl cursor-none">PILIH</button>
-            </div>
-        </div>
-    </section>
+    <div class="fixed left-4 top-1/2 -translate-y-1/2 z-[100] flex flex-col gap-4">
+        <a href="#" class="w-10 h-10 rounded-full glass-gold flex items-center justify-center text-gold hover:scale-110 transition-transform"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="w-10 h-10 rounded-full glass-gold flex items-center justify-center text-gold hover:scale-110 transition-transform"><i class="fab fa-telegram"></i></a>
+        <a href="#" class="w-10 h-10 rounded-full glass-gold flex items-center justify-center text-gold hover:scale-110 transition-transform"><i class="fab fa-facebook-f"></i></a>
+    </div>
 
-    <section class="py-32 px-4 max-w-6xl mx-auto">
-        <div class="glass-gold p-10 rounded-[50px] grid md:grid-cols-2 gap-12 items-center">
-            <div class="rounded-[30px] overflow-hidden h-80 grayscale invert contrast-125 border border-gold/30">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15945.71966270416!2d97.81881775!3d3.46824965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303964951475c753%3A0x6730591b689e49c1!2sBambel%2C%20Aceh%20Tenggara!5e0!3m2!1sid!2sid!4v1711580000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="fixed top-4 right-4 z-[100] glass-gold px-3 py-1 rounded-lg text-sm" id="google_translate_element"></div>
+
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 pb-10 interactive-layer relative">
+        <div class="reveal max-w-5xl mx-auto">
+            <div class="inline-block glass-gold px-6 py-2 rounded-full mb-6 border border-gold/30">
+                <span class="text-gold font-bold tracking-widest text-sm uppercase"><i class="fas fa-crown mr-2"></i> Angga Pradana Putra Exclusive</span>
             </div>
-            <div>
-                <h2 class="text-3xl font-black mb-6" style="font-family:'Cinzel Decorative'">MARKAS KOMANDO</h2>
-                <p class="text-slate-400 mb-8">Bambel, Aceh Tenggara. Infrastruktur fisik operasional digital marketing kami.</p>
-                <div class="text-sm font-bold flex flex-col gap-3">
-                    <p><i class="fab fa-whatsapp text-gold mr-3"></i> +62 882-7720-0044</p>
-                    <p><i class="fas fa-envelope text-gold mr-3"></i> ANGGAPRADANA@AI.ID</p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-black leading-tight mb-6 text-glow-gold">
+                Belajar Rahasia Algoritma YouTube, TikTok & Facebook.
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 font-light max-w-3xl mx-auto">
+                Hasilkan Jutaan Rupiah untuk <span class="text-gold font-bold">Pasif Income Hari Tua Anda!</span> Sistem anti-boncos teruji dengan AI Generatif.
+            </p>
+
+            <div class="glass-gold p-6 rounded-2xl inline-block mb-10">
+                <p class="text-sm text-gray-400 uppercase tracking-widest mb-3">Pendaftaran Batch Ini Ditutup Dalam:</p>
+                <div class="flex gap-4 justify-center" id="fomo-timer">
+                    <div class="text-center"><div class="text-3xl md:text-4xl font-bold text-gold" id="t-hours">23</div><div class="text-xs text-gray-500">JAM</div></div>
+                    <div class="text-3xl md:text-4xl font-bold text-gold/50">:</div>
+                    <div class="text-center"><div class="text-3xl md:text-4xl font-bold text-gold" id="t-mins">59</div><div class="text-xs text-gray-500">MENIT</div></div>
+                    <div class="text-3xl md:text-4xl font-bold text-gold/50">:</div>
+                    <div class="text-center"><div class="text-3xl md:text-4xl font-bold text-gold" id="t-secs">59</div><div class="text-xs text-gray-500">DETIK</div></div>
                 </div>
             </div>
+
+            <br>
+            <a href="#pricing" class="inline-block bg-gradient-to-r from-gold-dark via-gold to-gold-dark text-obsidian font-bold text-lg py-4 px-12 rounded-full hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.4)] interactive">
+                Amankan Kursi VVIP Sekarang <i class="fas fa-chevron-right ml-2"></i>
+            </a>
         </div>
     </section>
-</main>
 
-<footer class="py-12 text-center text-slate-700">
-    <p class="text-[9px] tracking-[6px] font-black uppercase">Developed by Wang Weize • Digital Architect 2026</p>
-</footer>
-
-<div id="checkout-modal" class="modal-layer items-center justify-center bg-black/95 backdrop-blur-xl">
-    <div class="glass-gold p-10 max-w-md w-full mx-4 border-gold/50">
-        <h2 class="text-2xl font-black mb-6 shimmer">KONFIRMASI AKSES</h2>
-        <p id="m-pkg" class="text-gold font-bold mb-8 text-xs tracking-widest"></p>
-        <input type="text" id="cust-nama" placeholder="NAMA LENGKAP LU" class="w-full p-5 bg-white/5 border border-white/10 rounded-2xl mb-6 outline-none focus:border-gold transition text-white">
-        <div class="flex gap-2 mb-8">
-            <button onclick="setPay('BCA')" class="p-chip flex-1 py-3 border border-white/10 rounded-xl text-[10px] font-bold cursor-none">BCA</button>
-            <button onclick="setPay('DANA')" class="p-chip flex-1 py-3 border border-white/10 rounded-xl text-[10px] font-bold cursor-none">DANA</button>
+    <section class="py-20 px-4 max-w-6xl mx-auto interactive-layer">
+        <div class="reveal text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-heading text-glow-gold mb-4">Kenapa Harus Belajar Sekarang?</h2>
+            <p class="text-gray-400">Proyeksi pertumbuhan pasif income menggunakan strategi matriks algoritma kami.</p>
         </div>
-        <button onclick="executeWA()" class="w-full py-6 bg-gold text-black font-black rounded-2xl hover:scale-105 transition cursor-none">KONFIRMASI PENDAFTARAN</button>
-        <button onclick="closeModal()" class="w-full mt-4 text-slate-500 text-[9px] tracking-widest uppercase">Batal</button>
+        <div class="glass-gold p-6 md:p-10 rounded-3xl reveal">
+            <canvas id="cuanChart" class="w-full h-[400px]"></canvas>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 max-w-6xl mx-auto interactive-layer">
+        <div class="reveal text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-heading text-glow-gold mb-4">Arsenal AI Kelas Dunia</h2>
+            <p class="text-gray-400">Tinggalkan cara lama. Produksi ribuan konten tanpa perlu tampil di depan kamera.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 reveal">
+            <div class="glass-gold p-10 rounded-3xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-[50px] rounded-full group-hover:bg-blue-500/40 transition-colors"></div>
+                <i class="fa-solid fa-video text-5xl text-blue-400 mb-6 drop-shadow-[0_0_15px_rgba(96,165,250,0.8)]"></i>
+                <h3 class="text-2xl font-bold text-white mb-4">Google Veo 3 Integration</h3>
+                <p class="text-gray-400 mb-4">Pelajari rahasia prompt sintesis video resolusi tinggi AI. Ciptakan visual sinematik 4K hanya dari teks, siap mendominasi YouTube Global dengan RPM tinggi.</p>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><i class="fas fa-check text-gold mr-2"></i> Prompting Text-to-Video Akurat</li>
+                    <li><i class="fas fa-check text-gold mr-2"></i> Konsistensi Karakter & Style</li>
+                </ul>
+            </div>
+            
+            <div class="glass-gold p-10 rounded-3xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-pink-500/20 blur-[50px] rounded-full group-hover:bg-pink-500/40 transition-colors"></div>
+                <i class="fa-solid fa-film text-5xl text-pink-400 mb-6 drop-shadow-[0_0_15px_rgba(244,114,182,0.8)]"></i>
+                <h3 class="text-2xl font-bold text-white mb-4">Sora 2 Cinematic Engine</h3>
+                <p class="text-gray-400 mb-4">Bypass batasan fisik. Gunakan Sora 2 untuk membuat *B-Roll* super realistis, video durasi panjang tanpa patah, dan manipulasi realitas untuk konten TikTok viral.</p>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><i class="fas fa-check text-gold mr-2"></i> Fisika & Gravitasi Realistis</li>
+                    <li><i class="fas fa-check text-gold mr-2"></i> Multi-Angle Generation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-20 px-4 max-w-7xl mx-auto interactive-layer">
+        <div class="reveal text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-heading text-glow-gold mb-4">Investasi Ilmu Anti Boncos</h2>
+            <p class="text-gray-400">Pilih senjata yang paling cocok untuk mendominasi algoritma.</p>
+        </div>
+
+        <div class="flex justify-center flex-wrap gap-4 mb-12 reveal">
+            <button onclick="switchTab('fb')" id="btn-fb" class="tab-btn px-8 py-4 rounded-full bg-gold text-obsidian font-bold transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] interactive">
+                <i class="fab fa-facebook mr-2"></i> Facebook Monet
+            </button>
+            <button onclick="switchTab('yt')" id="btn-yt" class="tab-btn px-8 py-4 rounded-full glass-gold text-gray-300 font-bold transition-all hover:text-gold interactive">
+                <i class="fab fa-youtube mr-2"></i> YouTube Mastery
+            </button>
+            <button onclick="switchTab('tk')" id="btn-tk" class="tab-btn px-8 py-4 rounded-full glass-gold text-gray-300 font-bold transition-all hover:text-gold interactive">
+                <i class="fab fa-tiktok mr-2"></i> TikTok Viral
+            </button>
+        </div>
+
+        <div id="content-fb" class="tab-content grid lg:grid-cols-3 gap-8">
+            <div class="glass-gold p-8 rounded-3xl flex flex-col reveal">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Starter</h3>
+                <div class="text-3xl font-heading font-bold text-white mb-6">Rp 200.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum:</p>
+                    <ul class="text-sm text-gray-400 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Fundamental Algoritma Facebook Pager</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Setup Fanspage Anti-Banned Dasar</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Trik Kejar Jam Tayang Instream Aman</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Optimasi Profil & Cover AI</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('Facebook Starter', 200000)" class="w-full py-4 rounded-xl border border-gold text-gold hover:bg-gold hover:text-obsidian transition-colors font-bold interactive">Pilih Starter</button>
+            </div>
+            <div class="glass-gold p-8 rounded-3xl flex flex-col relative transform lg:-translate-y-6 border-gold shadow-[0_0_30px_rgba(212,175,55,0.2)] reveal" style="border-width: 2px;">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-obsidian text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest">Paling Cuan</div>
+                <h3 class="text-xl font-bold text-gold mb-1">Pro Class</h3>
+                <div class="text-4xl font-heading font-bold text-white mb-6">Rp 500.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum (Termasuk Starter):</p>
+                    <ul class="text-sm text-gray-300 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Advance Meta Algorithm 2026</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Rahasia FB Reels Viral Organik</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Advanced Prompting ChatGPT/Gemini</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Trik Ternak Akun Skala Besar</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('Facebook Pro Class', 500000)" class="w-full py-4 rounded-xl bg-gold text-obsidian hover:bg-gold-light transition-colors font-bold interactive">Pilih Pro Class</button>
+            </div>
+            <div class="glass-gold p-8 rounded-3xl flex flex-col reveal relative">
+                <i class="fas fa-gem absolute top-6 right-6 text-2xl text-gold/30"></i>
+                <h3 class="text-xl font-bold text-gray-300 mb-1">VVIP Mentoring</h3>
+                <div class="text-3xl font-heading font-bold text-white mb-6">Rp 5.000.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum (All Access):</p>
+                    <ul class="text-sm text-gray-400 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Private Mentoring (Zoom/Home Visit)</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Done-For-You Setup (Terima Beres)</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Akses Modul Rahasia Veo 3 & Sora 2</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Grup Discord Inner Circle Seumur Hidup</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('Facebook VVIP Mentoring', 5000000)" class="w-full py-4 rounded-xl border border-gold text-gold hover:bg-gold hover:text-obsidian transition-colors font-bold interactive">Daftar VVIP</button>
+            </div>
+        </div>
+
+        <div id="content-yt" class="tab-content hidden grid lg:grid-cols-3 gap-8">
+             <div class="glass-gold p-8 rounded-3xl flex flex-col reveal">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Starter</h3>
+                <div class="text-3xl font-heading font-bold text-white mb-6">Rp 160.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum:</p>
+                    <ul class="text-sm text-gray-400 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Pola Algoritma YouTube 2026</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Teknik SEO & Metadata Sempurna</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Niche Research untuk RPM Tinggi</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('YouTube Starter', 160000)" class="w-full py-4 rounded-xl border border-gold text-gold hover:bg-gold hover:text-obsidian transition-colors font-bold interactive">Pilih Starter</button>
+            </div>
+            <div class="glass-gold p-8 rounded-3xl flex flex-col relative transform lg:-translate-y-6 border-gold shadow-[0_0_30px_rgba(212,175,55,0.2)] reveal" style="border-width: 2px;">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-obsidian text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest">Paling Cuan</div>
+                <h3 class="text-xl font-bold text-gold mb-1">Pro Class</h3>
+                <div class="text-4xl font-heading font-bold text-white mb-6">Rp 450.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum (Termasuk Starter):</p>
+                    <ul class="text-sm text-gray-300 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Strategi YouTube Shorts Meledak</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Automasi Konten Faceless dgn AI</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Hook & Retention Hack 80%+</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('YouTube Pro Class', 450000)" class="w-full py-4 rounded-xl bg-gold text-obsidian hover:bg-gold-light transition-colors font-bold interactive">Pilih Pro Class</button>
+            </div>
+            <div class="glass-gold p-8 rounded-3xl flex flex-col reveal relative">
+                <i class="fas fa-gem absolute top-6 right-6 text-2xl text-gold/30"></i>
+                <h3 class="text-xl font-bold text-gray-300 mb-1">VVIP Mentoring</h3>
+                <div class="text-3xl font-heading font-bold text-white mb-6">Rp 4.000.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum (All Access):</p>
+                    <ul class="text-sm text-gray-400 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Bedah Channel 1-on-1 Intensif</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Akses API Rahasia (Veo/Sora)</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Strategi Dominasi Market Global Tier 1</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Private Discord & Support Langsung</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('YouTube VVIP Mentoring', 4000000)" class="w-full py-4 rounded-xl border border-gold text-gold hover:bg-gold hover:text-obsidian transition-colors font-bold interactive">Daftar VVIP</button>
+            </div>
+        </div>
+
+        <div id="content-tk" class="tab-content hidden grid lg:grid-cols-3 gap-8">
+             <div class="glass-gold p-8 rounded-3xl flex flex-col reveal">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Starter</h3>
+                <div class="text-3xl font-heading font-bold text-white mb-6">Rp 120.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum:</p>
+                    <ul class="text-sm text-gray-400 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Anatomi FYP TikTok Organik</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Psikologi Hook 3 Detik Pertama</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Basic Editing Jedag-Jedug CapCut</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('TikTok Starter', 120000)" class="w-full py-4 rounded-xl border border-gold text-gold hover:bg-gold hover:text-obsidian transition-colors font-bold interactive">Pilih Starter</button>
+            </div>
+            <div class="glass-gold p-8 rounded-3xl flex flex-col relative transform lg:-translate-y-6 border-gold shadow-[0_0_30px_rgba(212,175,55,0.2)] reveal" style="border-width: 2px;">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-obsidian text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest">Paling Cuan</div>
+                <h3 class="text-xl font-bold text-gold mb-1">Pro Class</h3>
+                <div class="text-4xl font-heading font-bold text-white mb-6">Rp 240.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum (Termasuk Starter):</p>
+                    <ul class="text-sm text-gray-300 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Masterclass Affiliate Marketing</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Script Live Streaming Pecah Telur</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Manipulasi Algoritma Keranjang Kuning</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('TikTok Pro Class', 240000)" class="w-full py-4 rounded-xl bg-gold text-obsidian hover:bg-gold-light transition-colors font-bold interactive">Pilih Pro Class</button>
+            </div>
+            <div class="glass-gold p-8 rounded-3xl flex flex-col reveal relative">
+                <i class="fas fa-gem absolute top-6 right-6 text-2xl text-gold/30"></i>
+                <h3 class="text-xl font-bold text-gray-300 mb-1">VVIP Mentoring</h3>
+                <div class="text-3xl font-heading font-bold text-white mb-6">Rp 3.000.000</div>
+                <div class="space-y-4 mb-8 flex-1">
+                    <p class="text-sm font-bold text-gold border-b border-gold/20 pb-2">Kurikulum (All Access):</p>
+                    <ul class="text-sm text-gray-400 space-y-3">
+                        <li><i class="fas fa-check text-gold mr-2"></i> Setup TikTok Agency Level</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Bedah Akun Live Zoom Private</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Strategi Skala Iklan (TikTok Ads)</li>
+                        <li><i class="fas fa-check text-gold mr-2"></i> Akses Lingkaran Dalam (Inner Circle)</li>
+                    </ul>
+                </div>
+                <button onclick="openModal('TikTok VVIP Mentoring', 3000000)" class="w-full py-4 rounded-xl border border-gold text-gold hover:bg-gold hover:text-obsidian transition-colors font-bold interactive">Daftar VVIP</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 max-w-6xl mx-auto interactive-layer">
+        <div class="glass-gold rounded-3xl overflow-hidden reveal flex flex-col md:flex-row">
+            <div class="md:w-1/2 p-10 flex flex-col justify-center">
+                <h2 class="text-3xl font-heading text-glow-gold mb-4">Basecamp Premium</h2>
+                <p class="text-gray-300 mb-6">Kunjungi markas operasional kami untuk konsultasi langsung atau sesi VVIP Home Visit.</p>
+                <ul class="space-y-4 text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-map-marker-alt text-gold mt-1"></i>
+                        <span>Dekat Rikit, Kec. Bambel, Kab. Aceh Tenggara, Aceh 24651</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fab fa-whatsapp text-gold"></i>
+                        <span>+62 882-7720-0044</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-gold"></i>
+                        <span>anggapradanaarival@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="md:w-1/2 h-64 md:h-auto">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.2238426021626!2d97.8385!3d3.4913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMjknMjguNyJOIDk3wrA1MCcxOC42IkU!5e0!3m2!1sen!2sid!4v1690000000000!5m2!1sen!2sid" class="w-full h-full border-0 map-gold-filter" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass-gold mt-10 py-8 border-t border-gold/20 interactive-layer text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <h3 class="text-2xl font-heading text-gold mb-2">Angga Pradana Putra</h3>
+            <p class="text-sm text-gray-500 mb-4">&copy; 2026 Hak Cipta Dilindungi Undang-Undang.</p>
+            <p class="text-xs text-gray-600">Sistem dirakit oleh <span class="text-gold/50">Wang Weize</span></p>
+        </div>
+    </footer>
+
+    <div id="toast-container" class="fixed bottom-6 left-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+
+    <div class="fixed bottom-6 right-6 z-[110] flex flex-col items-end">
+        <div id="chat-window" class="glass-gold w-80 md:w-96 rounded-2xl mb-4 shadow-2xl flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right opacity-0 scale-50 pointer-events-none">
+            <div class="bg-gradient-to-r from-obsidian to-cyber border-b border-gold/30 p-4 flex justify-between items-center interactive-layer">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-robot text-gold text-xl"></i>
+                        <span class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-obsidian"></span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm font-heading tracking-wider">ANGGA-BOT</h4>
+                        <p class="text-[10px] text-green-400">Online | AI Assistant</p>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-gray-400 hover:text-gold interactive"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chat-body" class="p-4 h-72 overflow-y-auto flex flex-col gap-3 text-sm bg-obsidian/80 interactive-layer">
+                <div class="bg-cyber p-3 rounded-r-xl rounded-bl-xl border border-gold/20 self-start w-[85%] text-gray-300">
+                    Halo! Ada pertanyaan tentang materi VVIP, rahasia AI, atau mau langsung daftar? Gas tanyain aja!
+                </div>
+            </div>
+            <div class="p-3 border-t border-gold/20 bg-cyber flex gap-2 interactive-layer">
+                <input type="text" id="chat-input" placeholder="Tanya sesuatu..." class="flex-1 bg-obsidian border border-gold/30 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-gold interactive" onkeypress="handleChatEnter(event)">
+                <button onclick="processChat()" class="bg-gold text-obsidian px-4 rounded-lg hover:bg-gold-light transition-colors font-bold interactive"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        
+        <button onclick="toggleChat()" class="w-16 h-16 bg-gold rounded-full flex items-center justify-center text-obsidian text-2xl shadow-[0_0_20px_rgba(212,175,55,0.6)] hover:scale-110 transition-transform relative interactive group">
+            <i class="fa-solid fa-comment-dots group-hover:hidden"></i>
+            <i class="fa-solid fa-robot hidden group-hover:block"></i>
+            <span class="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-obsidian animate-pulse"></span>
+        </button>
     </div>
-</div>
 
-<div id="bot-window" class="glass-gold">
-    <div class="bg-gold p-4 text-black font-black text-[10px] tracking-widest">ANGGA-BOT SYSTEM</div>
-    <div id="chat-msgs" class="flex-1 overflow-y-auto p-4 space-y-4 text-xs"></div>
-    <div class="p-3 border-t border-white/10 flex">
-        <input type="text" id="chat-in" class="flex-1 bg-transparent outline-none text-white text-xs" placeholder="Input kueri strategi...">
-        <button onclick="sendChat()" class="text-gold font-bold">></button>
+    <div id="checkout-modal" class="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-gold relative w-full max-w-lg mx-4 p-8 rounded-3xl border border-gold/40 shadow-[0_0_50px_rgba(212,175,55,0.2)] transform scale-95 transition-transform duration-300 interactive-layer" id="modal-content">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gold text-xl interactive"><i class="fas fa-times"></i></button>
+            
+            <h3 class="text-3xl font-heading font-bold mb-2 text-glow-gold">Selesaikan Akses Anda</h3>
+            <p class="text-gray-400 mb-6 text-sm">Amankan kursi sebelum countdown berakhir.</p>
+            
+            <div class="bg-obsidian/50 border border-gold/20 rounded-xl p-4 mb-6 flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider">Paket Terpilih</p>
+                    <p id="paket-label" class="font-bold text-white text-lg"></p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-gray-500 uppercase tracking-wider">Total Investasi</p>
+                    <p id="harga-label" class="font-bold text-gold text-xl"></p>
+                </div>
+            </div>
+            
+            <form id="checkout-form" onsubmit="submitCheckout(event)">
+                <div class="mb-5">
+                    <label class="block text-xs text-gold uppercase tracking-wider mb-2">Nama Lengkap</label>
+                    <input type="text" id="cust-name" required class="w-full bg-cyber border border-gold/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors interactive">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-xs text-gold uppercase tracking-wider mb-3">Pilih Metode Pembayaran</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="relative interactive">
+                            <input type="radio" name="payment" id="pay-bca" value="BCA" class="peer sr-only payment-chip" required>
+                            <label for="pay-bca" class="block w-full text-center bg-cyber border border-gold/10 rounded-lg py-3 cursor-pointer transition-all text-gray-400 hover:border-gold/50">
+                                <i class="fas fa-university mb-1 block text-lg"></i> <span class="text-xs font-bold">BCA</span>
+                            </label>
+                        </div>
+                        <div class="relative interactive">
+                            <input type="radio" name="payment" id="pay-qris" value="QRIS" class="peer sr-only payment-chip">
+                            <label for="pay-qris" class="block w-full text-center bg-cyber border border-gold/10 rounded-lg py-3 cursor-pointer transition-all text-gray-400 hover:border-gold/50">
+                                <i class="fas fa-qrcode mb-1 block text-lg"></i> <span class="text-xs font-bold">QRIS</span>
+                            </label>
+                        </div>
+                        <div class="relative interactive">
+                            <input type="radio" name="payment" id="pay-dana" value="DANA" class="peer sr-only payment-chip">
+                            <label for="pay-dana" class="block w-full text-center bg-cyber border border-gold/10 rounded-lg py-3 cursor-pointer transition-all text-gray-400 hover:border-gold/50">
+                                <i class="fas fa-wallet mb-1 block text-lg"></i> <span class="text-xs font-bold">DANA</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-gold-dark via-gold to-gold-dark text-obsidian font-bold text-lg py-4 rounded-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] transition-all interactive">
+                    Konfirmasi via WhatsApp <i class="fab fa-whatsapp ml-2"></i>
+                </button>
+            </form>
+        </div>
     </div>
-</div>
-<div id="bot-trigger" onclick="toggleBot()"><i class="fas fa-robot text-black"></i></div>
 
-<script>
-// --- 1. SCRIPT STABILIZER ---
-const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring'), aura = document.getElementById('cursor-aura');
-let mx = 0, my = 0; document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
-function anim() { 
-    let rx = parseFloat(ring.style.left || mx), ry = parseFloat(ring.style.top || my);
-    ring.style.left = (rx + (mx - rx) * 0.15) + 'px'; ring.style.top = (ry + (my - ry) * 0.15) + 'px';
-    let ax = parseFloat(aura.style.left || mx), ay = parseFloat(aura.style.top || my);
-    aura.style.left = (ax + (mx - ax) * 0.05) + 'px'; aura.style.top = (ay + (my - ay) * 0.05) + 'px';
-    requestAnimationFrame(anim);
-} anim();
+    <script>
+        // --- 1. Custom Cursor ---
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.interactive, a, button, input, label').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
 
-// --- 2. CHART FULL DATA ---
-const cCtx = document.getElementById('incomeChart').getContext('2d');
-new Chart(cCtx, { type: 'line', data: { labels: ['B1','B2','B3','B4','B5','B6','B7','B8','B9','B10','B11','B12'], datasets: [{ label: 'Cuan (Juta)', data: [0, 8, 18, 35, 60, 95, 140, 200, 280, 380, 500, 650], borderColor: '#DAAB2D', backgroundColor: 'rgba(218,171,45,0.05)', fill: true, tension: 0.4, borderWidth: 4 }] }, options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false }, ticks: { color: '#444' } } } } });
+        // --- 2. Intersection Observer (Fade-In) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// --- 3. SYSTEM LOGIC ---
-let curP = '', curM = '';
-function switchTab(id) { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); document.getElementById('btn-'+id).classList.add('active'); document.getElementById('content-'+id).classList.add('active'); }
-function openModal(p, pr) { curP = p + " (" + pr + ")"; document.getElementById('m-pkg').innerText = curP; document.getElementById('checkout-modal').style.display = 'flex'; }
-function closeModal() { document.getElementById('checkout-modal').style.display = 'none'; }
-function setPay(m) { document.querySelectorAll('.p-chip').forEach(c => c.style.borderColor = 'rgba(255,255,255,0.1)'); event.target.style.borderColor = '#DAAB2D'; curM = m; }
-function executeWA() { let n = document.getElementById('cust-nama').value; if(!n || !curM) return alert("Matriks Identitas Kosong!"); window.open(`https://wa.me/6288277200044?text=${encodeURIComponent('Inisiasi Akses VVIP: '+n+' mendaftar '+curP+' via '+curM)}`, '_blank'); }
+        // --- 3. Google Translate ---
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'id', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        const gtScript = document.createElement('script');
+        gtScript.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.head.appendChild(gtScript);
 
-// --- 4. FOMO ---
-setInterval(() => { let n = new Date(); document.getElementById('th').innerText = (23-n.getHours()).toString().padStart(2,'0'); document.getElementById('tm').innerText = (59-n.getMinutes()).toString().padStart(2,'0'); document.getElementById('ts').innerText = (59-n.getSeconds()).toString().padStart(2,'0'); }, 1000);
-const users = ['Sari', 'Budi', 'Kevin', 'Nurul', 'Rizky'];
-setInterval(() => { let t = document.createElement('div'); t.className = 'toast'; t.innerHTML = `🔥 <strong>${users[Math.floor(Math.random()*5)]}</strong> baru saja mendaftar Paket VVIP!`; document.body.appendChild(t); setTimeout(() => t.remove(), 4000); }, 15000);
+        // --- 4. FOMO Engine (Countdown 24h cycle) ---
+        function updateTimer() {
+            const now = new Date();
+            const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+            const diff = tomorrow - now;
+            
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('t-hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('t-mins').innerText = m.toString().padStart(2, '0');
+            document.getElementById('t-secs').innerText = s.toString().padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
 
-// --- 5. BOT & PARTICLES ---
-function toggleBot() { let w = document.getElementById('bot-window'); w.classList.toggle('open'); }
-function sendChat() { let i = document.getElementById('chat-in'); if(!i.value) return; document.getElementById('chat-msgs').innerHTML += `<p class="text-right text-gold">[Lu]: ${i.value}</p>`; setTimeout(() => { document.getElementById('chat-msgs').innerHTML += `<p class="bg-white/5 p-3 rounded-2xl border border-white/10">[AI]: Strategi algoritma menyarankan lu ambil paket VVIP buat hasil maksimal.</p>`; }, 600); i.value = ''; }
+        // --- 5. Chart.js (Cuan Visualizer) ---
+        const ctx = document.getElementById('cuanChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(212, 175, 55, 0.5)');
+        gradient.addColorStop(1, 'rgba(212, 175, 55, 0)');
 
-const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
-let w, h, pts = []; function resize() { w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
-window.onresize = resize; resize();
-for(let i=0; i<50; i++) pts.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*2, vx:Math.random()-0.5, vy:Math.random()-0.5});
-function drawP() { ctx.clearRect(0,0,w,h); ctx.fillStyle = 'rgba(218,171,45,0.2)'; pts.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1; }); requestAnimationFrame(drawP); } drawP();
-</script>
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Bulan 1', 'Bulan 2', 'Bulan 3', 'Bulan 4', 'Bulan 5', 'Bulan 6'],
+                datasets: [{
+                    label: 'Pasif Income (Jutaan Rupiah)',
+                    data: [0, 2, 5, 12, 25, 45],
+                    borderColor: '#d4af37',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#d4af37',
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#e2e8f0', font: { family: 'Rajdhani' } } } },
+                scales: {
+                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
 
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        // --- 6. Pricing Tab Switcher ---
+        function switchTab(platform) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn px-8 py-4 rounded-full glass-gold text-gray-300 font-bold transition-all hover:text-gold interactive";
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('grid');
+            });
+
+            const activeBtn = document.getElementById(`btn-${platform}`);
+            activeBtn.className = "tab-btn px-8 py-4 rounded-full bg-gold text-obsidian font-bold transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] interactive";
+            
+            const activeContent = document.getElementById(`content-${platform}`);
+            activeContent.classList.remove('hidden');
+            activeContent.classList.add('grid');
+            activeContent.style.animation = 'fadeIn 0.5s ease-in-out';
+        }
+
+        // --- 7. Modal & WhatsApp Logic ---
+        let selPaket = "", selHarga = 0;
+        const modal = document.getElementById('checkout-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+        }
+
+        function openModal(paketName, harga) {
+            selPaket = paketName; selHarga = harga;
+            document.getElementById('paket-label').innerText = paketName;
+            document.getElementById('harga-label').innerText = formatRupiah(harga);
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+        function submitCheckout(e) {
+            e.preventDefault();
+            const nama = document.getElementById('cust-name').value;
+            const payRadio = document.querySelector('input[name="payment"]:checked');
+            if(!payRadio) return alert("Pilih metode pembayaran!");
+            const bayar = payRadio.value;
+            const timestamp = new Date().toLocaleString('id-ID');
+            
+            const text = `*_REQUEST AKSES VVIP_*\n\n*Nama:* ${nama}\n*Paket:* ${selPaket}\n*Investasi:* ${formatRupiah(selHarga)}\n*Metode:* ${bayar}\n*Waktu:* ${timestamp}\n\nMohon instruksi transfer selanjutnya, Mentor.`;
+            window.open(`https://wa.me/6288277200044?text=${encodeURIComponent(text)}`, '_blank');
+            closeModal();
+            e.target.reset();
+        }
+
+        // --- 8. Fake Live Sales Notification ---
+        const names = ["Budi dari Medan", "Siti dari Jakarta", "Andi dari Surabaya", "Rina dari Bandung", "Joko dari Bali", "Dewi dari Makassar"];
+        const packages = ["Facebook VVIP", "YouTube Pro Class", "TikTok Starter", "YouTube VVIP Mentoring"];
+        const toastContainer = document.getElementById('toast-container');
+
+        function createToast() {
+            const name = names[Math.floor(Math.random() * names.length)];
+            const pkg = packages[Math.floor(Math.random() * packages.length)];
+            
+            const toast = document.createElement('div');
+            toast.className = "glass-gold p-3 rounded-lg flex items-center gap-3 transform translate-y-10 opacity-0 transition-all duration-500 shadow-lg border-l-4 border-l-gold";
+            toast.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gold/20 flex justify-center items-center text-gold"><i class="fas fa-bolt"></i></div>
+                <div>
+                    <p class="text-xs text-white font-bold">${name}</p>
+                    <p class="text-[10px] text-gray-400">Baru saja mendaftar ${pkg}</p>
+                </div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 100);
+            
+            // Remove after 4s
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-x-10');
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+        setInterval(createToast, 15000);
+
+        // --- 9. Advanced Chatbot Logic ---
+        const chatWindow = document.getElementById('chat-window');
+        const chatBody = document.getElementById('chat-body');
+        const chatInput = document.getElementById('chat-input');
+        let chatOpen = false;
+
+        function toggleChat() {
+            chatOpen = !chatOpen;
+            if (chatOpen) {
+                chatWindow.classList.remove('opacity-0', 'scale-50', 'pointer-events-none');
+                chatInput.focus();
+            } else {
+                chatWindow.classList.add('opacity-0', 'scale-50', 'pointer-events-none');
+            }
+        }
+
+        function handleChatEnter(e) { if (e.key === 'Enter') processChat(); }
+
+        function appendMsg(txt, user = false) {
+            const d = document.createElement('div');
+            d.className = user 
+                ? "bg-gold p-3 rounded-l-xl rounded-tr-xl self-end w-[85%] text-obsidian font-medium"
+                : "bg-cyber p-3 rounded-r-xl rounded-bl-xl border border-gold/20 self-start w-[85%] text-gray-300";
+            d.innerHTML = txt;
+            chatBody.appendChild(d);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function processChat() {
+            const v = chatInput.value.toLowerCase().trim();
+            if (!v) return;
+            appendMsg(chatInput.value, true);
+            chatInput.value = '';
+
+            setTimeout(() => {
+                let res = "";
+                // Expanded Logic
+                if (v.match(/harga|biaya|bayar|price/)) {
+                    res = "Mulai 120k aja untuk Starter, sampai 5 Juta untuk VVIP Mentoring (Face-to-face/Zoom). Pembayaran bisa BCA, QRIS, atau DANA. Cek di tabel atas ya!";
+                } else if (v.match(/materi|kurikulum|belajar/)) {
+                    res = "Daging semua! Mulai fundamental algoritma FB/YT/TikTok, teknik SEO, *hook retention*, sampai *advanced prompting* pakai AI.";
+                } else if (v.match(/alamat|lokasi|rumah|basecamp/)) {
+                    res = "Basecamp kita di Bambel, Aceh Tenggara. Kalau ambil VVIP, mentor Angga bisa *home visit* langsung ke lokasi lu!";
+                } else if (v.match(/zoom|private/)) {
+                    res = "Fasilitas Zoom Premium *1-on-1* khusus buat pendaftar paket VVIP. Kita bedah tuntas *channel* lu sampai ketemu polanya.";
+                } else if (v.match(/sora|veo|chatgpt|gemini|ai/)) {
+                    res = "Ini rahasia dapurnya! Lu bakal diajarin prompt AI generatif mutakhir (Sora 2, Veo 3) buat bikin video sinematik otomatis tanpa rekam kamera. Cocok buat RPM Global!";
+                } else if (v.match(/passive|pasif|hari tua/)) {
+                    res = "Sistem monetisasi kita didesain buat *long-term cashflow*. Bangun aset digital sekarang, nikmati cuannya bertahun-tahun kemudian.";
+                } else {
+                    res = "Waduh, bot lagi *loading* nih. Mending *chat* langsung mentor Angga di <a href='https://wa.me/6288277200044' target='_blank' class='text-gold underline font-bold'>WhatsApp</a>, pasti direspon cepet!";
+                }
+                appendMsg(res);
+            }, 800);
+        }
+    </script>
 </body>
 </html>
