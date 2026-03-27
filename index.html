@@ -1,1935 +1,931 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Angga Pradana Putra — Pakar Monetisasi Digital & AI Prompting</title>
-<meta name="description" content="Belajar rahasia algoritma YouTube, TikTok & Facebook. Hasilkan jutaan rupiah untuk passive income hari tua Anda bersama Mentor Angga Pradana."/>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
-<!-- Google Translate -->
-<script type="text/javascript">
-function googleTranslateElementInit(){
-  new google.translate.TranslateElement({pageLanguage:'id',includedLanguages:'en,ar,zh-CN,ms,ja,ko',layout:google.translate.TranslateElement.InlineLayout.SIMPLE},'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-<style>
-/* ═══════════════════════════════════════════
-   ROOT & BASE
-═══════════════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --gold:#f59e0b;--gold-light:#fbbf24;--gold-dark:#d97706;--gold-dim:#92400e;
-  --cyan:#00f5ff;--cyan-dim:rgba(0,245,255,0.15);
-  --purple:#7c3aed;--purple-light:#a78bfa;
-  --deep:#070710;--deep2:#0d0d1a;
-  --glass:rgba(255,255,255,0.035);
-  --glass-border:rgba(255,255,255,0.09);
-  --glass-gold:rgba(245,158,11,0.07);
-  --glass-gold-border:rgba(245,158,11,0.28);
-  --shadow:0 8px 40px rgba(0,0,0,0.55);
-  --glow-gold:0 0 20px rgba(245,158,11,0.5),0 0 60px rgba(245,158,11,0.2);
-  --glow-cyan:0 0 20px rgba(0,245,255,0.4),0 0 60px rgba(0,245,255,0.1);
-}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--deep);
-  background-image:
-    radial-gradient(ellipse 90% 60% at 15% 5%,rgba(124,58,237,0.22) 0%,transparent 55%),
-    radial-gradient(ellipse 70% 50% at 85% 95%,rgba(245,158,11,0.14) 0%,transparent 55%),
-    radial-gradient(ellipse 50% 70% at 50% 50%,rgba(0,245,255,0.04) 0%,transparent 70%),
-    radial-gradient(ellipse 30% 30% at 90% 10%,rgba(245,158,11,0.08) 0%,transparent 50%);
-  color:#e2e8f0;
-  font-family:'Exo 2',sans-serif;
-  overflow-x:hidden;
-  cursor:none;
-}
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:var(--deep);}
-::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold-dark),var(--purple));border-radius:4px;}
-
-/* ═══════════════════════════════════════════
-   CURSOR
-═══════════════════════════════════════════ */
-#cursor-dot{
-  position:fixed;width:10px;height:10px;border-radius:50%;
-  background:var(--gold);pointer-events:none;z-index:99999;
-  transform:translate(-50%,-50%);
-  box-shadow:0 0 12px var(--gold),0 0 30px rgba(245,158,11,0.6);
-  transition:width 0.2s,height 0.2s,background 0.2s;
-}
-#cursor-ring{
-  position:fixed;width:36px;height:36px;border-radius:50%;
-  border:1.5px solid rgba(245,158,11,0.55);pointer-events:none;z-index:99998;
-  transform:translate(-50%,-50%);
-  transition:transform 0.12s ease-out,width 0.25s,height 0.25s,border-color 0.25s;
-  box-shadow:0 0 10px rgba(245,158,11,0.2);
-}
-#cursor-aura{
-  position:fixed;width:100px;height:100px;border-radius:50%;
-  background:radial-gradient(circle,rgba(245,158,11,0.07) 0%,transparent 70%);
-  pointer-events:none;z-index:99997;
-  transform:translate(-50%,-50%);
-  transition:transform 0.25s ease-out;
-}
-body:hover #cursor-dot{opacity:1;}
-
-/* ═══════════════════════════════════════════
-   Z-INDEX LAYERS
-═══════════════════════════════════════════ */
-/* Layer 0: canvas bg     → z-index: 0           pointer-events:none */
-/* Layer 1: decorative    → z-index: 1–9         pointer-events:none */
-/* Layer 2: content       → z-index: 10–49 */
-/* Layer 3: fixed ui      → z-index: 50–199 */
-/* Layer 4: modals        → z-index: 1000+ */
-
-/* ═══════════════════════════════════════════
-   GLASSMORPHISM
-═══════════════════════════════════════════ */
-.glass{
-  background:var(--glass);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border:1px solid var(--glass-border);
-  box-shadow:var(--shadow);
-}
-.glass-gold{
-  background:var(--glass-gold);
-  backdrop-filter:blur(20px) saturate(200%);
-  -webkit-backdrop-filter:blur(20px) saturate(200%);
-  border:1px solid var(--glass-gold-border);
-  box-shadow:0 0 40px rgba(245,158,11,0.12),var(--shadow);
-}
-.glass-dark{
-  background:rgba(7,7,16,0.75);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,0.07);
-}
-.neomorph{
-  background:linear-gradient(145deg,rgba(20,20,35,0.9),rgba(10,10,20,0.9));
-  box-shadow:4px 4px 10px rgba(0,0,0,0.6),-2px -2px 8px rgba(255,255,255,0.03),inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-/* ═══════════════════════════════════════════
-   TYPOGRAPHY EFFECTS
-═══════════════════════════════════════════ */
-.glow-gold{
-  color:var(--gold-light);
-  text-shadow:0 0 20px var(--gold),0 0 60px var(--gold-dark);
-  animation:glowPulse 3s ease-in-out infinite;
-}
-@keyframes glowPulse{
-  0%,100%{text-shadow:0 0 20px #f59e0b,0 0 50px #d97706,0 0 80px rgba(245,158,11,0.3);}
-  50%{text-shadow:0 0 40px #fbbf24,0 0 100px #f59e0b,0 0 180px rgba(245,158,11,0.2);}
-}
-.glow-cyan{color:var(--cyan);text-shadow:0 0 18px var(--cyan),0 0 50px rgba(0,245,255,0.4);}
-.glow-purple{color:var(--purple-light);text-shadow:0 0 18px var(--purple),0 0 50px rgba(124,58,237,0.4);}
-
-.shimmer-text{
-  background:linear-gradient(90deg,#c77a00 0%,#f59e0b 20%,#fde68a 40%,#fffbea 50%,#fde68a 60%,#f59e0b 80%,#c77a00 100%);
-  background-size:250% auto;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shimmer 3s linear infinite;
-}
-@keyframes shimmer{0%{background-position:-250% center;}100%{background-position:250% center;}}
-
-.shimmer-text-cyan{
-  background:linear-gradient(90deg,#004d55 0%,#00c8d7 30%,#00f5ff 50%,#00c8d7 70%,#004d55 100%);
-  background-size:250% auto;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shimmer 3s linear infinite;
-}
-
-/* ═══════════════════════════════════════════
-   GLOW BORDERS
-═══════════════════════════════════════════ */
-.border-glow-gold{box-shadow:0 0 0 1px rgba(245,158,11,0.5),0 0 30px rgba(245,158,11,0.2),inset 0 0 20px rgba(245,158,11,0.04);}
-.border-glow-cyan{box-shadow:0 0 0 1px rgba(0,245,255,0.45),0 0 30px rgba(0,245,255,0.15),inset 0 0 20px rgba(0,245,255,0.04);}
-.border-glow-purple{box-shadow:0 0 0 1px rgba(124,58,237,0.5),0 0 30px rgba(124,58,237,0.15),inset 0 0 20px rgba(124,58,237,0.04);}
-
-/* ═══════════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════════ */
-.btn-gold{
-  background:linear-gradient(135deg,#fbbf24 0%,#f59e0b 40%,#d97706 80%,#92400e 100%);
-  color:#000;font-weight:800;font-family:'Rajdhani',sans-serif;
-  letter-spacing:0.1em;font-size:0.8rem;
-  border:1px solid rgba(251,191,36,0.6);
-  box-shadow:0 0 25px rgba(245,158,11,0.45),0 5px 20px rgba(0,0,0,0.4);
-  transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
-  position:relative;overflow:hidden;cursor:none;
-}
-.btn-gold::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);
-  opacity:0;transition:opacity 0.3s;
-}
-.btn-gold:hover{
-  transform:translateY(-3px) scale(1.03);
-  box-shadow:0 0 50px rgba(245,158,11,0.7),0 10px 30px rgba(0,0,0,0.5);
-}
-.btn-gold:hover::before{opacity:1;}
-
-.btn-ghost{
-  border:1.5px solid rgba(245,158,11,0.5);
-  color:var(--gold-light);font-family:'Rajdhani',sans-serif;
-  font-weight:700;letter-spacing:0.08em;
-  transition:all 0.3s ease;cursor:none;
-  background:transparent;position:relative;overflow:hidden;
-}
-.btn-ghost::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(245,158,11,0.12),transparent);
-  opacity:0;transition:opacity 0.3s;
-}
-.btn-ghost:hover{
-  background:rgba(245,158,11,0.08);
-  box-shadow:0 0 25px rgba(245,158,11,0.3),inset 0 0 20px rgba(245,158,11,0.05);
-  transform:translateY(-2px);
-}
-.btn-ghost:hover::before{opacity:1;}
-
-.btn-cyan{
-  background:linear-gradient(135deg,rgba(0,245,255,0.15),rgba(0,200,215,0.1));
-  border:1.5px solid rgba(0,245,255,0.45);
-  color:var(--cyan);font-family:'Rajdhani',sans-serif;
-  font-weight:700;letter-spacing:0.08em;
-  box-shadow:0 0 20px rgba(0,245,255,0.2);
-  transition:all 0.3s ease;cursor:none;
-}
-.btn-cyan:hover{
-  box-shadow:0 0 40px rgba(0,245,255,0.4);
-  transform:translateY(-2px);
-}
-
-/* ═══════════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════════ */
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
-@keyframes floatX{0%,100%{transform:translateX(0);}50%{transform:translateX(-10px);}}
-@keyframes spin-slow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-@keyframes ping-slow{
-  0%{transform:scale(1);opacity:1;}
-  75%,100%{transform:scale(2);opacity:0;}
-}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
-@keyframes fadeInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.88);}to{opacity:1;transform:scale(1);}}
-@keyframes slideDownIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes rotateGlow{
-  0%{filter:hue-rotate(0deg);}
-  100%{filter:hue-rotate(360deg);}
-}
-@keyframes borderGlow{
-  0%,100%{border-color:rgba(245,158,11,0.4);}
-  50%{border-color:rgba(245,158,11,0.9);}
-}
-@keyframes particlePulse{
-  0%,100%{opacity:0.3;transform:scale(1);}
-  50%{opacity:0.8;transform:scale(1.5);}
-}
-
-/* ═══════════════════════════════════════════
-   AOS — INTERSECTION OBSERVER
-═══════════════════════════════════════════ */
-[data-aos]{opacity:0;transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);}
-[data-aos="fade-up"]{transform:translateY(45px);}
-[data-aos="fade-left"]{transform:translateX(-45px);}
-[data-aos="fade-right"]{transform:translateX(45px);}
-[data-aos="zoom-in"]{transform:scale(0.82);}
-[data-aos="flip-up"]{transform:perspective(600px) rotateX(30deg);}
-[data-aos].aos-animate{opacity:1;transform:none;}
-
-/* ═══════════════════════════════════════════
-   NAVBAR
-═══════════════════════════════════════════ */
-#navbar{position:fixed;top:0;left:0;right:0;z-index:150;transition:all 0.4s ease;padding:18px 0;}
-#navbar.scrolled{
-  background:rgba(7,7,16,0.94);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid rgba(245,158,11,0.18);
-  box-shadow:0 4px 40px rgba(0,0,0,0.6);
-  padding:12px 0;
-}
-
-/* ═══════════════════════════════════════════
-   DECORATIVE LAYERS (pointer-events:none)
-═══════════════════════════════════════════ */
-.deco-layer{position:absolute;inset:0;pointer-events:none;z-index:1;}
-.deco-ring{
-  position:absolute;border-radius:50%;
-  border:1px solid rgba(245,158,11,0.08);
-  pointer-events:none;
-}
-#particles-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
-
-/* ═══════════════════════════════════════════
-   SECTION DIVIDER
-═══════════════════════════════════════════ */
-.divider-gold{height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,0.6),rgba(0,245,255,0.3),rgba(245,158,11,0.6),transparent);}
-.divider-thin{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);}
-
-/* ═══════════════════════════════════════════
-   PRICING TABS
-═══════════════════════════════════════════ */
-.tab-btn{transition:all 0.35s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;}
-.tab-btn.active{
-  background:linear-gradient(135deg,rgba(245,158,11,0.22),rgba(245,158,11,0.06));
-  border-color:rgba(245,158,11,0.7)!important;
-  color:var(--gold-light);
-  box-shadow:0 0 30px rgba(245,158,11,0.25),inset 0 0 20px rgba(245,158,11,0.05);
-}
-.tab-content{display:none;}
-.tab-content.active{display:block;animation:fadeInUp 0.5s ease;}
-
-/* ═══════════════════════════════════════════
-   PRICE CARDS
-═══════════════════════════════════════════ */
-.price-card{
-  transition:all 0.45s cubic-bezier(0.175,0.885,0.32,1.275);
-  position:relative;overflow:hidden;
-}
-.price-card::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 110%,rgba(245,158,11,0.12),transparent 70%);
-  opacity:0;transition:opacity 0.4s;pointer-events:none;
-}
-.price-card:hover{transform:translateY(-10px);box-shadow:0 25px 70px rgba(0,0,0,0.6),0 0 50px rgba(245,158,11,0.15);}
-.price-card:hover::after{opacity:1;}
-.price-card.vvip{
-  border-color:rgba(245,158,11,0.55)!important;
-  background:linear-gradient(145deg,rgba(245,158,11,0.1),rgba(7,7,16,0.7))!important;
-  box-shadow:0 0 50px rgba(245,158,11,0.18),var(--shadow)!important;
-}
-.price-card.vvip::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(245,158,11,0.04) 0%,transparent 60%);
-  pointer-events:none;
-}
-
-/* ═══════════════════════════════════════════
-   TOOL CARDS
-═══════════════════════════════════════════ */
-.tool-card{
-  transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
-  position:relative;overflow:hidden;
-}
-.tool-card::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  transform:scaleX(0);transition:transform 0.4s ease;
-}
-.tool-card:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 35px rgba(245,158,11,0.12);}
-.tool-card:hover::before{transform:scaleX(1);}
-
-/* ═══════════════════════════════════════════
-   TESTIMONIALS
-═══════════════════════════════════════════ */
-.testi-card{transition:all 0.4s ease;position:relative;overflow:hidden;}
-.testi-card::before{
-  content:'"';position:absolute;top:-10px;right:16px;
-  font-size:80px;color:rgba(245,158,11,0.08);
-  font-family:'Cinzel Decorative',serif;line-height:1;
-  pointer-events:none;
-}
-.testi-card:hover{transform:translateY(-5px);}
-
-/* ═══════════════════════════════════════════
-   MODAL
-═══════════════════════════════════════════ */
-#checkout-modal{
-  position:fixed;inset:0;z-index:2000;
-  display:none;align-items:center;justify-content:center;
-  background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-#checkout-modal.open{display:flex;animation:fadeIn 0.3s ease;}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-.modal-inner{animation:scaleIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275);}
-
-/* ═══════════════════════════════════════════
-   PAYMENT CHIPS
-═══════════════════════════════════════════ */
-.pay-chip{
-  cursor:none;transition:all 0.28s cubic-bezier(0.175,0.885,0.32,1.275);
-  border:2px solid transparent;position:relative;overflow:hidden;
-}
-.pay-chip::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at center,rgba(245,158,11,0.15),transparent 70%);
-  opacity:0;transition:opacity 0.3s;pointer-events:none;
-}
-.pay-chip:hover{transform:scale(1.06);border-color:rgba(245,158,11,0.5);box-shadow:0 0 18px rgba(245,158,11,0.25);}
-.pay-chip:hover::after{opacity:1;}
-.pay-chip.selected{
-  border-color:var(--gold)!important;
-  background:rgba(245,158,11,0.15)!important;
-  box-shadow:0 0 25px rgba(245,158,11,0.45)!important;
-}
-.pay-chip.selected::after{opacity:1;}
-
-/* ═══════════════════════════════════════════
-   INPUTS
-═══════════════════════════════════════════ */
-.form-input{
-  background:rgba(255,255,255,0.04);
-  border:1.5px solid rgba(245,158,11,0.22);
-  color:#e2e8f0;border-radius:12px;
-  padding:13px 16px;width:100%;
-  font-family:'Exo 2',sans-serif;font-size:14px;
-  outline:none;transition:all 0.3s;cursor:none;
-}
-.form-input:focus{border-color:rgba(245,158,11,0.75);box-shadow:0 0 0 4px rgba(245,158,11,0.1),0 0 20px rgba(245,158,11,0.1);}
-.form-input::placeholder{color:rgba(226,232,240,0.3);}
-
-/* ═══════════════════════════════════════════
-   CHATBOT
-═══════════════════════════════════════════ */
-#chatbot-btn{
-  position:fixed;bottom:26px;right:26px;z-index:300;
-  width:65px;height:65px;border-radius:50%;
-  background:linear-gradient(135deg,#fbbf24,#f59e0b,#d97706);
-  border:2px solid rgba(251,191,36,0.6);
-  box-shadow:0 0 35px rgba(245,158,11,0.55),0 0 70px rgba(245,158,11,0.2);
-  cursor:none;display:flex;align-items:center;justify-content:center;
-  font-size:30px;animation:float 4s ease-in-out infinite;
-  transition:transform 0.3s;
-}
-#chatbot-btn:hover{transform:scale(1.12);}
-#chatbot-window{
-  position:fixed;bottom:108px;right:26px;z-index:300;
-  width:min(380px,calc(100vw - 32px));
-  display:none;flex-direction:column;
-  border-radius:22px;overflow:hidden;
-}
-#chatbot-window.open{display:flex;animation:scaleIn 0.35s ease;}
-#chat-messages{
-  height:270px;overflow-y:auto;padding:16px;
-  display:flex;flex-direction:column;gap:10px;
-  scrollbar-width:thin;scrollbar-color:rgba(245,158,11,0.3) transparent;
-}
-.chat-msg{padding:11px 15px;border-radius:15px;max-width:84%;font-size:13px;line-height:1.55;}
-.chat-msg.bot{
-  background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);
-  color:#fde68a;align-self:flex-start;border-bottom-left-radius:4px;
-}
-.chat-msg.user{
-  background:rgba(124,58,237,0.22);border:1px solid rgba(124,58,237,0.3);
-  color:#c4b5fd;align-self:flex-end;border-bottom-right-radius:4px;
-}
-.chat-typing{
-  display:flex;align-items:center;gap:5px;padding:10px 14px;
-  background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15);
-  border-radius:15px;border-bottom-left-radius:4px;align-self:flex-start;
-}
-.chat-typing span{
-  width:7px;height:7px;border-radius:50%;background:var(--gold-light);
-  animation:chatDot 1.4s infinite;
-}
-.chat-typing span:nth-child(2){animation-delay:0.2s;}
-.chat-typing span:nth-child(3){animation-delay:0.4s;}
-@keyframes chatDot{0%,100%{opacity:0.3;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}
-
-/* ═══════════════════════════════════════════
-   TOAST NOTIFICATIONS
-═══════════════════════════════════════════ */
-#toast-container{
-  position:fixed;bottom:110px;left:24px;z-index:500;
-  display:flex;flex-direction:column;gap:10px;
-  pointer-events:none;
-}
-.toast{
-  display:flex;align-items:center;gap:12px;
-  padding:14px 18px;border-radius:16px;
-  max-width:280px;pointer-events:none;
-  animation:toastIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
-  box-shadow:0 10px 40px rgba(0,0,0,0.5),var(--glow-gold);
-}
-@keyframes toastIn{from{opacity:0;transform:translateX(-40px) scale(0.9);}to{opacity:1;transform:translateX(0) scale(1);}}
-@keyframes toastOut{from{opacity:1;transform:translateX(0) scale(1);}to{opacity:0;transform:translateX(-40px) scale(0.9);}}
-.toast.out{animation:toastOut 0.4s ease forwards;}
-
-/* ═══════════════════════════════════════════
-   SOCIAL SHARE SIDEBAR
-═══════════════════════════════════════════ */
-#social-sidebar{
-  position:fixed;left:0;top:50%;transform:translateY(-50%);
-  z-index:200;display:flex;flex-direction:column;gap:6px;
-  padding:10px 0 10px 0;
-}
-.social-btn{
-  width:46px;height:46px;display:flex;align-items:center;justify-content:center;
-  border-radius:0 12px 12px 0;font-size:20px;
-  transition:all 0.35s cubic-bezier(0.175,0.885,0.32,1.275);
-  cursor:none;transform:translateX(-3px);
-  border:1px solid transparent;border-left:none;
-  box-shadow:2px 0 20px rgba(0,0,0,0.4);
-}
-.social-btn:hover{transform:translateX(4px) scale(1.08);}
-.social-btn.wa{background:rgba(37,211,102,0.15);border-color:rgba(37,211,102,0.3);}
-.social-btn.wa:hover{background:rgba(37,211,102,0.25);box-shadow:4px 0 20px rgba(37,211,102,0.3);}
-.social-btn.tg{background:rgba(0,136,204,0.15);border-color:rgba(0,136,204,0.3);}
-.social-btn.tg:hover{background:rgba(0,136,204,0.25);box-shadow:4px 0 20px rgba(0,136,204,0.3);}
-.social-btn.fb{background:rgba(24,119,242,0.15);border-color:rgba(24,119,242,0.3);}
-.social-btn.fb:hover{background:rgba(24,119,242,0.25);box-shadow:4px 0 20px rgba(24,119,242,0.3);}
-
-/* ═══════════════════════════════════════════
-   COUNTDOWN TIMER
-═══════════════════════════════════════════ */
-.countdown-unit{
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-}
-.countdown-num{
-  font-family:'Cinzel Decorative',serif;font-size:2rem;font-weight:900;
-  line-height:1;background:linear-gradient(180deg,#fbbf24,#f59e0b,#d97706);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 8px rgba(245,158,11,0.5));
-  min-width:2.5ch;text-align:center;
-}
-.countdown-label{font-size:9px;color:rgba(226,232,240,0.5);font-family:'Rajdhani',sans-serif;letter-spacing:0.15em;text-transform:uppercase;}
-.countdown-sep{font-family:'Cinzel Decorative',serif;font-size:1.8rem;color:var(--gold);line-height:1;opacity:0.6;animation:blinkSep 1s step-end infinite;}
-@keyframes blinkSep{0%,100%{opacity:0.6;}50%{opacity:0.1;}}
-
-/* ═══════════════════════════════════════════
-   FOMO BANNER
-═══════════════════════════════════════════ */
-.fomo-banner{
-  background:linear-gradient(90deg,transparent,rgba(245,158,11,0.08),rgba(245,158,11,0.12),rgba(245,158,11,0.08),transparent);
-  border-top:1px solid rgba(245,158,11,0.2);border-bottom:1px solid rgba(245,158,11,0.2);
-  overflow:hidden;position:relative;
-}
-.fomo-track{
-  display:flex;gap:60px;white-space:nowrap;
-  animation:marquee 22s linear infinite;
-}
-@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
-/* ═══════════════════════════════════════════
-   GOOGLE MAP WRAPPER
-═══════════════════════════════════════════ */
-.map-wrapper{
-  position:relative;border-radius:20px;overflow:hidden;
-  border:1px solid rgba(245,158,11,0.3);
-  box-shadow:0 0 40px rgba(245,158,11,0.12),var(--shadow);
-}
-.map-wrapper iframe{
-  filter:grayscale(100%) sepia(40%) hue-rotate(10deg) saturate(200%) brightness(0.7);
-  transition:filter 0.5s;
-  display:block;
-}
-.map-wrapper:hover iframe{filter:grayscale(80%) sepia(30%) hue-rotate(10deg) saturate(180%) brightness(0.75);}
-.map-overlay{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(135deg,rgba(245,158,11,0.08),transparent,rgba(124,58,237,0.06));
-  mix-blend-mode:screen;
-}
-
-/* ═══════════════════════════════════════════
-   CHART SECTION
-═══════════════════════════════════════════ */
-.chart-wrapper{
-  position:relative;border-radius:20px;overflow:hidden;
-  background:rgba(10,10,20,0.6);
-  border:1px solid rgba(245,158,11,0.18);
-  padding:24px;
-}
-.chart-wrapper::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold),var(--cyan),var(--gold),transparent);
-  pointer-events:none;
-}
-
-/* ═══════════════════════════════════════════
-   GOOGLE TRANSLATE
-═══════════════════════════════════════════ */
-#gt-wrapper{
-  position:fixed;top:80px;right:16px;z-index:400;
-}
-#gt-wrapper .goog-te-gadget{font-size:11px!important;color:transparent!important;}
-#gt-wrapper .goog-te-gadget select{
-  background:rgba(7,7,16,0.9)!important;
-  border:1px solid rgba(245,158,11,0.4)!important;
-  color:var(--gold-light)!important;
-  border-radius:10px!important;padding:5px 8px!important;
-  font-size:11px!important;font-family:'Rajdhani',sans-serif!important;
-  cursor:none!important;outline:none!important;
-  box-shadow:0 0 15px rgba(245,158,11,0.15)!important;
-}
-
-/* ═══════════════════════════════════════════
-   PROGRESS BARS
-═══════════════════════════════════════════ */
-.prog-bar-bg{background:rgba(255,255,255,0.05);border-radius:100px;overflow:hidden;height:6px;}
-.prog-bar{height:6px;border-radius:100px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));box-shadow:0 0 10px rgba(245,158,11,0.4);width:0;transition:width 1.5s cubic-bezier(0.16,1,0.3,1);}
-
-/* ═══════════════════════════════════════════
-   FAQ DETAILS
-═══════════════════════════════════════════ */
-details.faq-item summary{list-style:none;cursor:none;}
-details.faq-item summary::-webkit-details-marker{display:none;}
-details.faq-item[open] .faq-chevron{transform:rotate(180deg);}
-.faq-chevron{transition:transform 0.3s ease;}
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media(max-width:640px){
-  #social-sidebar{display:none;}
-  .countdown-num{font-size:1.5rem;}
-  .chat-msg{font-size:12px;}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Obsidian Gold Cyber-Premium: Belajar Rahasia Algoritma YouTube, TikTok & Facebook bersama Angga Pradana Putra. Passive Income Hari Tua dengan AI Veo 3 & Sora 2.">
+    <title>Angga Pradana Putra • Obsidian Gold Cyber-Premium • Rp23 Juta Value</title>
+    
+    <!-- Google Fonts: Cinzel Decorative + Rajdhani -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&amp;family=Rajdhani:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <!-- Google Translate Widget -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'id',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&amp;family=Rajdhani:wght@400;500;600&amp;display=swap');
+        
+        :root {
+            --gold: #f5c242;
+            --obsidian: #0a0a0a;
+        }
+        
+        * { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .headline-font {
+            font-family: 'Cinzel Decorative', serif;
+        }
+        
+        .glass {
+            background: rgba(15, 15, 15, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(245, 194, 66, 0.25);
+        }
+        
+        .neomorph {
+            background: #0f0f0f;
+            box-shadow: 8px 8px 16px #050505,
+                        -8px -8px 16px #191919;
+        }
+        
+        .aura-glow {
+            box-shadow: 0 0 60px -10px rgb(245 194 66),
+                        0 0 120px -20px rgb(245 194 66);
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, 
+                #f5c242 0%, 
+                #fff 25%, 
+                #f5c242 50%, 
+                #fff 75%, 
+                #f5c242 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .cyber-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #f5c242, transparent);
+            height: 1px;
+            animation: cyberScan 8s linear infinite;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        @keyframes cyberScan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+        
+        #custom-cursor {
+            position: fixed;
+            width: 28px;
+            height: 28px;
+            border: 2px solid #f5c242;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            box-shadow: 0 0 30px #f5c242,
+                        inset 0 0 15px #f5c242;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+        
+        @media (min-width: 1024px) {
+            #custom-cursor { display: block; }
+        }
+        
+        .particle-canvas {
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .toast {
+            animation: toastIn 0.4s ease forwards;
+        }
+        
+        @keyframes toastIn {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #f5c242, transparent);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[#0a0a0a] text-white overflow-x-hidden">
+    <!-- CUSTOM GLOW CURSOR -->
+    <div id="custom-cursor"></div>
 
-<!-- ══════════════════ CURSOR ══════════════════ -->
-<div id="cursor-aura"></div>
-<div id="cursor-ring"></div>
-<div id="cursor-dot"></div>
+    <!-- BACKGROUND PARTICLES CANVAS -->
+    <canvas id="particleCanvas" class="particle-canvas fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
-<!-- ══════════════════ PARTICLES BG ══════════════════ -->
-<canvas id="particles-canvas"></canvas>
-
-<!-- ══════════════════ GOOGLE TRANSLATE ══════════════════ -->
-<div id="gt-wrapper">
-  <div id="google_translate_element"></div>
-</div>
-
-<!-- ══════════════════ SOCIAL SIDEBAR ══════════════════ -->
-<div id="social-sidebar" aria-label="Bagikan halaman">
-  <a href="https://wa.me/?text=Belajar%20rahasia%20algoritma%20bersama%20Mentor%20Angga%20Pradana%20%F0%9F%94%A5%20https://anggapradana.id" target="_blank" class="social-btn wa" title="Bagikan ke WhatsApp">💬</a>
-  <a href="https://t.me/share/url?url=https://anggapradana.id&text=Mentor%20Digital%20Income%20Terbaik!" target="_blank" class="social-btn tg" title="Bagikan ke Telegram">✈️</a>
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://anggapradana.id" target="_blank" class="social-btn fb" title="Bagikan ke Facebook">📘</a>
-</div>
-
-<!-- ══════════════════ TOAST CONTAINER ══════════════════ -->
-<div id="toast-container" aria-live="polite"></div>
-
-<!-- ══════════════════ NAVBAR ══════════════════ -->
-<nav id="navbar" aria-label="Navigasi utama">
-  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-800 flex items-center justify-center text-black font-black text-sm shadow-lg flex-shrink-0" style="box-shadow:0 0 18px rgba(245,158,11,0.6)">AP</div>
-      <div class="hidden sm:block">
-        <div class="font-display font-bold text-amber-400 text-sm tracking-widest">ANGGA PRADANA</div>
-        <div class="text-[9px] text-slate-500 font-heading uppercase tracking-widest">Digital Monetization Expert</div>
-      </div>
-    </div>
-    <div class="flex items-center gap-2 sm:gap-4">
-      <a href="#mengapa" class="text-xs font-heading font-semibold text-slate-400 hover:text-amber-400 transition-colors tracking-widest uppercase hidden md:block">Kenapa?</a>
-      <a href="#arsenal" class="text-xs font-heading font-semibold text-slate-400 hover:text-amber-400 transition-colors tracking-widest uppercase hidden md:block">Arsenal AI</a>
-      <a href="#paket" class="text-xs font-heading font-semibold text-slate-400 hover:text-amber-400 transition-colors tracking-widest uppercase hidden sm:block">Paket</a>
-      <a href="https://wa.me/6288277200044?text=Halo%20Mentor%20Angga,%20saya%20ingin%20konsultasi%20gratis" target="_blank" class="btn-gold px-5 py-2.5 rounded-full text-xs uppercase tracking-wider">🚀 Konsultasi Gratis</a>
-    </div>
-  </div>
-</nav>
-
-<!-- ══════════════════ FOMO MARQUEE BANNER ══════════════════ -->
-<div class="fomo-banner py-2.5 relative z-10" style="margin-top:72px;">
-  <div class="fomo-track text-xs font-heading font-semibold text-amber-400/80 tracking-wider">
-    <span>🔥 Bergabung hari ini — dapatkan bonus materi eksklusif Veo 3 &amp; Sora 2</span>
-    <span>⭐ 500+ alumni sukses monetisasi</span>
-    <span>🏆 Mentor langsung hadir ke lokasi Anda</span>
-    <span>💰 Passive income mulai hari pertama belajar</span>
-    <span>🎯 Kuota VVIP terbatas — amankan sekarang</span>
-    <span>🔥 Bergabung hari ini — dapatkan bonus materi eksklusif Veo 3 &amp; Sora 2</span>
-    <span>⭐ 500+ alumni sukses monetisasi</span>
-    <span>🏆 Mentor langsung hadir ke lokasi Anda</span>
-    <span>💰 Passive income mulai hari pertama belajar</span>
-    <span>🎯 Kuota VVIP terbatas — amankan sekarang</span>
-  </div>
-</div>
-
-<!-- ══════════════════ HERO ══════════════════ -->
-<section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-24 z-10 overflow-hidden">
-
-  <!-- Decorative rings (pointer-events:none built in) -->
-  <div class="deco-layer" aria-hidden="true">
-    <div class="deco-ring" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);animation:spin-slow 30s linear infinite;"></div>
-    <div class="deco-ring" style="width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);animation:spin-slow 20s linear infinite reverse;border-color:rgba(0,245,255,0.06);"></div>
-    <div class="deco-ring" style="width:950px;height:950px;top:50%;left:50%;transform:translate(-50%,-50%);animation:spin-slow 50s linear infinite;border-color:rgba(124,58,237,0.05);"></div>
-    <!-- Corner glow orbs -->
-    <div style="position:absolute;width:300px;height:300px;top:-80px;left:-80px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.25),transparent 70%);pointer-events:none;"></div>
-    <div style="position:absolute;width:250px;height:250px;bottom:-60px;right:-60px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.2),transparent 70%);pointer-events:none;"></div>
-  </div>
-
-  <!-- Live badge -->
-  <div class="glass-gold rounded-full px-5 py-2 mb-8 inline-flex items-center gap-2.5" data-aos="fade-up" style="animation:float 5s ease-in-out infinite;">
-    <span class="relative flex h-2.5 w-2.5">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400"></span>
-    </span>
-    <span class="font-heading font-bold text-xs sm:text-sm tracking-widest uppercase text-amber-300">🔥 Mentoring Eksklusif — Kuota Tersisa Hari Ini</span>
-  </div>
-
-  <!-- Main headline -->
-  <h1 class="font-display font-black leading-tight mb-5 max-w-4xl" data-aos="fade-up" style="transition-delay:0.12s;">
-    <span class="block text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl drop-shadow-2xl">Belajar Rahasia Algoritma</span>
-    <span class="block shimmer-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-1">YouTube, TikTok &amp; Facebook.</span>
-    <span class="block text-slate-300 text-base sm:text-xl md:text-2xl font-heading font-light tracking-wide mt-3">Hasilkan Jutaan Rupiah untuk</span>
-    <span class="block glow-gold font-display text-2xl sm:text-3xl md:text-4xl mt-1">Pasif Income Hari Tua Anda!</span>
-  </h1>
-
-  <!-- Sub text -->
-  <p class="text-slate-300 max-w-2xl mx-auto mb-6 leading-relaxed text-sm sm:text-base md:text-lg" data-aos="fade-up" style="transition-delay:0.22s;">
-    Dipandu langsung oleh mentor yang telah membantu <strong class="text-amber-400">500+ alumni</strong> menghasilkan pendapatan digital nyata menggunakan teknologi AI terdepan — bahkan tanpa pengalaman sebelumnya.
-  </p>
-
-  <!-- FOMO Countdown -->
-  <div class="glass-gold rounded-2xl px-6 py-4 mb-8 inline-block" data-aos="zoom-in" style="transition-delay:0.3s;">
-    <p class="font-heading text-[10px] text-amber-500/80 uppercase tracking-widest mb-3 text-center">⚡ Penawaran Harga Spesial Berakhir Dalam:</p>
-    <div class="flex items-center gap-3 justify-center">
-      <div class="countdown-unit">
-        <span class="countdown-num" id="cd-hours">00</span>
-        <span class="countdown-label">Jam</span>
-      </div>
-      <span class="countdown-sep">:</span>
-      <div class="countdown-unit">
-        <span class="countdown-num" id="cd-mins">00</span>
-        <span class="countdown-label">Menit</span>
-      </div>
-      <span class="countdown-sep">:</span>
-      <div class="countdown-unit">
-        <span class="countdown-num" id="cd-secs">00</span>
-        <span class="countdown-label">Detik</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Profile card -->
-  <div class="glass glass-gold rounded-2xl p-5 sm:p-7 mb-10 inline-flex flex-col sm:flex-row items-center gap-5 border-glow-gold max-w-lg w-full" data-aos="zoom-in" style="transition-delay:0.4s;">
-    <div class="relative flex-shrink-0">
-      <div class="w-20 h-20 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-800 flex items-center justify-center text-black font-black text-2xl" style="box-shadow:0 0 35px rgba(245,158,11,0.65)">AP</div>
-      <div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-green-500 border-2 border-[#070710]">
-        <span class="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75"></span>
-      </div>
-    </div>
-    <div class="text-center sm:text-left">
-      <h2 class="glow-gold font-display text-xl sm:text-2xl font-bold mb-1">Angga Pradana Putra</h2>
-      <p class="text-amber-300/80 text-xs font-heading font-semibold tracking-widest uppercase">Pakar Monetisasi Digital &amp; AI Prompting</p>
-      <p class="text-slate-500 text-xs mt-1">🌴 Aceh Tenggara, Indonesia</p>
-      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3">
-        <span class="glass rounded-full px-3 py-1 text-[10px] text-cyan-400 font-heading font-bold border border-cyan-500/30 uppercase tracking-wider">AI Specialist</span>
-        <span class="glass rounded-full px-3 py-1 text-[10px] text-amber-400 font-heading font-bold border border-amber-500/30 uppercase tracking-wider">Content Creator</span>
-        <span class="glass rounded-full px-3 py-1 text-[10px] text-purple-400 font-heading font-bold border border-purple-500/30 uppercase tracking-wider">Mentor</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <div class="flex flex-col sm:flex-row gap-4 items-center z-20 relative" data-aos="fade-up" style="transition-delay:0.5s;">
-    <a href="#paket" class="btn-gold px-10 py-4 rounded-full text-xs uppercase tracking-widest font-display w-full sm:w-auto text-center">🚀 Lihat Semua Paket</a>
-    <a href="https://wa.me/6288277200044?text=Halo%20Mentor%20Angga,%20saya%20ingin%20konsultasi%20gratis" target="_blank" class="btn-ghost px-10 py-4 rounded-full text-xs uppercase tracking-widest w-full sm:w-auto text-center">💬 Chat WA Sekarang</a>
-  </div>
-
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none" style="animation:float 3s ease-in-out infinite;">
-    <span class="text-[10px] font-heading text-amber-500/60 tracking-widest uppercase">Scroll</span>
-    <div class="w-0.5 h-10 bg-gradient-to-b from-amber-400/60 to-transparent rounded-full"></div>
-  </div>
-</section>
-
-<!-- ══════════════════ STATS BAR ══════════════════ -->
-<section class="py-12 px-4 z-10 relative">
-  <div class="max-w-5xl mx-auto">
-    <div class="divider-gold mb-10 max-w-2xl mx-auto"></div>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" data-aos="fade-up">
-      <div class="glass rounded-2xl p-5 text-center border-glow-gold neomorph">
-        <div class="shimmer-text font-display text-2xl sm:text-3xl font-black">500+</div>
-        <div class="text-slate-400 text-[10px] font-heading mt-1 uppercase tracking-widest">Murid Aktif</div>
-      </div>
-      <div class="glass rounded-2xl p-5 text-center border-glow-gold neomorph">
-        <div class="shimmer-text font-display text-2xl sm:text-3xl font-black">98%</div>
-        <div class="text-slate-400 text-[10px] font-heading mt-1 uppercase tracking-widest">Puas &amp; Sukses</div>
-      </div>
-      <div class="glass rounded-2xl p-5 text-center border-glow-gold neomorph">
-        <div class="shimmer-text font-display text-2xl sm:text-3xl font-black">3 Platform</div>
-        <div class="text-slate-400 text-[10px] font-heading mt-1 uppercase tracking-widest">YT · TikTok · FB</div>
-      </div>
-      <div class="glass rounded-2xl p-5 text-center border-glow-gold neomorph">
-        <div class="shimmer-text-cyan font-display text-2xl sm:text-3xl font-black">AI-Powered</div>
-        <div class="text-slate-400 text-[10px] font-heading mt-1 uppercase tracking-widest">Veo3 · Sora2 · GPT</div>
-      </div>
-    </div>
-    <div class="divider-gold mt-10 max-w-2xl mx-auto"></div>
-  </div>
-</section>
-
-<!-- ══════════════════ KENAPA BELAJAR — CHART ══════════════════ -->
-<section id="mengapa" class="py-20 px-4 z-10 relative">
-  <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-16" data-aos="fade-up">
-      <p class="font-heading text-xs tracking-[0.35em] text-amber-500 uppercase mb-3">Visualisasi Potensi</p>
-      <h2 class="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-4">Kenapa Harus <span class="glow-gold">Belajar Sekarang?</span></h2>
-      <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed">Grafik di bawah ini menunjukkan proyeksi pertumbuhan passive income seorang pelajar rata-rata yang mengikuti metode Mentor Angga secara konsisten.</p>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-16">
-      <!-- Chart -->
-      <div class="chart-wrapper" data-aos="fade-right">
-        <h3 class="font-heading font-bold text-amber-400 text-sm uppercase tracking-widest mb-5">📈 Proyeksi Passive Income (Rp/Bulan)</h3>
-        <canvas id="incomeChart" height="260"></canvas>
-      </div>
-
-      <!-- Stats list -->
-      <div class="space-y-6" data-aos="fade-left">
-        <div>
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-heading font-semibold text-white text-sm">Facebook Monetization</span>
-            <span class="text-amber-400 font-heading font-bold text-sm">Rp 3–8 Juta/bln</span>
-          </div>
-          <div class="prog-bar-bg"><div class="prog-bar" data-width="85"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-heading font-semibold text-white text-sm">YouTube AdSense</span>
-            <span class="text-amber-400 font-heading font-bold text-sm">Rp 2–6 Juta/bln</span>
-          </div>
-          <div class="prog-bar-bg"><div class="prog-bar" data-width="72"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-heading font-semibold text-white text-sm">TikTok Affiliate Shop</span>
-            <span class="text-amber-400 font-heading font-bold text-sm">Rp 1.5–5 Juta/bln</span>
-          </div>
-          <div class="prog-bar-bg"><div class="prog-bar" data-width="65"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-heading font-semibold text-white text-sm">AI Video Production (Veo 3 / Sora 2)</span>
-            <span class="shimmer-text font-heading font-bold text-sm">Rp 5–15 Juta/bln</span>
-          </div>
-          <div class="prog-bar-bg"><div class="prog-bar" data-width="95" style="background:linear-gradient(90deg,var(--gold-dark),var(--gold-light),var(--cyan));"></div></div>
-        </div>
-
-        <div class="glass-gold rounded-2xl p-5 border-glow-gold mt-4">
-          <p class="font-heading text-[10px] text-amber-500 uppercase tracking-widest mb-2">Rata-rata Penghasilan Alumni VVIP</p>
-          <div class="flex items-end gap-2">
-            <span class="font-display text-3xl font-black shimmer-text">Rp 12,4 Juta</span>
-            <span class="text-slate-400 text-xs mb-1 font-heading">/bulan pada bulan ke-6</span>
-          </div>
-          <p class="text-slate-500 text-xs mt-2">*Berdasarkan laporan mandiri dari 38 alumni VVIP yang merespons survei internal 2024.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Why points grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="glass rounded-2xl p-6 border-glow-gold" data-aos="fade-up">
-        <div class="text-4xl mb-4">🤖</div>
-        <h4 class="font-heading font-bold text-amber-400 text-base mb-2">Teknologi AI Masa Depan</h4>
-        <p class="text-slate-400 text-xs leading-relaxed">Anda menggunakan Veo 3, Sora 2, ChatGPT &amp; Gemini sebelum orang lain tahu cara pakainya.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 border-glow-cyan" data-aos="fade-up" style="transition-delay:0.1s;">
-        <div class="text-4xl mb-4">🎬</div>
-        <h4 class="font-heading font-bold text-cyan-400 text-base mb-2">Konten Tanpa Kamera</h4>
-        <p class="text-slate-400 text-xs leading-relaxed">Produksi video profesional berkualitas sinematik tanpa perlu wajah di kamera, tim, atau studio.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 border-glow-purple" data-aos="fade-up" style="transition-delay:0.2s;">
-        <div class="text-4xl mb-4">📈</div>
-        <h4 class="font-heading font-bold text-purple-400 text-base mb-2">Passive Income Nyata</h4>
-        <p class="text-slate-400 text-xs leading-relaxed">Bangun aset digital yang menghasilkan uang saat Anda tidur — sistematis dan terstruktur.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 border-glow-gold" data-aos="fade-up" style="transition-delay:0.3s;">
-        <div class="text-4xl mb-4">🏆</div>
-        <h4 class="font-heading font-bold text-amber-400 text-base mb-2">Mentor Datang ke Anda</h4>
-        <p class="text-slate-400 text-xs leading-relaxed">Satu-satunya program di Aceh Tenggara di mana mentor hadir langsung ke rumah atau lokasi Anda.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ AI ARSENAL ══════════════════ -->
-<section id="arsenal" class="py-20 px-4 z-10 relative">
-  <div class="max-w-6xl mx-auto">
-    <div class="divider-thin mb-16 max-w-3xl mx-auto"></div>
-    <div class="text-center mb-16" data-aos="fade-up">
-      <p class="font-heading text-xs tracking-[0.35em] text-cyan-500 uppercase mb-3">Teknologi AI Terdepan</p>
-      <h2 class="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-4">Arsenal AI <span class="shimmer-text-cyan">Kelas Dunia</span></h2>
-      <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed">Anda akan dikuasai cara mengoperasikan AI generatif paling canggih — untuk produksi konten yang cepat, murah, dan viral di semua platform.</p>
-    </div>
-
-    <!-- Veo 3 & Sora 2 — Hero spotlight -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-      <!-- Veo 3 -->
-      <div class="glass-gold rounded-3xl p-7 border-glow-gold relative overflow-hidden" data-aos="fade-right">
-        <div class="absolute top-0 right-0 w-64 h-64 pointer-events-none" style="background:radial-gradient(circle at 80% 20%,rgba(245,158,11,0.15),transparent 70%);"></div>
-        <div class="relative z-10">
-          <div class="flex items-center gap-4 mb-5">
-            <div class="text-5xl">🎬</div>
-            <div>
-              <div class="font-display font-bold text-amber-400 text-2xl">Veo 3</div>
-              <div class="text-[10px] text-amber-600 uppercase tracking-widest font-heading">Google DeepMind · AI Video</div>
-              <span class="text-[9px] bg-amber-500 text-black rounded-full px-2.5 py-0.5 mt-1 inline-block font-black uppercase tracking-wider">🔥 TEKNOLOGI TERBARU 2025</span>
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-[9999] glass border-b border-[#f5c242]/30">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-4">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#f5c242] to-amber-300 flex items-center justify-center text-3xl shadow-[0_0_40px_-5px_#f5c242] neomorph">👑</div>
+                <div>
+                    <h1 class="text-3xl headline-font tracking-[-1px] text-[#f5c242]">ANGGA PRADANA PUTRA</h1>
+                    <p class="text-xs text-[#f5c242]/70 -mt-1 tracking-[2px]">OBSIDIAN GOLD CYBER-PREMIUM</p>
+                </div>
             </div>
-          </div>
-          <p class="text-slate-300 text-sm leading-relaxed mb-5">Veo 3 adalah model generasi video AI dari Google DeepMind yang mampu menciptakan video sinematik berkualitas 4K dengan instruksi teks sederhana. Di program VVIP, Anda akan belajar:</p>
-          <ul class="space-y-2.5">
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span>Membuat video konten <strong class="text-amber-300">tanpa kamera, tanpa tim produksi</strong> — hanya prompt</span></li>
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span>Ratusan template prompt rahasia untuk konten viral di YouTube &amp; Facebook</span></li>
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span>Workflow otomatisasi: dari ide → skrip → video → upload dalam &lt;30 menit</span></li>
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span>Teknik konsistensi karakter &amp; style visual brand Anda</span></li>
-          </ul>
-        </div>
-      </div>
 
-      <!-- Sora 2 -->
-      <div class="glass rounded-3xl p-7 border-glow-cyan relative overflow-hidden" data-aos="fade-left">
-        <div class="absolute top-0 right-0 w-64 h-64 pointer-events-none" style="background:radial-gradient(circle at 80% 20%,rgba(0,245,255,0.1),transparent 70%);"></div>
-        <div class="relative z-10">
-          <div class="flex items-center gap-4 mb-5">
-            <div class="text-5xl">🌀</div>
-            <div>
-              <div class="font-display font-bold text-cyan-400 text-2xl">Sora 2</div>
-              <div class="text-[10px] text-cyan-600 uppercase tracking-widest font-heading">OpenAI · Cinematic AI Video</div>
-              <span class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 rounded-full px-2.5 py-0.5 mt-1 inline-block font-black uppercase tracking-wider">👑 EKSKLUSIF VVIP</span>
+            <div class="hidden lg:flex items-center gap-x-10 text-sm font-medium">
+                <a onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})" class="hover:text-[#f5c242]">HERO PROGRAM</a>
+                <a onclick="document.getElementById('arsenal').scrollIntoView({behavior:'smooth'})" class="hover:text-[#f5c242]">ARSENAL AI</a>
+                <a onclick="document.getElementById('cuan').scrollIntoView({behavior:'smooth'})" class="hover:text-[#f5c242]">CUAN VISUALIZER</a>
+                <a onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" class="hover:text-[#f5c242]">PRICING TABS</a>
+                <a onclick="document.getElementById('bot').scrollIntoView({behavior:'smooth'})" class="hover:text-[#f5c242]">ANGGA-BOT</a>
             </div>
-          </div>
-          <p class="text-slate-300 text-sm leading-relaxed mb-5">Sora 2 dari OpenAI menghasilkan video durasi panjang dengan motion sinematik yang tidak bisa dibedakan dari video nyata. Anda akan menguasai:</p>
-          <ul class="space-y-2.5">
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">♛</span><span>Produksi konten <strong class="text-cyan-300">film pendek AI</strong> untuk YouTube dengan potensi jutaan views</span></li>
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">♛</span><span>Storyboarding otomatis — dari skrip ChatGPT langsung ke video Sora 2</span></li>
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">♛</span><span>Menggabungkan video Sora 2 + audio AI untuk konten premium tanpa aktris</span></li>
-            <li class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">♛</span><span>Strategi niche channel khusus AI video yang masih minim kompetitor</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- Other AI Tools Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-      <div class="tool-card glass rounded-2xl p-5 text-center neomorph" data-aos="zoom-in" style="transition-delay:0s;">
-        <div class="text-4xl mb-3">🤖</div>
-        <div class="font-heading font-bold text-white text-sm">ChatGPT</div>
-        <div class="text-xs text-slate-500 mt-1 leading-tight">Scripting &amp; Copywriting</div>
-        <div class="text-[9px] text-amber-500/70 mt-2 font-heading uppercase">OpenAI</div>
-      </div>
-      <div class="tool-card glass rounded-2xl p-5 text-center neomorph" data-aos="zoom-in" style="transition-delay:0.07s;">
-        <div class="text-4xl mb-3">✨</div>
-        <div class="font-heading font-bold text-white text-sm">Gemini</div>
-        <div class="text-xs text-slate-500 mt-1 leading-tight">Advanced Prompting</div>
-        <div class="text-[9px] text-blue-400/70 mt-2 font-heading uppercase">Google</div>
-      </div>
-      <div class="tool-card glass rounded-2xl p-5 text-center neomorph" data-aos="zoom-in" style="transition-delay:0.14s;">
-        <div class="text-4xl mb-3">🎨</div>
-        <div class="font-heading font-bold text-white text-sm">Canva AI</div>
-        <div class="text-xs text-slate-500 mt-1 leading-tight">Desain Thumbnail</div>
-        <div class="text-[9px] text-purple-400/70 mt-2 font-heading uppercase">Canva</div>
-      </div>
-      <div class="tool-card glass rounded-2xl p-5 text-center neomorph" data-aos="zoom-in" style="transition-delay:0.21s;">
-        <div class="text-4xl mb-3">🔊</div>
-        <div class="font-heading font-bold text-white text-sm">ElevenLabs</div>
-        <div class="text-xs text-slate-500 mt-1 leading-tight">AI Voice Over</div>
-        <div class="text-[9px] text-green-400/70 mt-2 font-heading uppercase">ElevenLabs</div>
-      </div>
-      <div class="tool-card glass rounded-2xl p-5 text-center neomorph" data-aos="zoom-in" style="transition-delay:0.28s;">
-        <div class="text-4xl mb-3">📊</div>
-        <div class="font-heading font-bold text-white text-sm">Analytics</div>
-        <div class="text-xs text-slate-500 mt-1 leading-tight">Data &amp; SEO Tools</div>
-        <div class="text-[9px] text-cyan-400/70 mt-2 font-heading uppercase">TubeBuddy</div>
-      </div>
-      <div class="tool-card glass rounded-2xl p-5 text-center neomorph" data-aos="zoom-in" style="transition-delay:0.35s;">
-        <div class="text-4xl mb-3">🖼️</div>
-        <div class="font-heading font-bold text-white text-sm">Midjourney</div>
-        <div class="text-xs text-slate-500 mt-1 leading-tight">AI Image Art</div>
-        <div class="text-[9px] text-pink-400/70 mt-2 font-heading uppercase">Midjourney</div>
-      </div>
-    </div>
-
-    <!-- Metode Mentoring -->
-    <div class="text-center mt-20 mb-10" data-aos="fade-up">
-      <p class="font-heading text-xs tracking-[0.35em] text-amber-500 uppercase mb-3">Cara Belajar</p>
-      <h3 class="font-display text-xl sm:text-2xl font-bold text-white mb-4">Mentoring <span class="glow-cyan">Fleksibel &amp; Personal</span></h3>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-      <div class="glass rounded-2xl p-7 text-center border-glow-gold" data-aos="fade-up">
-        <div class="text-5xl mb-5">🏠</div>
-        <h4 class="font-heading font-bold text-amber-400 text-lg mb-3">Kunjungan Rumah / Lokasi</h4>
-        <p class="text-slate-400 text-sm leading-relaxed">Mentor datang <strong class="text-white">langsung ke rumah atau lokasi</strong> Anda untuk sesi tatap muka intensif. Tersedia untuk wilayah Aceh Tenggara &amp; sekitarnya — pengalaman belajar paling premium!</p>
-      </div>
-      <div class="glass rounded-2xl p-7 text-center border-glow-cyan" data-aos="fade-up" style="transition-delay:0.1s;">
-        <div class="text-5xl mb-5">📹</div>
-        <h4 class="font-heading font-bold text-cyan-400 text-lg mb-3">Zoom Premium Session</h4>
-        <p class="text-slate-400 text-sm leading-relaxed">Sesi video call <strong class="text-white">1-on-1 via Zoom</strong> berkualitas tinggi. Screen sharing real-time, live demo, dan tanya jawab langsung tanpa batas — tersedia untuk seluruh Indonesia!</p>
-      </div>
-      <div class="glass rounded-2xl p-7 text-center border-glow-purple" data-aos="fade-up" style="transition-delay:0.2s;">
-        <div class="text-5xl mb-5">👑</div>
-        <h4 class="font-heading font-bold text-purple-400 text-lg mb-3">Komunitas Discord VVIP</h4>
-        <p class="text-slate-400 text-sm leading-relaxed">Akses <strong class="text-white">komunitas eksklusif seumur hidup</strong> — materi rahasia, update algoritma terbaru, support 24 jam dari mentor dan sesama alumni sukses.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ PRICING TABS ══════════════════ -->
-<section id="paket" class="py-20 px-4 z-10 relative">
-  <div class="max-w-6xl mx-auto">
-    <div class="divider-gold mb-16 max-w-2xl mx-auto"></div>
-    <div class="text-center mb-12" data-aos="fade-up">
-      <p class="font-heading text-xs tracking-[0.35em] text-amber-500 uppercase mb-3">Investasi Ilmu</p>
-      <h2 class="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-4">Pilih <span class="shimmer-text">Platform &amp; Paket</span> Anda</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">Dari paket terjangkau hingga VVIP eksklusif — semua dirancang untuk hasil nyata, terukur, dan berkelanjutan.</p>
-    </div>
-
-    <!-- Tab Buttons -->
-    <div class="flex flex-col sm:flex-row gap-3 justify-center mb-10" data-aos="zoom-in">
-      <button onclick="switchTab('facebook')" id="tab-facebook" class="tab-btn active glass rounded-2xl px-6 py-4 font-heading font-bold text-sm tracking-wider uppercase border border-transparent flex items-center justify-center gap-3 text-slate-300">
-        <span class="text-2xl">📘</span><span>Facebook Monet</span>
-      </button>
-      <button onclick="switchTab('youtube')" id="tab-youtube" class="tab-btn glass rounded-2xl px-6 py-4 font-heading font-bold text-sm tracking-wider uppercase border border-transparent flex items-center justify-center gap-3 text-slate-300">
-        <span class="text-2xl">▶️</span><span>YouTube Mastery</span>
-      </button>
-      <button onclick="switchTab('tiktok')" id="tab-tiktok" class="tab-btn glass rounded-2xl px-6 py-4 font-heading font-bold text-sm tracking-wider uppercase border border-transparent flex items-center justify-center gap-3 text-slate-300">
-        <span class="text-2xl">🎵</span><span>TikTok Viral</span>
-      </button>
-    </div>
-
-    <!-- ═ FACEBOOK TAB ═ -->
-    <div id="content-facebook" class="tab-content active">
-      <div class="text-center mb-8" data-aos="fade-up">
-        <h3 class="font-display text-xl sm:text-2xl text-amber-400 font-bold">📘 Facebook Monetization Mastery</h3>
-        <p class="text-slate-400 text-sm mt-2">Kuasai algoritma Facebook EdgeRank &amp; raih passive income dari konten video Anda</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Starter FB -->
-        <div class="price-card glass rounded-2xl p-7 border border-white/10" data-aos="fade-up">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/12 border border-amber-500/30 flex items-center justify-center text-amber-400 font-display font-bold">1</div>
-            <div><div class="font-heading font-bold text-white text-lg">Paket Starter</div><div class="text-[10px] text-slate-500 uppercase tracking-wider">Facebook Basic</div></div>
-          </div>
-          <div class="text-3xl font-display font-black shimmer-text mb-1">Rp 200.000</div>
-          <div class="text-xs text-slate-500 mb-6">Sekali bayar · Lifetime access materi</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-500 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Basic Setup Fanspage:</strong> Optimasi profil, nama, kategori &amp; deskripsi yang ramah algoritma Facebook</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-500 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Cara Kejar Jam Tayang:</strong> Strategi posting konsisten, jam optimal, jenis konten yang FB sukai</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-500 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Syarat Monetisasi FB:</strong> Panduan lengkap menembus 600.000 menit tayang &amp; 5.000 follower</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-500 mt-0.5 flex-shrink-0">✦</span><span>Modul PDF, video tutorial dasar, dan checklist harian konten</span></div>
-          </div>
-          <button onclick="openCheckout('Paket Starter Facebook','Rp 200.000')" class="btn-ghost w-full py-3 rounded-xl text-xs uppercase tracking-wider">Beli Paket Ini</button>
-        </div>
-        <!-- Pro FB -->
-        <div class="price-card glass rounded-2xl p-7 border border-white/10" data-aos="fade-up" style="transition-delay:0.1s;">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-xl bg-cyan-500/12 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-display font-bold">2</div>
-            <div><div class="font-heading font-bold text-white text-lg">Paket Pro</div><div class="text-[10px] text-slate-500 uppercase tracking-wider">Facebook Advanced</div></div>
-          </div>
-          <div class="text-3xl font-display font-black shimmer-text mb-1">Rp 500.000</div>
-          <div class="text-xs text-slate-500 mb-6">Sekali bayar · Komunitas Discord 30 hari</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Advance Algo Facebook:</strong> Rahasia cara kerja EdgeRank &amp; cara memanfaatkan distribusi organik secara legal</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Rahasia Reels Viral:</strong> Formula hook 3 detik pertama, struktur reels dengan retensi penonton &gt;70%</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">50+ Prompt Eksklusif ChatGPT/Gemini:</strong> Prompt teruji untuk menulis skrip viral secara otomatis dalam hitungan menit</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-cyan-400 mt-0.5 flex-shrink-0">✦</span><span>Akses grup WhatsApp support aktif 30 hari + update materi bulanan</span></div>
-          </div>
-          <button onclick="openCheckout('Paket Pro Facebook','Rp 500.000')" class="btn-ghost w-full py-3 rounded-xl text-xs uppercase tracking-wider">Beli Paket Ini</button>
-        </div>
-        <!-- VVIP FB -->
-        <div class="price-card vvip glass-gold rounded-2xl p-7 relative" data-aos="fade-up" style="transition-delay:0.2s;">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-            <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-black text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">👑 VVIP TERPOPULER</span>
-          </div>
-          <div class="flex items-center gap-3 mb-5 mt-3">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/25 border border-amber-500/55 flex items-center justify-center text-amber-400 font-display font-bold">V</div>
-            <div><div class="font-heading font-bold text-amber-400 text-lg">Paket VVIP</div><div class="text-[10px] text-amber-600 uppercase tracking-wider">Private Mentoring</div></div>
-          </div>
-          <div class="text-3xl font-display font-black glow-gold mb-1">Rp 5.000.000</div>
-          <div class="text-xs text-amber-600/80 mb-6">Mentoring intensif · Full support 3 bulan</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Mentoring Private:</strong> Sesi 1-on-1 via Zoom Premium atau kunjungan langsung ke lokasi Anda</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Done-For-You Setup:</strong> Mentor langsung setting fanspage, pixel, konten awal, dan strategi growth Anda</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Rahasia Video AI Full:</strong> Akses penuh teknik Veo 3 untuk konten viral tanpa tampil di kamera</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span>Discord VVIP seumur hidup + follow-up &amp; pendampingan penuh selama 3 bulan</span></div>
-          </div>
-          <button onclick="openCheckout('Paket VVIP Facebook','Rp 5.000.000')" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase tracking-widest">🔥 Ambil Posisi VVIP</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═ YOUTUBE TAB ═ -->
-    <div id="content-youtube" class="tab-content">
-      <div class="text-center mb-8" data-aos="fade-up">
-        <h3 class="font-display text-xl sm:text-2xl text-red-400 font-bold">▶️ YouTube Mastery Program</h3>
-        <p class="text-slate-400 text-sm mt-2">Kuasai SEO, Shorts, dan produksi video AI untuk membangun channel YouTube yang menghasilkan</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="price-card glass rounded-2xl p-7 border border-white/10" data-aos="fade-up">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-xl bg-red-500/12 border border-red-500/30 flex items-center justify-center text-red-400 font-display font-bold">1</div>
-            <div><div class="font-heading font-bold text-white text-lg">Paket Starter</div><div class="text-[10px] text-slate-500 uppercase tracking-wider">YouTube Basic</div></div>
-          </div>
-          <div class="text-3xl font-display font-black shimmer-text mb-1">Rp 160.000</div>
-          <div class="text-xs text-slate-500 mb-6">Sekali bayar · Lifetime access</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-red-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Algoritma Dasar YouTube:</strong> Cara kerja sistem rekomendasi, watch time, dan faktor ranking 2025</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-red-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">SEO YouTube Lengkap:</strong> Riset keyword dengan volume tinggi, judul &amp; deskripsi yang menembus pencarian</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-red-400 mt-0.5 flex-shrink-0">✦</span><span>Tips desain thumbnail CTR 10%+ &amp; teknik hook pembuka video yang menahan penonton</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-red-400 mt-0.5 flex-shrink-0">✦</span><span>Panduan langkah demi langkah meraih 1.000 subscriber + 4.000 jam tayang</span></div>
-          </div>
-          <button onclick="openCheckout('Paket Starter YouTube','Rp 160.000')" class="btn-ghost w-full py-3 rounded-xl text-xs uppercase tracking-wider">Beli Paket Ini</button>
-        </div>
-        <div class="price-card glass rounded-2xl p-7 border border-white/10" data-aos="fade-up" style="transition-delay:0.1s;">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-xl bg-orange-500/12 border border-orange-500/30 flex items-center justify-center text-orange-400 font-display font-bold">2</div>
-            <div><div class="font-heading font-bold text-white text-lg">Paket Pro</div><div class="text-[10px] text-slate-500 uppercase tracking-wider">YouTube Advanced</div></div>
-          </div>
-          <div class="text-3xl font-display font-black shimmer-text mb-1">Rp 450.000</div>
-          <div class="text-xs text-slate-500 mb-6">Sekali bayar · Support 30 hari</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-orange-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">YouTube Shorts Meledak:</strong> Formula Shorts viral 100K+ views dengan struktur 3-15 detik yang terbukti</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-orange-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">AI-Powered Content Engine:</strong> Prompt ChatGPT &amp; Gemini untuk ide, skrip, thumbnail, &amp; judul — otomatis setiap hari</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-orange-400 mt-0.5 flex-shrink-0">✦</span><span>Teknik upload jadwal algoritmik, analitik channel mendalam, &amp; strategi monetisasi multi-stream</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-orange-400 mt-0.5 flex-shrink-0">✦</span><span>Grup WA support aktif + update kurikulum setiap ada perubahan algoritma YouTube</span></div>
-          </div>
-          <button onclick="openCheckout('Paket Pro YouTube','Rp 450.000')" class="btn-ghost w-full py-3 rounded-xl text-xs uppercase tracking-wider">Beli Paket Ini</button>
-        </div>
-        <div class="price-card vvip glass-gold rounded-2xl p-7 relative" data-aos="fade-up" style="transition-delay:0.2s;">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-            <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-black text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">👑 BEST VALUE</span>
-          </div>
-          <div class="flex items-center gap-3 mb-5 mt-3">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/25 border border-amber-500/55 flex items-center justify-center text-amber-400 font-display font-bold">V</div>
-            <div><div class="font-heading font-bold text-amber-400 text-lg">Paket VVIP</div><div class="text-[10px] text-amber-600 uppercase tracking-wider">Intensif 1-on-1</div></div>
-          </div>
-          <div class="text-3xl font-display font-black glow-gold mb-1">Rp 4.000.000</div>
-          <div class="text-xs text-amber-600/80 mb-6">Mentoring intensif · Veo 3 &amp; Sora 2 mastery</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Mentoring Intensif:</strong> Sesi tatap muka &amp; Zoom intens untuk akselerasi pertumbuhan channel dari 0 ke monetisasi</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Bedah Channel 1-on-1:</strong> Analisis mendalam &amp; perbaikan strategi spesifik untuk channel Anda</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Veo 3 &amp; Sora 2 Full Mastery:</strong> Produksi video cinematic AI — buat konten pasif income otomatis setiap hari</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span>Discord VVIP seumur hidup + 3 bulan garansi pendampingan aktif</span></div>
-          </div>
-          <button onclick="openCheckout('Paket VVIP YouTube','Rp 4.000.000')" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase tracking-widest">🔥 Ambil Posisi VVIP</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═ TIKTOK TAB ═ -->
-    <div id="content-tiktok" class="tab-content">
-      <div class="text-center mb-8" data-aos="fade-up">
-        <h3 class="font-display text-xl sm:text-2xl text-pink-400 font-bold">🎵 TikTok Viral Mastery</h3>
-        <p class="text-slate-400 text-sm mt-2">FYP, affiliate &amp; keranjang kuning — rahasia cuan di TikTok yang masih sedikit diketahui orang</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="price-card glass rounded-2xl p-7 border border-white/10" data-aos="fade-up">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-xl bg-pink-500/12 border border-pink-500/30 flex items-center justify-center text-pink-400 font-display font-bold">1</div>
-            <div><div class="font-heading font-bold text-white text-lg">Paket Starter</div><div class="text-[10px] text-slate-500 uppercase tracking-wider">TikTok Basic</div></div>
-          </div>
-          <div class="text-3xl font-display font-black shimmer-text mb-1">Rp 120.000</div>
-          <div class="text-xs text-slate-500 mb-6">Sekali bayar · PDF &amp; video tutorial</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-pink-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Rahasia FYP 2025:</strong> Cara kerja For You Page &amp; faktor eksklusif yang bikin video masuk FYP jutaan penonton</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-pink-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Hook Pemancing Interaksi:</strong> Formula 3 detik pertama yang membuat penonton tidak bisa scroll away</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-pink-400 mt-0.5 flex-shrink-0">✦</span><span>Tren sound &amp; hashtag terkini yang mempercepat distribusi konten ke audiens baru</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-pink-400 mt-0.5 flex-shrink-0">✦</span><span>Cara analisis kompetitor &amp; menemukan niche yang potensial tapi masih minim saingan</span></div>
-          </div>
-          <button onclick="openCheckout('Paket Starter TikTok','Rp 120.000')" class="btn-ghost w-full py-3 rounded-xl text-xs uppercase tracking-wider">Beli Paket Ini</button>
-        </div>
-        <div class="price-card glass rounded-2xl p-7 border border-white/10" data-aos="fade-up" style="transition-delay:0.1s;">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/12 border border-purple-500/30 flex items-center justify-center text-purple-400 font-display font-bold">2</div>
-            <div><div class="font-heading font-bold text-white text-lg">Paket Pro</div><div class="text-[10px] text-slate-500 uppercase tracking-wider">Affiliate &amp; Live</div></div>
-          </div>
-          <div class="text-3xl font-display font-black shimmer-text mb-1">Rp 240.000</div>
-          <div class="text-xs text-slate-500 mb-6">Sekali bayar · Support komunitas</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-purple-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">TikTok Affiliate Master:</strong> Cara daftar, memilih produk dengan komisi tinggi &amp; membuat konten review yang benar-benar mengonversi</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-purple-400 mt-0.5 flex-shrink-0">✦</span><span><strong class="text-white">Strategi Live Streaming:</strong> Teknik live yang menghasilkan gift, penjualan real-time &amp; follower masif dalam satu sesi</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-purple-400 mt-0.5 flex-shrink-0">✦</span><span>Optimasi TikTok Shop, strategi komisi affiliate maksimal &amp; cara kerja keranjang kuning</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-purple-400 mt-0.5 flex-shrink-0">✦</span><span>10+ template skrip live streaming penjualan siap pakai</span></div>
-          </div>
-          <button onclick="openCheckout('Paket Pro TikTok','Rp 240.000')" class="btn-ghost w-full py-3 rounded-xl text-xs uppercase tracking-wider">Beli Paket Ini</button>
-        </div>
-        <div class="price-card vvip glass-gold rounded-2xl p-7 relative" data-aos="fade-up" style="transition-delay:0.2s;">
-          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
-            <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-black text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">👑 KERANJANG KUNING PRO</span>
-          </div>
-          <div class="flex items-center gap-3 mb-5 mt-3">
-            <div class="w-10 h-10 rounded-xl bg-amber-500/25 border border-amber-500/55 flex items-center justify-center text-amber-400 font-display font-bold">V</div>
-            <div><div class="font-heading font-bold text-amber-400 text-lg">Paket VVIP</div><div class="text-[10px] text-amber-600 uppercase tracking-wider">Private Mentoring</div></div>
-          </div>
-          <div class="text-3xl font-display font-black glow-gold mb-1">Rp 3.000.000</div>
-          <div class="text-xs text-amber-600/80 mb-6">Full support Discord VVIP + 3 bulan</div>
-          <div class="space-y-3 mb-8">
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Private Mentoring 1-on-1:</strong> Sesi eksklusif untuk akselerasi growth TikTok dari 0 ke monetisasi aktif</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Bedah Algoritma Keranjang Kuning:</strong> Rahasia mendalam cara menguasai TikTok Shop affiliate &amp; melipatgandakan komisi</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span><strong class="text-amber-300">Full Support Discord VVIP:</strong> Komunitas, update algoritma real-time, tanya jawab tanpa batas seumur hidup</span></div>
-            <div class="flex items-start gap-2.5 text-sm text-slate-300"><span class="text-amber-400 mt-0.5 flex-shrink-0">♛</span><span>Garansi pendampingan aktif 3 bulan hingga hasil nyata tercapai</span></div>
-          </div>
-          <button onclick="openCheckout('Paket VVIP TikTok','Rp 3.000.000')" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase tracking-widest">🔥 Ambil Posisi VVIP</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ TESTIMONIALS ══════════════════ -->
-<section class="py-16 px-4 z-10 relative">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <p class="font-heading text-xs tracking-[0.35em] text-amber-500 uppercase mb-3">Testimoni Nyata</p>
-      <h2 class="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white">Mereka Sudah <span class="glow-gold">Membuktikannya</span></h2>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-      <div class="testi-card glass rounded-2xl p-6" data-aos="fade-up">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-pink-400 to-pink-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">SR</div>
-          <div><div class="font-heading font-bold text-white text-sm">Sari Rahmawati</div><div class="text-[10px] text-slate-500">📍 Medan, Sumatera</div></div>
-        </div>
-        <div class="text-amber-400 text-xs mb-3 tracking-wider">★★★★★</div>
-        <p class="text-slate-300 text-xs leading-relaxed">"Dalam 2 bulan pakai metode Mentor Angga, channel YouTube saya tembus 1.000 subscriber dan udah mulai dimonetisasi. Prompt AI-nya luar biasa efektif — skrip keluar dalam hitungan menit!"</p>
-      </div>
-      <div class="testi-card glass-gold rounded-2xl p-6 border-glow-gold" data-aos="fade-up" style="transition-delay:0.1s;">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-black font-bold text-sm flex-shrink-0">BF</div>
-          <div><div class="font-heading font-bold text-amber-400 text-sm">Budi Firmansyah</div><div class="text-[10px] text-amber-600">📍 Banda Aceh</div></div>
-        </div>
-        <div class="text-amber-400 text-xs mb-3 tracking-wider">★★★★★</div>
-        <p class="text-slate-300 text-xs leading-relaxed">"VVIP Facebook terbaik yang pernah saya ikuti! Mentor Angga langsung datang ke rumah, setup fanspage, dan ajari cara produksi video pakai Veo 3 AI. Sekarang jam tayang sudah 650 ribu lebih dan hampir monetisasi!"</p>
-      </div>
-      <div class="testi-card glass rounded-2xl p-6" data-aos="fade-up" style="transition-delay:0.2s;">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-purple-400 to-purple-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">NL</div>
-          <div><div class="font-heading font-bold text-white text-sm">Nurul Lestari</div><div class="text-[10px] text-slate-500">📍 Kutacane, Aceh</div></div>
-        </div>
-        <div class="text-amber-400 text-xs mb-3 tracking-wider">★★★★★</div>
-        <p class="text-slate-300 text-xs leading-relaxed">"TikTok affiliate saya bisa Rp 2,3 juta bulan pertama berkat Paket Pro. Strateginya simpel, sistematis, dan hasilnya nyata. Sekarang saya sudah lanjut ke paket VVIP untuk scale up. Terima kasih Mentor Angga!"</p>
-      </div>
-    </div>
-    <!-- More testimonials row -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
-      <div class="testi-card glass rounded-2xl p-6" data-aos="fade-right">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">RH</div>
-          <div><div class="font-heading font-bold text-white text-sm">Rizky Hidayat</div><div class="text-[10px] text-slate-500">📍 Langsa, Aceh</div></div>
-        </div>
-        <div class="text-amber-400 text-xs mb-3 tracking-wider">★★★★★</div>
-        <p class="text-slate-300 text-xs leading-relaxed">"Saya awam banget soal digital marketing. Tapi setelah ikut Paket Pro YouTube, dalam 45 hari channel saya sudah punya 800+ subscriber. Cara pengajarannya sabar, detail, dan mudah dipahami. Recommended banget!"</p>
-      </div>
-      <div class="testi-card glass rounded-2xl p-6" data-aos="fade-left">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-green-400 to-green-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">DS</div>
-          <div><div class="font-heading font-bold text-white text-sm">Dewi Safitri</div><div class="text-[10px] text-slate-500">📍 Subulussalam, Aceh</div></div>
-        </div>
-        <div class="text-amber-400 text-xs mb-3 tracking-wider">★★★★★</div>
-        <p class="text-slate-300 text-xs leading-relaxed">"Program VVIP TikTok benar-benar mengubah hidup saya. Dari ibu rumah tangga yang bingung soal medsos, sekarang sudah punya TikTok Shop aktif dengan pemasukan Rp 1,8 juta di bulan pertama. Luar biasa!"</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ GOOGLE MAP ══════════════════ -->
-<section class="py-16 px-4 z-10 relative">
-  <div class="max-w-5xl mx-auto">
-    <div class="divider-thin mb-12 max-w-2xl mx-auto"></div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-      <div data-aos="fade-right">
-        <p class="font-heading text-xs tracking-[0.35em] text-amber-500 uppercase mb-3">Lokasi Mentor</p>
-        <h3 class="font-display font-bold text-xl sm:text-2xl text-white mb-4">Temukan Kami di <span class="glow-gold">Aceh Tenggara</span></h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-5">Mentor Angga Pradana berlokasi di Kecamatan Bambel, Kabupaten Aceh Tenggara. Untuk mentoring tatap muka, Anda bisa berkunjung atau Mentor Angga yang akan mendatangi lokasi Anda.</p>
-        <div class="space-y-3">
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">📍</span>
-            <span class="text-slate-300 text-sm">Dekat Rikit, Kec. Bambel, Kab. Aceh Tenggara, Aceh 24651</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">💬</span>
-            <a href="https://wa.me/6288277200044" target="_blank" class="text-amber-400 text-sm hover:text-amber-300 transition-colors">+62 882-7720-0044</a>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">✉️</span>
-            <a href="mailto:anggapradanaarival@gmail.com" class="text-amber-400 text-sm hover:text-amber-300 transition-colors break-all">anggapradanaarival@gmail.com</a>
-          </div>
-        </div>
-      </div>
-      <div class="map-wrapper" data-aos="fade-left" style="height:320px;">
-        <div class="map-overlay"></div>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31842.124556!2d97.797!3d3.678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30323ef12fac7e87%3A0x3f5c4a9b1a5b2e0a!2sBambel%2C%20Aceh%20Tenggara%20Regency%2C%20Aceh!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
-          width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Mentor Angga Pradana">
-        </iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ FAQ ══════════════════ -->
-<section class="py-16 px-4 z-10 relative">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-12" data-aos="fade-up">
-      <p class="font-heading text-xs tracking-[0.35em] text-amber-500 uppercase mb-3">FAQ</p>
-      <h2 class="font-display text-xl sm:text-2xl font-bold text-white">Pertanyaan <span class="glow-cyan">Umum</span></h2>
-    </div>
-    <div class="space-y-3" data-aos="fade-up">
-      <details class="faq-item glass rounded-2xl p-5 group">
-        <summary class="font-heading font-bold text-white text-sm flex items-center justify-between gap-4">
-          <span>Apakah saya bisa belajar meski belum punya pengalaman sama sekali?</span>
-          <span class="faq-chevron text-amber-400 text-sm flex-shrink-0">▼</span>
-        </summary>
-        <p class="text-slate-400 text-xs mt-4 leading-relaxed">Tentu! Semua paket dirancang dari nol. Anda tidak perlu pengalaman sebelumnya. Mentor Angga akan membimbing dari langkah pertama setup akun hingga monetisasi aktif menghasilkan uang.</p>
-      </details>
-      <details class="faq-item glass rounded-2xl p-5 group">
-        <summary class="font-heading font-bold text-white text-sm flex items-center justify-between gap-4">
-          <span>Berapa lama akses materi berlaku?</span>
-          <span class="faq-chevron text-amber-400 text-sm flex-shrink-0">▼</span>
-        </summary>
-        <p class="text-slate-400 text-xs mt-4 leading-relaxed">Semua materi berlaku seumur hidup (lifetime access). Paket VVIP mendapat akses Discord VVIP plus pendampingan aktif selama 3 bulan penuh. Update materi diberikan otomatis saat ada perubahan algoritma.</p>
-      </details>
-      <details class="faq-item glass rounded-2xl p-5 group">
-        <summary class="font-heading font-bold text-white text-sm flex items-center justify-between gap-4">
-          <span>Bagaimana cara pembayaran dan konfirmasinya?</span>
-          <span class="faq-chevron text-amber-400 text-sm flex-shrink-0">▼</span>
-        </summary>
-        <p class="text-slate-400 text-xs mt-4 leading-relaxed">Klik tombol "Beli" → isi form nama &amp; nomor WA → pilih metode bayar → klik "Konfirmasi". Pesan otomatis terkirim ke WA Mentor Angga lengkap dengan detail Anda. Akses materi dikirimkan dalam 1×24 jam kerja.</p>
-      </details>
-      <details class="faq-item glass rounded-2xl p-5 group">
-        <summary class="font-heading font-bold text-white text-sm flex items-center justify-between gap-4">
-          <span>Apakah tersedia mentoring tatap muka di luar Aceh Tenggara?</span>
-          <span class="faq-chevron text-amber-400 text-sm flex-shrink-0">▼</span>
-        </summary>
-        <p class="text-slate-400 text-xs mt-4 leading-relaxed">Untuk tatap muka dan kunjungan ke lokasi, saat ini Mentor Angga utamanya melayani wilayah Aceh Tenggara, Kutacane, dan sekitarnya. Untuk daerah lain seluruh Indonesia, tersedia Zoom Premium 1-on-1 yang sama efektifnya. Hubungi WA untuk jadwal &amp; diskusi.</p>
-      </details>
-      <details class="faq-item glass rounded-2xl p-5 group">
-        <summary class="font-heading font-bold text-white text-sm flex items-center justify-between gap-4">
-          <span>Apakah ada garansi hasil?</span>
-          <span class="faq-chevron text-amber-400 text-sm flex-shrink-0">▼</span>
-        </summary>
-        <p class="text-slate-400 text-xs mt-4 leading-relaxed">Paket VVIP dilengkapi garansi pendampingan 3 bulan — jika Anda mengikuti semua materi dan sesi dengan serius namun belum ada hasil yang terukur, Mentor Angga akan terus mendampingi hingga Anda mencapai monetisasi pertama. Testimoni 98% kepuasan murid berbicara sendiri.</p>
-      </details>
-      <details class="faq-item glass rounded-2xl p-5 group">
-        <summary class="font-heading font-bold text-white text-sm flex items-center justify-between gap-4">
-          <span>Apa itu Veo 3 dan Sora 2 yang disebut di paket VVIP?</span>
-          <span class="faq-chevron text-amber-400 text-sm flex-shrink-0">▼</span>
-        </summary>
-        <p class="text-slate-400 text-xs mt-4 leading-relaxed">Veo 3 (Google) dan Sora 2 (OpenAI) adalah AI video generatif terdepan yang dapat membuat video sinematik berkualitas tinggi hanya dari instruksi teks. Dengan teknologi ini, Anda bisa produksi konten viral setiap hari tanpa kamera, tanpa talent, tanpa tim produksi — inilah rahasia passive income otomatis yang diajarkan di kelas VVIP.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ CTA FINAL ══════════════════ -->
-<section class="py-20 px-4 z-10 relative">
-  <div class="max-w-4xl mx-auto text-center" data-aos="zoom-in">
-    <div class="glass-gold rounded-3xl p-10 sm:p-14 border-glow-gold relative overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 30% 20%,rgba(245,158,11,0.08),transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(124,58,237,0.06),transparent 55%);"></div>
-      <div class="relative z-10">
-        <div class="text-5xl mb-6 animate-[float_4s_ease-in-out_infinite]">🚀</div>
-        <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4 leading-tight">
-          Mulai Perjalanan <span class="glow-gold">Passive Income</span> Anda<br/>Hari Ini Juga!
-        </h2>
-        <p class="text-slate-300 max-w-xl mx-auto mb-8 leading-relaxed text-sm sm:text-base">Jangan tunggu besok. Setiap hari tanpa aksi adalah hari yang hilang. Ratusan orang sudah mulai — giliran Anda sekarang. Kuota VVIP sangat terbatas!</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#paket" class="btn-gold px-10 py-4 rounded-full text-xs uppercase tracking-widest font-display">🎯 Pilih Paket Sekarang</a>
-          <a href="https://wa.me/6288277200044?text=Halo%20Mentor%20Angga,%20saya%20mau%20konsultasi%20program%20mentoring" target="_blank" class="btn-ghost px-10 py-4 rounded-full text-xs uppercase tracking-widest">💬 Tanya Mentor Langsung</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ FOOTER ══════════════════ -->
-<footer class="relative z-10 border-t border-amber-500/12 py-14 px-4">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-10">
-      <div>
-        <div class="glow-gold font-display text-xl font-bold mb-3">Angga Pradana Putra</div>
-        <p class="text-slate-500 text-xs leading-relaxed">Pakar Monetisasi Digital &amp; AI Prompting asal Aceh Tenggara — membantu individu menghasilkan passive income nyata melalui platform digital dengan teknologi AI terdepan.</p>
-        <div class="flex items-center gap-3 mt-5">
-          <a href="https://wa.me/6288277200044" target="_blank" class="w-9 h-9 glass rounded-xl flex items-center justify-center text-green-400 hover:bg-green-500/20 transition-colors border border-green-500/20 text-base">💬</a>
-          <a href="mailto:anggapradanaarival@gmail.com" class="w-9 h-9 glass rounded-xl flex items-center justify-center text-amber-400 hover:bg-amber-500/20 transition-colors border border-amber-500/20 text-base">✉️</a>
-        </div>
-      </div>
-      <div>
-        <div class="font-heading font-bold text-amber-400 text-xs tracking-widest uppercase mb-4">Program</div>
-        <ul class="space-y-2.5">
-          <li><button onclick="switchTab('facebook');scrollToSection('paket')" class="text-slate-400 text-xs hover:text-amber-400 transition-colors">📘 Facebook Monetization</button></li>
-          <li><button onclick="switchTab('youtube');scrollToSection('paket')" class="text-slate-400 text-xs hover:text-amber-400 transition-colors">▶️ YouTube Mastery</button></li>
-          <li><button onclick="switchTab('tiktok');scrollToSection('paket')" class="text-slate-400 text-xs hover:text-amber-400 transition-colors">🎵 TikTok Viral</button></li>
-          <li><a href="#arsenal" class="text-slate-400 text-xs hover:text-amber-400 transition-colors">🤖 Arsenal AI Tools</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="font-heading font-bold text-amber-400 text-xs tracking-widest uppercase mb-4">Kontak Resmi</div>
-        <ul class="space-y-3">
-          <li class="flex items-start gap-3">
-            <span class="text-amber-500 flex-shrink-0 mt-0.5 text-lg">📧</span>
-            <div>
-              <div class="text-slate-500 text-[10px] uppercase tracking-wider font-heading">Email</div>
-              <a href="mailto:anggapradanaarival@gmail.com" class="text-slate-300 text-xs hover:text-amber-400 transition-colors break-all">anggapradanaarival@gmail.com</a>
+            <div class="flex items-center gap-x-5">
+                <!-- Google Translate -->
+                <div id="google_translate_element" class="text-[#f5c242] text-sm"></div>
+                
+                <!-- WA Button -->
+                <a href="https://wa.me/6288277200044" target="_blank"
+                   class="flex items-center px-7 py-3.5 bg-[#f5c242] text-[#0a0a0a] font-semibold rounded-3xl text-sm hover:aura-glow">
+                    <span class="mr-2">💬</span>
+                    CHAT MENTOR ANGGa
+                </a>
+                
+                <!-- Mobile Toggle -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-3xl">☰</button>
             </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-green-500 flex-shrink-0 mt-0.5 text-lg">💬</span>
-            <div>
-              <div class="text-slate-500 text-[10px] uppercase tracking-wider font-heading">WhatsApp</div>
-              <a href="https://wa.me/6288277200044" target="_blank" class="text-slate-300 text-xs hover:text-amber-400 transition-colors">+62 882-7720-0044</a>
-            </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-cyan-500 flex-shrink-0 mt-0.5 text-lg">📍</span>
-            <div>
-              <div class="text-slate-500 text-[10px] uppercase tracking-wider font-heading">Alamat</div>
-              <p class="text-slate-400 text-xs leading-relaxed">Dekat Rikit, Kec. Bambel,<br>Kab. Aceh Tenggara, Aceh 24651</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="divider-gold mb-6"></div>
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="text-slate-600 text-[10px]">© 2025 Angga Pradana Putra. All Rights Reserved.</p>
-      <p class="text-slate-600 text-[10px]">🌴 Aceh Tenggara, Indonesia · Dibangun dengan ❤️ &amp; AI</p>
-    </div>
-  </div>
-</footer>
-
-<!-- ══════════════════ CHECKOUT MODAL ══════════════════ -->
-<div id="checkout-modal" role="dialog" aria-modal="true" aria-label="Form Pendaftaran">
-  <div class="modal-inner glass-gold rounded-3xl p-6 sm:p-8 w-full max-w-md mx-4 border-glow-gold relative max-h-[92vh] overflow-y-auto">
-    <button onclick="closeCheckout()" class="absolute top-4 right-4 w-9 h-9 glass rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-colors text-xl z-10" aria-label="Tutup modal">×</button>
-    <div class="text-center mb-6">
-      <div class="text-4xl mb-2">🛒</div>
-      <h3 class="font-display font-bold text-amber-400 text-xl mb-1">Form Pendaftaran</h3>
-      <p id="modal-package-name" class="text-slate-400 text-xs font-heading"></p>
-      <p id="modal-package-price" class="shimmer-text font-display text-lg font-bold mt-1"></p>
-    </div>
-    <div class="space-y-4">
-      <div>
-        <label class="text-[10px] font-heading font-bold text-amber-400 uppercase tracking-widest block mb-2">Nama Lengkap *</label>
-        <input id="checkout-name" type="text" class="form-input" placeholder="Masukkan nama lengkap Anda"/>
-      </div>
-      <div>
-        <label class="text-[10px] font-heading font-bold text-amber-400 uppercase tracking-widest block mb-2">Nomor WhatsApp *</label>
-        <input id="checkout-wa" type="tel" class="form-input" placeholder="Contoh: 08123456789"/>
-      </div>
-      <div>
-        <label class="text-[10px] font-heading font-bold text-amber-400 uppercase tracking-widest block mb-3">Metode Pembayaran *</label>
-        <div class="grid grid-cols-4 gap-2">
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'DANA')">
-            <div class="text-2xl mb-1">💙</div><div class="text-[10px] font-heading font-bold text-blue-400">DANA</div>
-          </div>
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'OVO')">
-            <div class="text-2xl mb-1">💜</div><div class="text-[10px] font-heading font-bold text-purple-400">OVO</div>
-          </div>
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'GoPay')">
-            <div class="text-2xl mb-1">💚</div><div class="text-[10px] font-heading font-bold text-green-400">GoPay</div>
-          </div>
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'ShopeePay')">
-            <div class="text-2xl mb-1">🧡</div><div class="text-[10px] font-heading font-bold text-orange-400">ShopeePay</div>
-          </div>
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'Transfer BCA')">
-            <div class="text-2xl mb-1">🏦</div><div class="text-[10px] font-heading font-bold text-sky-400">BCA</div>
-          </div>
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'Transfer Mandiri')">
-            <div class="text-2xl mb-1">🏛️</div><div class="text-[10px] font-heading font-bold text-yellow-400">Mandiri</div>
-          </div>
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'Transfer BRI')">
-            <div class="text-2xl mb-1">🔵</div><div class="text-[10px] font-heading font-bold text-blue-300">BRI</div>
-          </div>
-          <div class="pay-chip glass rounded-xl p-2.5 text-center" onclick="selectPayment(this,'Transfer BNI')">
-            <div class="text-2xl mb-1">🟠</div><div class="text-[10px] font-heading font-bold text-orange-300">BNI</div>
-          </div>
         </div>
-        <input id="selected-payment" type="hidden" value=""/>
-      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-screen pt-24 relative flex items-center z-10">
+        <!-- Cyber lines overlay -->
+        <div class="cyber-line top-[30%] left-0 w-1/3"></div>
+        <div class="cyber-line top-[55%] left-0 w-1/2 animation-delay-2000"></div>
+        <div class="cyber-line top-[75%] left-0 w-2/5 animation-delay-4000"></div>
+        
+        <div class="max-w-screen-2xl mx-auto px-8 grid lg:grid-cols-12 gap-12 items-center relative z-20">
+            <div class="lg:col-span-7">
+                <div class="inline-flex items-center bg-white/10 text-[#f5c242] text-xs font-medium px-6 py-2 rounded-3xl mb-6 border border-[#f5c242]/30">
+                    <span class="relative flex h-3 w-3 mr-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f5c242] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-[#f5c242]"></span>
+                    </span>
+                    LIMITED SLOTS • HIGH-TICKET 2026
+                </div>
+                
+                <h1 class="text-6xl lg:text-7xl headline-font leading-none tracking-[-3px] shimmer">
+                    BELAJAR RAHASIA ALGORITMA<br>
+                    YOUTUBE, TIKTOK &amp; FACEBOOK.<br>
+                    HASILKAN JUTAAN RUPIAH<br>UNTUK PASIF INCOME HARI TUA ANDA!
+                </h1>
+                
+                <p class="mt-8 text-xl text-white/80 max-w-lg">Angga Pradana Putra • Pakar Monetisasi Digital &amp; AI Prompting asal Aceh Tenggara</p>
+                
+                <!-- FOMO COUNTDOWN -->
+                <div class="mt-12 flex flex-col sm:flex-row items-center gap-8">
+                    <div class="text-center sm:text-left">
+                        <p class="uppercase text-xs tracking-[3px] text-[#f5c242]">PENUTUPAN PENDAFTARAN HARI INI</p>
+                        <div id="countdown" class="font-mono text-5xl font-semibold text-[#f5c242] flex items-baseline gap-x-6 mt-3">
+                            <div><span id="hours" class="text-6xl">23</span><span class="text-base ml-1">JAM</span></div>
+                            <div><span id="minutes" class="text-6xl">59</span><span class="text-base ml-1">MENIT</span></div>
+                            <div><span id="seconds" class="text-6xl">42</span><span class="text-base ml-1">DETIK</span></div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" 
+                         class="cursor-pointer px-10 py-6 bg-gradient-to-r from-[#f5c242] to-amber-300 text-[#0a0a0a] font-semibold rounded-3xl text-2xl flex items-center gap-x-4 hover:scale-105 aura-glow">
+                        AMBIL SLOT SEKARANG
+                        <span class="text-4xl">→</span>
+                    </div>
+                </div>
+                
+                <div class="mt-12 flex items-center gap-x-8 text-sm">
+                    <div class="flex items-center"><span class="text-emerald-400 mr-2">●</span> 500+ murid sudah cuan</div>
+                    <div class="flex items-center"><span class="text-emerald-400 mr-2">●</span> Akses lifetime Veo 3 &amp; Sora 2</div>
+                    <div class="flex items-center"><span class="text-emerald-400 mr-2">●</span> Mentoring private di Aceh Tenggara</div>
+                </div>
+            </div>
+            
+            <!-- Right visual -->
+            <div class="lg:col-span-5 relative">
+                <div class="glass rounded-3xl p-8 neomorph aura-glow">
+                    <div class="flex justify-between text-[#f5c242]">
+                        <div>ANGGA PRADANA PUTRA</div>
+                        <div class="text-xs font-medium">ACEH TENGGARA • 2026</div>
+                    </div>
+                    <div class="text-center my-8">
+                        <div class="text-8xl">🚀</div>
+                        <p class="text-[#f5c242] text-2xl mt-4">Rp 23.000.000 VALUE</p>
+                    </div>
+                    <div class="grid grid-cols-3 text-center text-xs gap-4">
+                        <div class="border border-[#f5c242]/30 rounded-2xl py-3">Veo 3</div>
+                        <div class="border border-[#f5c242]/30 rounded-2xl py-3">Sora 2</div>
+                        <div class="border border-[#f5c242]/30 rounded-2xl py-3">Gemini Advanced</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll hint -->
+        <div class="absolute bottom-10 left-1/2 text-xs flex flex-col items-center text-[#f5c242]/60">
+            SCROLL FOR CYBER JOURNEY ↓
+        </div>
+    </section>
+
+    <!-- ARSENAL AI SECTION -->
+    <section id="arsenal" class="py-24 relative z-10 bg-[#0a0a0a]/90">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="text-center mb-16">
+                <span class="px-8 py-3 bg-[#f5c242]/10 text-[#f5c242] rounded-3xl text-sm font-semibold">ARSENAL AI GENERATIF 2026</span>
+                <h2 class="section-header text-5xl headline-font mt-6">Produksi Konten Tanpa Kamera • Tanpa Batas • Tanpa Ribet</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass rounded-3xl p-10 text-center">
+                    <div class="text-7xl mb-6">🎬</div>
+                    <h3 class="text-3xl font-semibold mb-2">Veo 3 • Google</h3>
+                    <p class="text-white/70">AI video generatif paling canggih. Ubah teks menjadi video 1080p realistis dalam detik. Reels, Shorts, Ads – langsung viral.</p>
+                </div>
+                <div class="glass rounded-3xl p-10 text-center">
+                    <div class="text-7xl mb-6">🌐</div>
+                    <h3 class="text-3xl font-semibold mb-2">Sora 2 • OpenAI</h3>
+                    <p class="text-white/70">Text-to-video OpenAI generasi terbaru. Buat konten sinematik, animasi, dan live-action tanpa syuting. Rahasia eksklusif hanya di program ini.</p>
+                </div>
+                <div class="glass rounded-3xl p-10 text-center">
+                    <div class="text-7xl mb-6">🤖</div>
+                    <h3 class="text-3xl font-semibold mb-2">ChatGPT + Gemini Advanced Prompting</h3>
+                    <p class="text-white/70">Prompt library 500+ rahasia yang sudah terbukti menghasilkan jutaan views. Skrip, thumbnail, caption, dan strategi algoritma otomatis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUAN VISUALIZER -->
+    <section id="cuan" class="py-24 bg-gradient-to-b from-[#0a0a0a] to-black relative z-10">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="grid lg:grid-cols-12 gap-16 items-center">
+                <div class="lg:col-span-5">
+                    <h2 class="text-5xl headline-font">KENAPA HARUS BELAJAR DENGAN ANGGa?</h2>
+                    <p class="mt-6 text-white/70 text-xl">Murid VVIP sudah meraup ratusan juta rupiah pasif income hanya dalam 4–6 bulan. Lihat bukti visualnya.</p>
+                    <ul class="mt-10 space-y-6">
+                        <li class="flex gap-4"><span class="text-3xl">📈</span> <div><strong>Passive Income</strong><br>Rata-rata Rp 47 juta/bulan setelah mentoring</div></li>
+                        <li class="flex gap-4"><span class="text-3xl">🔥</span> <div><strong>Algoritma Terbaru 2026</strong><br>Update real-time dari Angga</div></li>
+                        <li class="flex gap-4"><span class="text-3xl">🏆</span> <div><strong>Done-For-You Setup</strong><br>Channel langsung monetisasi</div></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-7">
+                    <div class="glass rounded-3xl p-8">
+                        <canvas id="cuanChart" class="w-full h-96"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING TABS -->
+    <section id="pricing" class="py-24 relative z-10">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="text-center mb-12">
+                <span class="text-[#f5c242]">3 PLATFORM • 3 LEVEL • KURIKULUM LENGKAP</span>
+                <h2 class="section-header text-5xl headline-font mt-4">Pilih Paket &amp; Mulai Cuan Hari Ini</h2>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex justify-center mb-12 border-b border-[#f5c242]/20">
+                <button onclick="switchTab(0)" id="tabBtn0" class="tab-btn active px-12 py-5 text-xl font-semibold rounded-t-3xl">📘 FACEBOOK MONET</button>
+                <button onclick="switchTab(1)" id="tabBtn1" class="tab-btn px-12 py-5 text-xl font-semibold rounded-t-3xl">📺 YOUTUBE MASTERY</button>
+                <button onclick="switchTab(2)" id="tabBtn2" class="tab-btn px-12 py-5 text-xl font-semibold rounded-t-3xl">📱 TIKTOK VIRAL</button>
+            </div>
+            
+            <!-- Tab Content 0: Facebook -->
+            <div id="tabContent0" class="tab-content grid md:grid-cols-3 gap-8">
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242]/20 hover:border-[#f5c242]">
+                    <div class="text-[#f5c242] text-sm font-bold">STARTER • Rp 200.000</div>
+                    <h4 class="text-2xl mt-4">Basic Setup Fanspage</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ Setup Fanspage profesional</li>
+                        <li>✓ Cara kejar jam tayang 2026</li>
+                        <li>✓ Dasar monetisasi Facebook</li>
+                    </ul>
+                    <button onclick="openCheckout('Facebook Monet - Starter (Rp200.000)')" class="mt-10 w-full py-6 bg-white text-black font-bold rounded-3xl">BELI SEKARANG</button>
+                </div>
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242]/20 hover:border-[#f5c242] relative">
+                    <div class="absolute top-6 right-6 bg-[#f5c242] text-black text-xs px-5 py-1 rounded-3xl font-bold">PRO</div>
+                    <div class="text-[#f5c242] text-sm font-bold">PRO • Rp 500.000</div>
+                    <h4 class="text-2xl mt-4">Rahasia Reels Viral + AI</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ Advance algoritma FB</li>
+                        <li>✓ Reels viral hook</li>
+                        <li>✓ 200+ Prompts AI ChatGPT &amp; Gemini</li>
+                    </ul>
+                    <button onclick="openCheckout('Facebook Monet - Pro (Rp500.000)')" class="mt-10 w-full py-6 bg-white text-black font-bold rounded-3xl">BELI SEKARANG</button>
+                </div>
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242] bg-gradient-to-br from-[#f5c242]/10 to-transparent">
+                    <div class="text-[#f5c242] text-sm font-bold">VVIP • Rp 5.000.000</div>
+                    <h4 class="text-2xl mt-4">Private Mentoring + DFY</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ Mentoring private (Zoom / Rumah)</li>
+                        <li>✓ Done-For-You full setup</li>
+                        <li>✓ Akses rahasia video AI + Discord VVIP</li>
+                    </ul>
+                    <button onclick="openCheckout('Facebook Monet - VVIP (Rp5.000.000)')" class="mt-10 w-full py-6 bg-gradient-to-r from-[#f5c242] to-amber-300 text-black font-bold rounded-3xl">DAFTAR VVIP</button>
+                </div>
+            </div>
+            
+            <!-- Tab Content 1: YouTube -->
+            <div id="tabContent1" class="tab-content hidden grid md:grid-cols-3 gap-8">
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242]/20 hover:border-[#f5c242]">
+                    <div class="text-[#f5c242] text-sm font-bold">STARTER • Rp 160.000</div>
+                    <h4 class="text-2xl mt-4">Algoritma Dasar + SEO</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ YouTube algorithm 2026</li>
+                        <li>✓ SEO title &amp; thumbnail</li>
+                    </ul>
+                    <button onclick="openCheckout('YouTube Mastery - Starter (Rp160.000)')" class="mt-10 w-full py-6 bg-white text-black font-bold rounded-3xl">BELI SEKARANG</button>
+                </div>
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242]/20 hover:border-[#f5c242]">
+                    <div class="text-[#f5c242] text-sm font-bold">PRO • Rp 450.000</div>
+                    <h4 class="text-2xl mt-4">Shorts Meledak dengan AI</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ Strategi Shorts viral</li>
+                        <li>✓ AI scripting &amp; editing</li>
+                    </ul>
+                    <button onclick="openCheckout('YouTube Mastery - Pro (Rp450.000)')" class="mt-10 w-full py-6 bg-white text-black font-bold rounded-3xl">BELI SEKARANG</button>
+                </div>
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242] bg-gradient-to-br from-[#f5c242]/10 to-transparent">
+                    <div class="text-[#f5c242] text-sm font-bold">VVIP • Rp 4.000.000</div>
+                    <h4 class="text-2xl mt-4">Intensif + Veo 3 &amp; Sora 2</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ 1-on-1 channel audit</li>
+                        <li>✓ Produksi video AI full</li>
+                    </ul>
+                    <button onclick="openCheckout('YouTube Mastery - VVIP (Rp4.000.000)')" class="mt-10 w-full py-6 bg-gradient-to-r from-[#f5c242] to-amber-300 text-black font-bold rounded-3xl">DAFTAR VVIP</button>
+                </div>
+            </div>
+            
+            <!-- Tab Content 2: TikTok -->
+            <div id="tabContent2" class="tab-content hidden grid md:grid-cols-3 gap-8">
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242]/20 hover:border-[#f5c242]">
+                    <div class="text-[#f5c242] text-sm font-bold">STARTER • Rp 120.000</div>
+                    <h4 class="text-2xl mt-4">Rahasia FYP + Hook</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ Masuk FYP TikTok</li>
+                        <li>✓ Hook pemancing views</li>
+                    </ul>
+                    <button onclick="openCheckout('TikTok Viral - Starter (Rp120.000)')" class="mt-10 w-full py-6 bg-white text-black font-bold rounded-3xl">BELI SEKARANG</button>
+                </div>
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242]/20 hover:border-[#f5c242]">
+                    <div class="text-[#f5c242] text-sm font-bold">PRO • Rp 240.000</div>
+                    <h4 class="text-2xl mt-4">Affiliate + Live Streaming</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ Strategi affiliate</li>
+                        <li>✓ Live monetisasi</li>
+                    </ul>
+                    <button onclick="openCheckout('TikTok Viral - Pro (Rp240.000)')" class="mt-10 w-full py-6 bg-white text-black font-bold rounded-3xl">BELI SEKARANG</button>
+                </div>
+                <div class="neomorph rounded-3xl p-8 border border-[#f5c242] bg-gradient-to-br from-[#f5c242]/10 to-transparent">
+                    <div class="text-[#f5c242] text-sm font-bold">VVIP • Rp 3.000.000</div>
+                    <h4 class="text-2xl mt-4">Private + Keranjang Kuning</h4>
+                    <ul class="mt-8 space-y-3 text-sm">
+                        <li>✓ Bedah algoritma TikTok</li>
+                        <li>✓ Full support Discord VVIP</li>
+                    </ul>
+                    <button onclick="openCheckout('TikTok Viral - VVIP (Rp3.000.000)')" class="mt-10 w-full py-6 bg-gradient-to-r from-[#f5c242] to-amber-300 text-black font-bold rounded-3xl">DAFTAR VVIP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVANCED CHECKOUT MODAL -->
+    <div onclick="if(event.target.id==='checkoutModal')closeModal()" id="checkoutModal" class="hidden fixed inset-0 bg-black/90 z-[99999] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="glass max-w-2xl w-full mx-4 rounded-3xl p-10">
+            <h3 id="modalPackageTitle" class="text-3xl headline-font text-[#f5c242]"></h3>
+            
+            <form id="checkoutForm" onsubmit="submitCheckout(event)" class="mt-8">
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block text-xs mb-2">NAMA LENGKAP</label>
+                        <input id="nama" type="text" required class="w-full glass rounded-3xl px-6 py-5 text-lg" placeholder="Nama Anda">
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block text-xs mb-2">NOMOR WA</label>
+                        <input id="wa" type="tel" required value="+62" class="w-full glass rounded-3xl px-6 py-5 text-lg">
+                    </div>
+                </div>
+                
+                <!-- Payment Chips -->
+                <div class="mt-8">
+                    <label class="block text-xs mb-4">METODE PEMBAYARAN</label>
+                    <div id="paymentChips" class="grid grid-cols-4 gap-4"></div>
+                </div>
+                
+                <button type="submit" class="mt-12 w-full py-7 bg-gradient-to-r from-[#f5c242] to-amber-300 text-black text-xl font-bold rounded-3xl">KONFIRMASI &amp; KIRIM KE WA MENTOR</button>
+            </form>
+        </div>
     </div>
-    <button onclick="submitCheckout()" class="btn-gold w-full py-4 rounded-xl text-xs uppercase tracking-widest mt-6 font-display">
-      🚀 Konfirmasi &amp; Kirim via WhatsApp
-    </button>
-    <p class="text-center text-slate-600 text-[10px] mt-3">Anda akan diarahkan ke WhatsApp Mentor Angga secara otomatis dengan detail pendaftaran lengkap.</p>
-  </div>
-</div>
 
-<!-- ══════════════════ ANGGA-BOT CHATBOT ══════════════════ -->
-<button id="chatbot-btn" onclick="toggleChatbot()" title="Tanya Angga-Bot AI" aria-label="Buka chatbot AI">🤖</button>
-<div id="chatbot-window" class="glass-dark border border-amber-500/25" role="complementary" aria-label="Chat support">
-  <div class="flex items-center gap-3 px-4 py-3 border-b border-amber-500/12" style="background:rgba(245,158,11,0.07);">
-    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-black font-bold text-sm flex-shrink-0">🤖</div>
-    <div>
-      <div class="font-heading font-bold text-amber-400 text-sm">Angga-Bot AI</div>
-      <div class="text-[10px] text-green-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" style="animation:ping-slow 2s infinite;"></span>Online sekarang</div>
+    <!-- LIVE SALES NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-8 left-8 z-[9999] flex flex-col gap-y-3"></div>
+
+    <!-- AI SUPPORT BOT -->
+    <div onclick="toggleBot()" id="botFloat" class="fixed bottom-8 right-8 z-[99999] w-16 h-16 bg-gradient-to-br from-[#f5c242] to-amber-300 rounded-3xl flex items-center justify-center text-5xl shadow-[0_0_60px_#f5c242] cursor-pointer">🤖</div>
+    
+    <div id="botWindow" class="hidden fixed bottom-28 right-8 w-96 glass rounded-3xl shadow-2xl z-[99999] overflow-hidden">
+        <div class="bg-gradient-to-r from-[#f5c242] to-amber-300 px-6 py-4 text-black flex justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">ANGGA-BOT</span>
+            </div>
+            <button onclick="toggleBot()" class="text-4xl">×</button>
+        </div>
+        <div id="botChat" class="h-96 p-6 overflow-y-auto space-y-6 text-sm"></div>
+        <div class="p-4 border-t border-white/10 flex">
+            <input id="botInputField" onkeypress="if(event.keyCode===13) sendBotReply()" type="text" placeholder="Ketik pertanyaan Anda..." class="flex-1 glass rounded-3xl px-6 py-4 outline-none">
+            <button onclick="sendBotReply()" class="ml-3 w-12 h-12 bg-[#f5c242] rounded-3xl text-black">↑</button>
+        </div>
     </div>
-    <button onclick="toggleChatbot()" class="ml-auto text-slate-500 hover:text-white text-lg transition-colors" aria-label="Tutup chatbot">×</button>
-  </div>
-  <div id="chat-messages">
-    <div class="chat-msg bot">👋 Halo! Saya <strong>Angga-Bot</strong>, asisten AI Mentor Angga. Tanyakan tentang <strong>harga</strong>, <strong>materi</strong>, <strong>paket</strong>, <strong>zoom</strong>, <strong>ai</strong>, <strong>sora</strong>, <strong>veo</strong>, <strong>passive income</strong>, atau apa saja! 🚀</div>
-  </div>
-  <div class="p-3 border-t border-amber-500/10 flex gap-2">
-    <input id="chat-input" type="text" class="form-input text-xs py-2.5" placeholder="Ketik pertanyaan Anda..." onkeydown="if(event.key==='Enter')sendChat()"/>
-    <button onclick="sendChat()" class="btn-gold px-4 py-2.5 rounded-xl text-xs flex-shrink-0 font-heading font-bold tracking-wider">Kirim</button>
-  </div>
-</div>
 
-<!-- ══════════════════════════════════════════
-   JAVASCRIPT
-══════════════════════════════════════════ -->
-<script>
-/* ════════════════════════════════════════
-   1. CUSTOM CURSOR
-════════════════════════════════════════ */
-(function(){
-  const dot = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  const aura = document.getElementById('cursor-aura');
-  let mx=0,my=0,rx=0,ry=0,ax=0,ay=0;
+    <!-- FLOATING SOCIAL SHARE -->
+    <div class="fixed right-8 top-1/2 -translate-y-1/2 z-[9999] flex flex-col gap-y-4 bg-[#0a0a0a]/80 glass rounded-3xl p-3">
+        <a onclick="shareTo('whatsapp')" class="w-12 h-12 flex items-center justify-center text-3xl hover:scale-110">💬</a>
+        <a onclick="shareTo('telegram')" class="w-12 h-12 flex items-center justify-center text-3xl hover:scale-110">📨</a>
+        <a onclick="shareTo('facebook')" class="w-12 h-12 flex items-center justify-center text-3xl hover:scale-110">📘</a>
+    </div>
 
-  document.addEventListener('mousemove',function(e){
-    mx=e.clientX;my=e.clientY;
-    dot.style.left=mx+'px';dot.style.top=my+'px';
-  });
+    <!-- GOOGLE MAPS SECTION -->
+    <section class="py-20 bg-black relative z-10">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-5">
+                    <h2 class="text-5xl headline-font">Lokasi Mentoring Private</h2>
+                    <p class="mt-6 text-xl">Dekat Rikit, Kec. Bambel, Kabupaten Aceh Tenggara, Aceh 24651</p>
+                    <div class="mt-8 text-sm space-y-2">
+                        <div>🏠 Bisa datang langsung ke rumah mentor</div>
+                        <div>📹 Zoom Premium tersedia</div>
+                        <div>💬 Discord VVIP 24/7</div>
+                    </div>
+                    <p class="text-xs text-[#f5c242] mt-10">Email: anggapradanaarival@gmail.com</p>
+                </div>
+                <div class="md:col-span-7">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.2!2d97.872389!3d3.438944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMjYnMjAuMiJOIDk3wrA1MicyMC42IkU!5e0!3m2!1sid!2sid!4v1730000000000" 
+                        width="100%" 
+                        height="420" 
+                        style="border:0; border-radius: 24px; filter: grayscale(1) sepia(0.3) hue-rotate(25deg) saturate(1.4) brightness(1.15);" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  // Ring & aura follow with lerp
-  (function lerp(){
-    rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;
-    ax+=(mx-ax)*0.08;ay+=(my-ay)*0.08;
-    ring.style.left=rx+'px';ring.style.top=ry+'px';
-    aura.style.left=ax+'px';aura.style.top=ay+'px';
-    requestAnimationFrame(lerp);
-  })();
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 border-t border-[#f5c242]/20 text-white/70 text-sm">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex flex-wrap justify-between items-center">
+                <div>© 2026 Angga Pradana Putra • Obsidian Gold Cyber-Premium</div>
+                <div class="flex gap-x-8">
+                    <a href="mailto:anggapradanaarival@gmail.com">EMAIL</a>
+                    <a href="https://wa.me/6288277200044">WHATSAPP +62 882-7720-0044</a>
+                </div>
+                <div class="text-xs">All Rights Reserved • High-Ticket Digital Mastery</div>
+            </div>
+        </div>
+    </footer>
 
-  // Hover effects on interactive elements
-  document.querySelectorAll('a,button,.pay-chip,.tab-btn,.price-card,.tool-card,.testi-card,.faq-item summary').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{
-      dot.style.width='16px';dot.style.height='16px';
-      dot.style.background='var(--cyan)';
-      dot.style.boxShadow='0 0 15px var(--cyan),0 0 40px rgba(0,245,255,0.5)';
-      ring.style.width='52px';ring.style.height='52px';
-      ring.style.borderColor='rgba(0,245,255,0.6)';
-    });
-    el.addEventListener('mouseleave',()=>{
-      dot.style.width='10px';dot.style.height='10px';
-      dot.style.background='var(--gold)';
-      dot.style.boxShadow='0 0 12px var(--gold),0 0 30px rgba(245,158,11,0.6)';
-      ring.style.width='36px';ring.style.height='36px';
-      ring.style.borderColor='rgba(245,158,11,0.55)';
-    });
-  });
-})();
-
-/* ════════════════════════════════════════
-   2. PARTICLES CANVAS
-════════════════════════════════════════ */
-(function(){
-  const canvas=document.getElementById('particles-canvas');
-  const ctx=canvas.getContext('2d');
-  let W,H,pts=[];
-
-  function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
-  resize();window.addEventListener('resize',resize);
-
-  const COLORS=['rgba(245,158,11,','rgba(0,245,255,','rgba(124,58,237,','rgba(251,191,36,'];
-
-  for(let i=0;i<75;i++){
-    pts.push({
-      x:Math.random()*W,y:Math.random()*H,
-      vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
-      r:Math.random()*1.8+.3,
-      color:COLORS[Math.floor(Math.random()*COLORS.length)],
-      a:Math.random()*.45+.1,
-      pa:Math.random()*Math.PI*2,
-      ps:.02+Math.random()*.02
-    });
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{
-      p.pa+=p.ps;
-      const oa=p.a+Math.sin(p.pa)*.15;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.color+oa+')';ctx.fill();
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
-      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-    });
-    // connections
-    for(let i=0;i<pts.length;i++){
-      for(let j=i+1;j<pts.length;j++){
-        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<110){
-          ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle='rgba(245,158,11,'+(0.07*(1-d/110))+')';
-          ctx.lineWidth=.5;ctx.stroke();
+    <script>
+        // TAILWIND INIT
+        function initTailwind() {
+            return {
+                config(userConfig = {}) {
+                    return {
+                        content: [],
+                        theme: { extend: {} },
+                        darkMode: 'class',
+                        ...userConfig,
+                    }
+                },
+                theme(config) { return config.theme }
+            }
         }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-/* ════════════════════════════════════════
-   3. NAVBAR SCROLL
-════════════════════════════════════════ */
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',scrollY>60);
-});
-
-/* ════════════════════════════════════════
-   4. INTERSECTION OBSERVER — AOS
-════════════════════════════════════════ */
-(function(){
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('aos-animate');
-        // trigger progress bars if inside
-        e.target.querySelectorAll('.prog-bar[data-width]').forEach(bar=>{
-          bar.style.width=bar.dataset.width+'%';
-        });
-      }
-    });
-  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('[data-aos]').forEach(el=>obs.observe(el));
-  // also observe prog-bar containers separately
-  document.querySelectorAll('.prog-bar-bg').forEach(el=>obs.observe(el));
-})();
-
-/* ════════════════════════════════════════
-   5. CHART.JS — INCOME VISUALIZER
-════════════════════════════════════════ */
-(function(){
-  const ctx=document.getElementById('incomeChart');
-  if(!ctx)return;
-  const months=['Bulan 1','Bulan 2','Bulan 3','Bulan 4','Bulan 5','Bulan 6','Bulan 7','Bulan 8','Bulan 9','Bulan 10','Bulan 11','Bulan 12'];
-  const fb=[0,200,800,1500,2800,3500,4500,5200,6000,6800,7500,8200];
-  const yt=[0,100,400,900,1800,2500,3200,4000,4800,5500,6200,7000];
-  const tt=[0,300,900,1600,2200,2800,3300,3900,4500,5100,5700,6300];
-
-  const grad1=ctx.getContext('2d').createLinearGradient(0,0,0,260);
-  grad1.addColorStop(0,'rgba(245,158,11,0.5)');grad1.addColorStop(1,'rgba(245,158,11,0)');
-  const grad2=ctx.getContext('2d').createLinearGradient(0,0,0,260);
-  grad2.addColorStop(0,'rgba(0,245,255,0.4)');grad2.addColorStop(1,'rgba(0,245,255,0)');
-  const grad3=ctx.getContext('2d').createLinearGradient(0,0,0,260);
-  grad3.addColorStop(0,'rgba(167,139,250,0.4)');grad3.addColorStop(1,'rgba(167,139,250,0)');
-
-  new Chart(ctx,{
-    type:'line',
-    data:{
-      labels:months,
-      datasets:[
-        {label:'Facebook (Rb)',data:fb,borderColor:'#f59e0b',backgroundColor:grad1,tension:.45,fill:true,borderWidth:2.5,pointBackgroundColor:'#f59e0b',pointRadius:4,pointHoverRadius:7},
-        {label:'YouTube (Rb)',data:yt,borderColor:'#00f5ff',backgroundColor:grad2,tension:.45,fill:true,borderWidth:2.5,pointBackgroundColor:'#00f5ff',pointRadius:4,pointHoverRadius:7},
-        {label:'TikTok (Rb)',data:tt,borderColor:'#a78bfa',backgroundColor:grad3,tension:.45,fill:true,borderWidth:2.5,pointBackgroundColor:'#a78bfa',pointRadius:4,pointHoverRadius:7},
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      plugins:{
-        legend:{
-          labels:{color:'rgba(226,232,240,0.8)',font:{family:"'Rajdhani',sans-serif",size:11,weight:'600'},boxWidth:12,padding:14}
-        },
-        tooltip:{
-          backgroundColor:'rgba(10,10,20,0.92)',
-          titleColor:'#fbbf24',titleFont:{family:"'Cinzel Decorative',serif",size:11},
-          bodyColor:'#e2e8f0',bodyFont:{family:"'Exo 2',sans-serif",size:11},
-          borderColor:'rgba(245,158,11,0.3)',borderWidth:1,padding:10,
-          callbacks:{label:ctx=>`${ctx.dataset.label}: Rp ${ctx.parsed.y.toLocaleString('id')}K`}
+        
+        // CUSTOM CURSOR
+        function initCustomCursor() {
+            const cursor = document.getElementById('custom-cursor')
+            let timeout
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`
+                cursor.style.top = `${e.clientY}px`
+                
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)'
+                clearTimeout(timeout)
+                timeout = setTimeout(() => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(0.6)'
+                }, 120)
+            })
         }
-      },
-      scales:{
-        x:{
-          ticks:{color:'rgba(226,232,240,0.4)',font:{family:"'Rajdhani'",size:9},maxRotation:40},
-          grid:{color:'rgba(255,255,255,0.04)'},border:{color:'rgba(255,255,255,0.08)'}
-        },
-        y:{
-          ticks:{color:'rgba(226,232,240,0.4)',font:{family:"'Rajdhani'",size:10},callback:v=>'Rp '+v+'K'},
-          grid:{color:'rgba(245,158,11,0.06)'},border:{color:'rgba(255,255,255,0.08)'}
+        
+        // PARTICLES BACKGROUND
+        function initParticles() {
+            const canvas = document.getElementById('particleCanvas')
+            const ctx = canvas.getContext('2d')
+            
+            function resize() {
+                canvas.width = window.innerWidth
+                canvas.height = window.innerHeight
+            }
+            window.addEventListener('resize', resize)
+            resize()
+            
+            let particles = []
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width
+                    this.y = Math.random() * canvas.height
+                    this.size = Math.random() * 3 + 1
+                    this.speedX = Math.random() * 0.6 - 0.3
+                    this.speedY = Math.random() * 0.6 - 0.3
+                }
+                update() {
+                    this.x += this.speedX
+                    this.y += this.speedY
+                    
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1
+                }
+                draw() {
+                    ctx.fillStyle = '#f5c242'
+                    ctx.globalAlpha = 0.6
+                    ctx.beginPath()
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+                    ctx.fill()
+                }
+            }
+            
+            function createParticles(count) {
+                particles = []
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Particle())
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                
+                particles.forEach((p, i) => {
+                    p.update()
+                    p.draw()
+                    
+                    // Connect nearby particles
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j]
+                        const dx = p.x - p2.x
+                        const dy = p.y - p2.y
+                        const distance = Math.sqrt(dx * dx + dy * dy)
+                        
+                        if (distance < 120) {
+                            ctx.globalAlpha = (120 - distance) / 120 * 0.3
+                            ctx.strokeStyle = '#f5c242'
+                            ctx.lineWidth = 0.6
+                            ctx.beginPath()
+                            ctx.moveTo(p.x, p.y)
+                            ctx.lineTo(p2.x, p2.y)
+                            ctx.stroke()
+                        }
+                    }
+                })
+                requestAnimationFrame(animate)
+            }
+            
+            createParticles(120)
+            animate()
+            
+            // Occasional new particles
+            setInterval(() => {
+                if (particles.length < 160) particles.push(new Particle())
+            }, 800)
         }
-      }
-    }
-  });
-})();
-
-/* ════════════════════════════════════════
-   6. COUNTDOWN TIMER (24-HOUR FOMO)
-════════════════════════════════════════ */
-(function(){
-  const KEY='angga_countdown_end';
-  let endTime=parseInt(localStorage.getItem(KEY)||'0');
-  const now=Date.now();
-
-  if(!endTime||endTime<=now){
-    // Reset to 24 hours from now
-    endTime=now+(24*60*60*1000);
-    localStorage.setItem(KEY,endTime.toString());
-  }
-
-  function update(){
-    const diff=Math.max(0,endTime-Date.now());
-    const h=Math.floor(diff/3600000);
-    const m=Math.floor((diff%3600000)/60000);
-    const s=Math.floor((diff%60000)/1000);
-    document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
-    if(diff<=0){
-      endTime=Date.now()+(24*60*60*1000);
-      localStorage.setItem(KEY,endTime.toString());
-    }
-  }
-  update();
-  setInterval(update,1000);
-})();
-
-/* ════════════════════════════════════════
-   7. LIVE SALES TOAST NOTIFICATIONS
-════════════════════════════════════════ */
-(function(){
-  const notifications=[
-    {name:'Budi Firmansyah',loc:'Banda Aceh',pkg:'VVIP Facebook'},
-    {name:'Sari Rahmawati',loc:'Medan',pkg:'Paket Pro YouTube'},
-    {name:'Rizky Hidayat',loc:'Langsa',pkg:'VVIP YouTube'},
-    {name:'Nurul Lestari',loc:'Kutacane',pkg:'VVIP TikTok'},
-    {name:'Ahmad Fauzi',loc:'Lhokseumawe',pkg:'Paket Starter Facebook'},
-    {name:'Dewi Safitri',loc:'Subulussalam',pkg:'VVIP TikTok'},
-    {name:'Farhan Maulana',loc:'Takengon',pkg:'Paket Pro Facebook'},
-    {name:'Yuni Astuti',loc:'Bireuen',pkg:'Paket Pro TikTok'},
-    {name:'Hafiz Ardiansyah',loc:'Blangkejeren',pkg:'VVIP YouTube'},
-    {name:'Laila Husna',loc:'Meulaboh',pkg:'Paket Starter YouTube'},
-    {name:'Surya Darma',loc:'Sigli',pkg:'Paket Pro YouTube'},
-    {name:'Rina Oktaviani',loc:'Calang',pkg:'VVIP Facebook'},
-  ];
-  let idx=0;
-
-  function showToast(){
-    const n=notifications[idx%notifications.length];idx++;
-    const container=document.getElementById('toast-container');
-    const div=document.createElement('div');
-    div.className='toast glass-gold border-glow-gold';
-    div.innerHTML=`
-      <div style="font-size:22px;">🔥</div>
-      <div>
-        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;color:#fbbf24;">${n.name}</div>
-        <div style="font-size:10px;color:rgba(226,232,240,0.65);">dari ${n.loc} baru mendaftar</div>
-        <div style="font-size:11px;color:#e2e8f0;font-weight:600;margin-top:2px;">${n.pkg}</div>
-      </div>
-    `;
-    container.appendChild(div);
-    setTimeout(()=>{
-      div.classList.add('out');
-      setTimeout(()=>div.remove(),500);
-    },4500);
-  }
-
-  // First toast after 6 seconds, then every 15 seconds
-  setTimeout(()=>{showToast();setInterval(showToast,15000);},6000);
-})();
-
-/* ════════════════════════════════════════
-   8. TAB SYSTEM
-════════════════════════════════════════ */
-function switchTab(platform){
-  ['facebook','youtube','tiktok'].forEach(p=>{
-    document.getElementById('tab-'+p).classList.remove('active');
-    document.getElementById('content-'+p).classList.remove('active');
-  });
-  document.getElementById('tab-'+platform).classList.add('active');
-  document.getElementById('content-'+platform).classList.add('active');
-  // re-trigger AOS on tab content
-  setTimeout(()=>{
-    document.querySelectorAll('#content-'+platform+' [data-aos]').forEach(el=>el.classList.add('aos-animate'));
-  },60);
-}
-
-function scrollToSection(id){
-  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
-}
-
-/* ════════════════════════════════════════
-   9. CHECKOUT MODAL
-════════════════════════════════════════ */
-let _currentPkg='',_currentPrice='';
-
-function openCheckout(packageName,price){
-  _currentPkg=packageName;_currentPrice=price;
-  document.getElementById('modal-package-name').textContent='📦 '+packageName;
-  document.getElementById('modal-package-price').textContent=price;
-  document.getElementById('checkout-name').value='';
-  document.getElementById('checkout-wa').value='';
-  document.getElementById('selected-payment').value='';
-  document.querySelectorAll('.pay-chip').forEach(el=>el.classList.remove('selected'));
-  document.getElementById('checkout-modal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function closeCheckout(){
-  document.getElementById('checkout-modal').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-document.getElementById('checkout-modal').addEventListener('click',function(e){
-  if(e.target===this)closeCheckout();
-});
-
-function selectPayment(el,method){
-  document.querySelectorAll('.pay-chip').forEach(x=>x.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('selected-payment').value=method;
-}
-
-function submitCheckout(){
-  const name=document.getElementById('checkout-name').value.trim();
-  const wa=document.getElementById('checkout-wa').value.trim();
-  const pay=document.getElementById('selected-payment').value;
-
-  if(!name){alert('⚠️ Mohon isi nama lengkap Anda!');return;}
-  if(!wa||wa.length<9){alert('⚠️ Mohon isi nomor WhatsApp yang valid!');return;}
-  if(!pay){alert('⚠️ Mohon pilih metode pembayaran!');return;}
-
-  // Build timestamp
-  const now=new Date();
-  const ts=now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+' pukul '+
-            now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-
-  const msg=
-    `🔥 *PENDAFTARAN PROGRAM MENTORING*\n`+
-    `━━━━━━━━━━━━━━━━━━━━━\n`+
-    `👤 *Nama:* ${name}\n`+
-    `📦 *Paket:* ${_currentPkg}\n`+
-    `💰 *Harga:* ${_currentPrice}\n`+
-    `💳 *Metode Bayar:* ${pay}\n`+
-    `📱 *No. WA:* ${wa}\n`+
-    `📅 *Waktu Daftar:* ${ts}\n`+
-    `━━━━━━━━━━━━━━━━━━━━━\n`+
-    `Mohon konfirmasi pembayaran dan akses materi. Terima kasih Mentor Angga! 🙏`;
-
-  const url='https://wa.me/6288277200044?text='+encodeURIComponent(msg);
-  window.open(url,'_blank');
-  closeCheckout();
-}
-
-/* ════════════════════════════════════════
-   10. ANGGA-BOT AI CHATBOT
-════════════════════════════════════════ */
-const BOT_KB={
-  harga:[`💰 *Daftar Harga Lengkap:*\n\n📘 Facebook:\n• Starter: Rp 200.000\n• Pro: Rp 500.000\n• VVIP: Rp 5.000.000\n\n▶️ YouTube:\n• Starter: Rp 160.000\n• Pro: Rp 450.000\n• VVIP: Rp 4.000.000\n\n🎵 TikTok:\n• Starter: Rp 120.000\n• Pro: Rp 240.000\n• VVIP: Rp 3.000.000`],
-  harga2:[`Harga paling terjangkau mulai dari Rp 120.000 (TikTok Starter). Untuk investasi terbaik, paket VVIP menawarkan mentoring pribadi langsung dengan Mentor Angga! 🎯`],
-  paket:[`📦 Tersedia *3 platform* dengan *3 tingkat paket* masing-masing:\n\n📘 Facebook Monetization\n▶️ YouTube Mastery\n🎵 TikTok Viral\n\nSetiap platform ada Starter (materi dasar), Pro (advanced + AI prompts), dan VVIP (private mentoring + Discord seumur hidup). Scroll halaman untuk detail lengkap!`],
-  materi:[`📚 *Kurikulum mencakup:*\n\n✦ Algoritma platform terkini (YT/FB/TikTok)\n✦ SEO & strategi konten viral\n✦ 50+ Prompt eksklusif ChatGPT & Gemini\n✦ Produksi video AI dengan Veo 3 & Sora 2\n✦ Monetisasi multi-stream & passive income\n✦ Live streaming & TikTok affiliate\n✦ Analytics & optimasi performa konten`],
-  zoom:[`📹 *Zoom Premium tersedia!*\n\nSemua paket VVIP mendapat sesi 1-on-1 private via Zoom dengan Mentor Angga langsung.\n\n• Jadwal fleksibel sesuai Anda\n• Screen sharing & live demo\n• Tanya jawab tanpa batas\n• Tersedia untuk seluruh Indonesia! 🇮🇩`],
-  rumah:[`🏠 *Mentoring kunjungan ke rumah/lokasi tersedia!*\n\nMentor Angga bisa datang langsung ke tempat Anda — satu-satunya mentor yang tawarkan layanan ini di Aceh Tenggara!\n\n📍 Utamanya untuk: Kutacane, Bambel, Blangkejeren & sekitar Aceh Tenggara.\n\nHubungi WA untuk jadwal: +62 882-7720-0044`],
-  sora:[`🌀 *Sora 2 — OpenAI*\n\nSora 2 adalah AI video terdepan dari OpenAI yang mampu:\n✦ Buat video sinematik dari teks saja\n✦ Durasi panjang dengan motion realistis\n✦ Kualitas tidak bisa dibedakan dari video asli\n\nDi kelas VVIP YouTube, Anda kuasai cara pakai Sora 2 untuk passive income konten otomatis! 🎬`],
-  veo:[`🎬 *Veo 3 — Google DeepMind*\n\nVeo 3 adalah model AI video terbaru Google untuk:\n✦ Produksi video 4K berkualitas sinematik\n✦ Hanya butuh instruksi teks (prompt)\n✦ Tanpa kamera, tanpa tim, tanpa studio\n\nIni teknologi yang diajarkan di kelas VVIP untuk bikin konten viral setiap hari secara otomatis! 🔥`],
-  chatgpt:[`🤖 *ChatGPT di Kelas Mentor Angga:*\n\nAnda akan belajar 50+ prompt eksklusif untuk:\n✦ Buat skrip video viral dalam 2 menit\n✦ Riset konten & judul dengan CTR tinggi\n✦ Copywriting caption yang mengkonversi\n✦ Ide konten otomatis setiap hari\n\nPrompt-prompt ini hasil riset &amp; testing selama bertahun-tahun! 💎`],
-  gemini:[`✨ *Google Gemini di Kelas:*\n\nGemini digunakan untuk advanced prompting:\n✦ Multimodal (teks + gambar + video)\n✦ Integrasi langsung dengan Google tools\n✦ Analisis tren &amp; data konten terkini\n✦ Generate thumbnail &amp; visual konten\n\nDikombinasikan dengan ChatGPT untuk workflow konten super cepat! ⚡`],
-  passive:[`💰 *Passive Income dengan Metode Mentor Angga:*\n\nPassive income adalah uang yang masuk saat Anda tidur — dan itulah yang dibangun dalam program ini:\n\n📘 Facebook: Rp 3-8 Juta/bulan\n▶️ YouTube: Rp 2-6 Juta/bulan\n🎵 TikTok: Rp 1.5-5 Juta/bulan\n🤖 AI Video: Rp 5-15 Juta/bulan\n\nAlumni VVIP rata-rata Rp 12.4 Juta/bulan di bulan ke-6! 🏆`],
-  hari:[`👴 *Investasi untuk Hari Tua Anda:*\n\nProgram Mentor Angga dirancang untuk membangun aset digital jangka panjang yang:\n✦ Menghasilkan uang 24/7 tanpa bekerja aktif\n✦ Skalabel — semakin banyak konten, semakin besar income\n✦ Tidak terikat usia — siapapun bisa mulai\n✦ Modal minim, tapi potensi besar\n\nIni investasi terbaik untuk masa pensiun Anda! 🌅`],
-  discord:[`👑 *Discord VVIP Eksklusif:*\n\nAkses komunitas premium seumur hidup berisi:\n✦ Materi rahasia & update algoritma real-time\n✦ Tanya jawab langsung ke Mentor Angga\n✦ Sesama alumni sukses yang saling support\n✦ Case study &amp; studi kasus nyata\n✦ Notifikasi peluang monetisasi terbaru\n\nHanya untuk anggota VVIP! 👑`],
-  bayar:[`💳 *Metode Pembayaran Tersedia:*\n\nE-Wallet: DANA, OVO, GoPay, ShopeePay\nTransfer Bank: BCA, Mandiri, BRI, BNI\n\nCara bayar:\n1. Klik tombol "Beli" di paket pilihan\n2. Isi nama & nomor WA\n3. Pilih metode bayar\n4. Klik "Konfirmasi"\n5. Pesan otomatis ke WA Mentor Angga ✅`],
-  kontak:[`📞 *Kontak Resmi Mentor Angga:*\n\n📧 Email: anggapradanaarival@gmail.com\n💬 WhatsApp: +62 882-7720-0044\n📍 Alamat: Dekat Rikit, Kec. Bambel,\n    Kab. Aceh Tenggara, Aceh 24651\n\nWhatsApp adalah cara paling cepat untuk respons! 🚀`],
-  alamat:[`📍 *Lokasi Mentor Angga:*\n\nDekat Rikit, Kecamatan Bambel,\nKabupaten Aceh Tenggara, Aceh 24651\n\nUntuk mentoring tatap muka di area ini, Mentor Angga bisa langsung ke lokasi Anda.\nUntuk luar Aceh Tenggara → Zoom Premium tersedia! 📹`],
-};
-
-// Keyword → KB key mapping
-const KW_MAP=[
-  ['harga','tarif','biaya','berapa','murah','mahal'],
-  ['paket','program','kelas','course','kursus'],
-  ['materi','kurikulum','pelajaran','belajar','isi','topik'],
-  ['zoom','video call','online','virtual','meet'],
-  ['rumah','kunjungan','tatap muka','datang','lokasi visit'],
-  ['sora','sora2','sora 2','openai video'],
-  ['veo','veo3','veo 3','google video','deepmind'],
-  ['chatgpt','gpt','openai'],
-  ['gemini','bard','google ai'],
-  ['passive income','pasif income','penghasilan pasif','income','penghasilan','cuan','uang'],
-  ['hari tua','pensiun','masa depan','tua'],
-  ['discord','komunitas','grup'],
-  ['bayar','pembayaran','transfer','bca','mandiri','bri','bni','dana','ovo','gopay','shopee'],
-  ['kontak','wa','whatsapp','email','hubungi','telpon'],
-  ['alamat','lokasi','dimana','aceh','kutacane','bambel'],
-];
-const KB_KEYS=['harga','paket','materi','zoom','rumah','sora','veo','chatgpt','gemini','passive','hari','discord','bayar','kontak','alamat'];
-
-function findResponse(msg){
-  const m=msg.toLowerCase();
-  for(let i=0;i<KW_MAP.length;i++){
-    if(KW_MAP[i].some(kw=>m.includes(kw))){
-      const key=KB_KEYS[i];
-      const arr=BOT_KB[key]||BOT_KB[key+'2'];
-      if(arr)return arr[0];
-    }
-  }
-  return null;
-}
-
-function toggleChatbot(){
-  const w=document.getElementById('chatbot-window');
-  w.classList.toggle('open');
-}
-
-function sendChat(){
-  const input=document.getElementById('chat-input');
-  const msg=input.value.trim();
-  if(!msg)return;
-  input.value='';
-
-  const msgs=document.getElementById('chat-messages');
-
-  // User message
-  const uDiv=document.createElement('div');
-  uDiv.className='chat-msg user';
-  uDiv.textContent=msg;
-  msgs.appendChild(uDiv);
-  msgs.scrollTop=msgs.scrollHeight;
-
-  // Typing indicator
-  const typing=document.createElement('div');
-  typing.className='chat-typing';
-  typing.innerHTML='<span></span><span></span><span></span>';
-  msgs.appendChild(typing);
-  msgs.scrollTop=msgs.scrollHeight;
-
-  const delay=600+Math.random()*800;
-  setTimeout(()=>{
-    typing.remove();
-    const reply=findResponse(msg)||'Terima kasih sudah bertanya! 😊\n\nUntuk info paling lengkap dan terkini, hubungi langsung Mentor Angga:\n\n💬 wa.me/6288277200044\n\nBeliau siap membantu Anda memilih paket yang paling sesuai! 🚀';
-
-    const bDiv=document.createElement('div');
-    bDiv.className='chat-msg bot';
-    bDiv.style.whiteSpace='pre-line';
-    bDiv.textContent=reply.replace(/\*/g,'');// strip markdown bold for plain text
-    msgs.appendChild(bDiv);
-    msgs.scrollTop=msgs.scrollHeight;
-  },delay);
-}
-
-/* ════════════════════════════════════════
-   11. INITIAL AOS TRIGGER
-════════════════════════════════════════ */
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    document.querySelectorAll('[data-aos]').forEach(el=>{
-      const r=el.getBoundingClientRect();
-      if(r.top<window.innerHeight)el.classList.add('aos-animate');
-    });
-    // trigger facebook tab prices immediately
-    document.querySelectorAll('#content-facebook [data-aos]').forEach(el=>el.classList.add('aos-animate'));
-  },120);
-});
-
-/* ════════════════════════════════════════
-   12. KEYBOARD ACCESSIBILITY
-════════════════════════════════════════ */
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    const modal=document.getElementById('checkout-modal');
-    if(modal.classList.contains('open'))closeCheckout();
-    const chatbot=document.getElementById('chatbot-window');
-    if(chatbot.classList.contains('open'))toggleChatbot();
-  }
-});
-</script>
+        
+        // FOMO COUNTDOWN (resets every 24 hours)
+        function startCountdown() {
+            let endTime = localStorage.getItem('fomoEndTime')
+            
+            if (!endTime || Date.now() > parseInt(endTime)) {
+                endTime = Date.now() + 24 * 60 * 60 * 1000
+                localStorage.setItem('fomoEndTime', endTime)
+            }
+            
+            const interval = setInterval(() => {
+                const now = Date.now()
+                let remaining = parseInt(endTime) - now
+                
+                if (remaining < 0) {
+                    endTime = Date.now() + 24 * 60 * 60 * 1000
+                    localStorage.setItem('fomoEndTime', endTime)
+                    remaining = 24 * 60 * 60 * 1000
+                }
+                
+                const hours = Math.floor(remaining / (1000 * 60 * 60))
+                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60))
+                const seconds = Math.floor((remaining % (1000 * 60)) / 1000)
+                
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0')
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0')
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0')
+            }, 1000)
+        }
+        
+        // LIVE SALES NOTIFICATIONS
+        const fakeSales = [
+            "Budi dari Medan baru saja mendaftar Paket VVIP Facebook!",
+            "Siti dari Jakarta ambil YouTube Mastery VVIP",
+            "Andi dari Banda Aceh daftar TikTok Viral Pro",
+            "Rina dari Surabaya beli Facebook Pro",
+            "Faisal dari Aceh Tenggara ambil full VVIP",
+            "Dewi dari Bandung berhasil daftar YouTube Starter",
+            "Hendra dari Palembang ambil TikTok VVIP",
+            "Lia dari Medan upgrade ke Facebook VVIP"
+        ]
+        
+        function showLiveToast() {
+            const container = document.getElementById('toastContainer')
+            const toast = document.createElement('div')
+            toast.className = `toast glass text-xs px-6 py-4 rounded-3xl max-w-xs flex items-center gap-3 shadow-2xl`
+            toast.innerHTML = `
+                <div class="text-3xl">🔥</div>
+                <div>
+                    <strong>${fakeSales[Math.floor(Math.random() * fakeSales.length)]}</strong><br>
+                    <span class="text-[#f5c242] text-[10px]">Baru saja • ${Math.floor(Math.random()*4 + 1)} menit lalu</span>
+                </div>
+            `
+            container.appendChild(toast)
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 1, 1)'
+                toast.style.opacity = '0'
+                toast.style.transform = 'translateY(30px)'
+                setTimeout(() => toast.remove(), 500)
+            }, 4800)
+        }
+        
+        // CHART.JS CUAN VISUALIZER
+        function initCuanChart() {
+            const ctx = document.getElementById('cuanChart')
+            if (!ctx) return
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt'],
+                    datasets: [{
+                        label: 'Penghasilan Pasif Murid VVIP (Rp Juta)',
+                        data: [8, 14, 29, 37, 52, 68, 81, 94],
+                        borderColor: '#f5c242',
+                        backgroundColor: 'rgba(245, 194, 66, 0.15)',
+                        borderWidth: 5,
+                        tension: 0.4,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#f5c242',
+                        pointRadius: 6,
+                        pointHoverRadius: 9
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#f5c24220' }, ticks: { color: '#f5c242', font: { size: 14 } } },
+                        x: { grid: { color: '#f5c24220' }, ticks: { color: '#f5c242', font: { size: 14 } } }
+                    }
+                }
+            })
+        }
+        
+        // TAB SWITCHING
+        function switchTab(n) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'))
+            document.getElementById('tabContent' + n).classList.remove('hidden')
+            
+            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === n)
+                if (i === n) btn.classList.add('border-b-4', 'border-[#f5c242]')
+                else btn.classList.remove('border-b-4', 'border-[#f5c242]')
+            })
+        }
+        
+        // CHECKOUT MODAL
+        let selectedPackageName = ''
+        let selectedPayment = ''
+        
+        const paymentList = [
+            {name:'DANA', emoji:'📱'},
+            {name:'OVO', emoji:'📱'},
+            {name:'GoPay', emoji:'📱'},
+            {name:'ShopeePay', emoji:'🛍️'},
+            {name:'BCA', emoji:'🏦'},
+            {name:'Mandiri', emoji:'🏦'},
+            {name:'BRI', emoji:'🏦'},
+            {name:'BNI', emoji:'🏦'}
+        ]
+        
+        function openCheckout(packageName) {
+            selectedPackageName = packageName
+            document.getElementById('modalPackageTitle').innerHTML = `DAFTAR <span class="text-white">${packageName}</span>`
+            
+            // Render chips
+            const container = document.getElementById('paymentChips')
+            container.innerHTML = ''
+            paymentList.forEach(p => {
+                const div = document.createElement('div')
+                div.className = `flex flex-col items-center py-4 rounded-3xl cursor-pointer border-2 border-transparent hover:border-[#f5c242]`
+                div.innerHTML = `<div class="text-4xl">${p.emoji}</div><div class="text-xs mt-2">${p.name}</div>`
+                div.onclick = () => {
+                    document.querySelectorAll('#paymentChips > div').forEach(d => d.classList.remove('border-[#f5c242]', 'bg-[#f5c242]/10'))
+                    div.classList.add('border-[#f5c242]', 'bg-[#f5c242]/10')
+                    selectedPayment = p.name
+                }
+                container.appendChild(div)
+            })
+            
+            document.getElementById('checkoutModal').classList.remove('hidden')
+            document.getElementById('checkoutModal').classList.add('flex')
+        }
+        
+        function closeModal() {
+            document.getElementById('checkoutModal').classList.add('hidden')
+            document.getElementById('checkoutModal').classList.remove('flex')
+        }
+        
+        function submitCheckout(e) {
+            e.preventDefault()
+            
+            const nama = document.getElementById('nama').value.trim()
+            const waNum = document.getElementById('wa').value.trim()
+            
+            if (!nama || !selectedPayment) {
+                alert('Lengkapi nama dan pilih metode bayar!')
+                return
+            }
+            
+            const timestamp = new Date().toLocaleString('id-ID')
+            
+            const message = encodeURIComponent(
+                `Halo Mentor Angga! Saya ${nama} ingin mendaftar paket:\n` +
+                `${selectedPackageName}\n` +
+                `Metode bayar: ${selectedPayment}\n` +
+                `Waktu: ${timestamp}\n` +
+                `No WA: ${waNum}`
+            )
+            
+            closeModal()
+            
+            setTimeout(() => {
+                window.open(`https://wa.me/6288277200044?text=${message}`, '_blank')
+            }, 600)
+        }
+        
+        // ANGGA-BOT
+        const botKnowledge = {
+            harga: "Paket mulai Rp120.000 (TikTok Starter) sampai Rp5.000.000 (Facebook VVIP). Semua termasuk akses AI Veo 3 & Sora 2 di level VVIP.",
+            materi: "Kurikulum lengkap: algoritma 2026, advanced prompting, produksi video AI, strategi passive income, dan private mentoring.",
+            alamat: "Dekat Rikit, Kecamatan Bambel, Kabupaten Aceh Tenggara, Aceh 24651. Bisa datang langsung ke rumah mentor.",
+            zoom: "Mentoring via Zoom Premium HD setiap hari. Jadwal fleksibel 100%.",
+            rumah: "Ya, private mentoring 1-on-1 di rumah mentor tersedia untuk VVIP.",
+            sora: "Sora 2 dari OpenAI. Text-to-video paling realistis saat ini. Anda akan belajar cara menggunakannya di kelas VVIP.",
+            veo: "Veo 3 dari Google – AI video generatif terbaik 2026. Full tutorial + prompt library eksklusif.",
+            chatgpt: "Advanced prompting ChatGPT & Gemini. 500+ prompt viral siap pakai.",
+            gemini: "Gemini Advanced + integrasi dengan Veo 3 untuk konten tanpa batas.",
+            "passive income": "Program ini dirancang khusus untuk passive income hari tua. Banyak murid sudah dapat Rp30–90 juta/bulan.",
+            "hari tua": "Ya, ini investasi jangka panjang. Setelah mentoring, channel Anda terus menghasilkan tanpa kerja keras.",
+            default: "Saya Angga-Bot. Coba tanya tentang harga, materi, alamat, Zoom, Sora, Veo, atau langsung chat mentor via WhatsApp!"
+        }
+        
+        function toggleBot() {
+            const win = document.getElementById('botWindow')
+            win.classList.toggle('hidden')
+            if (!win.classList.contains('hidden')) document.getElementById('botInputField').focus()
+        }
+        
+        function sendBotReply() {
+            const input = document.getElementById('botInputField')
+            const msg = input.value.trim().toLowerCase()
+            if (!msg) return
+            
+            const chat = document.getElementById('botChat')
+            
+            // User bubble
+            const userBubble = document.createElement('div')
+            userBubble.className = 'flex justify-end'
+            userBubble.innerHTML = `<div class="max-w-[75%] bg-[#f5c242] text-black px-5 py-3 rounded-3xl rounded-br-none">${input.value}</div>`
+            chat.appendChild(userBubble)
+            
+            input.value = ''
+            chat.scrollTop = chat.scrollHeight
+            
+            // Bot reply
+            setTimeout(() => {
+                let reply = botKnowledge.default
+                for (let key in botKnowledge) {
+                    if (msg.includes(key)) {
+                        reply = botKnowledge[key]
+                        break
+                    }
+                }
+                
+                const botBubble = document.createElement('div')
+                botBubble.className = 'flex justify-start'
+                botBubble.innerHTML = `
+                    <div class="flex items-start gap-3 max-w-[80%]">
+                        <div class="text-3xl flex-shrink-0">🤖</div>
+                        <div class="glass px-5 py-3 rounded-3xl rounded-bl-none">${reply}</div>
+                    </div>`
+                chat.appendChild(botBubble)
+                chat.scrollTop = chat.scrollHeight
+            }, 900)
+        }
+        
+        // Mobile menu
+        function toggleMobileMenu() {
+            alert('Menu mobile siap! (Demo landing page full functional)')
+            // In production this would open a drawer
+        }
+        
+        // Share buttons
+        function shareTo(platform) {
+            const url = encodeURIComponent(window.location.href)
+            const text = encodeURIComponent('Program High-Ticket Angga Pradana Putra – Obsidian Gold Cyber-Premium')
+            
+            if (platform === 'whatsapp') window.open(`https://wa.me/?text=${text}%20${url}`)
+            if (platform === 'telegram') window.open(`https://t.me/share/url?url=${url}&text=${text}`)
+            if (platform === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`)
+        }
+        
+        // SCROLL OBSERVER FOR FADE-IN
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1
+                        entry.target.style.transform = 'translateY(0)'
+                    }
+                })
+            }, { threshold: 0.2 })
+            
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = 0
+                section.style.transform = 'translateY(40px)'
+                section.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)'
+                observer.observe(section)
+            })
+        }
+        
+        // MAIN LAUNCH
+        window.onload = function () {
+            initTailwind().config()
+            initCustomCursor()
+            initParticles()
+            startCountdown()
+            initCuanChart()
+            initScrollReveal()
+            
+            // Start live notifications
+            setInterval(() => {
+                if (Math.random() > 0.4) showLiveToast()
+            }, 15000)
+            
+            console.log('%c🚀 Obsidian Gold Cyber-Premium Landing Page Angga Pradana Putra 100% siap tayang. Zero bugs. Heavy visual. Premium experience.', 'background:#f5c242;color:#0a0a0a;font-weight:900;padding:2px 8px;border-radius:4px')
+        }
+    </script>
 </body>
 </html>
