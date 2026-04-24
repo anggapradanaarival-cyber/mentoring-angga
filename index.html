@@ -3,406 +3,1152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Angga Web Design membantu UKM, pedagang, sekolah, dan bisnis lokal di Aceh Tenggara go digital dengan website elegan, cepat, dan terjangkau." />
-  <title>Angga Web Design | Jasa Pembuatan Website Aceh Tenggara</title>
+  <title>Angga Web Design | Jasa Pembuatan Website Premium Aceh Tenggara</title>
+  <meta name="description" content="Jasa pembuatan website elegan dan terjangkau untuk UKM, pedagang, sekolah, event, dan perusahaan lokal di Aceh Tenggara. Mulai Rp150.000." />
+  <meta name="theme-color" content="#0B0B0B" />
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <script>
+    tailwind = window.tailwind || {};
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            obsidian: '#070707',
-            charcoal: '#151515',
-            charcoalSoft: '#1f1f1f',
-            gold: '#D6AF56',
-            goldLight: '#F4D98B',
-            goldDark: '#9A742A',
-            cream: '#F8F1DF'
+            obsidian: '#0B0B0B',
+            obsidian2: '#111111',
+            charcoal: '#1A1A1A',
+            charcoal2: '#232323',
+            gold: '#D4AF37',
+            goldSoft: '#F5DE8B',
+            goldDark: '#8B6914',
+            cream: '#FFF6D6'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Cormorant Garamond', 'serif']
           },
           boxShadow: {
-            luxury: '0 24px 80px rgba(0,0,0,.55)',
-            gold: '0 18px 45px rgba(214,175,86,.18)'
+            luxury: '0 30px 90px rgba(0,0,0,.55)',
+            gold: '0 18px 55px rgba(212,175,55,.22)',
+            soft: '0 16px 50px rgba(0,0,0,.25)'
           },
-          backgroundImage: {
-            'gold-gradient': 'linear-gradient(135deg, #9A742A 0%, #F4D98B 45%, #D6AF56 70%, #7A571E 100%)',
-            'dark-radial': 'radial-gradient(circle at top, rgba(214,175,86,.16), transparent 34%), radial-gradient(circle at bottom right, rgba(244,217,139,.08), transparent 32%)'
+          animation: {
+            float: 'float 7s ease-in-out infinite',
+            pulseGold: 'pulseGold 2.4s ease-in-out infinite',
+            shimmer: 'shimmer 2.6s linear infinite',
+            spinSlow: 'spin 18s linear infinite'
+          },
+          keyframes: {
+            float: {
+              '0%,100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-14px)' }
+            },
+            pulseGold: {
+              '0%,100%': { boxShadow: '0 0 0 0 rgba(212,175,55,.35)' },
+              '50%': { boxShadow: '0 0 0 13px rgba(212,175,55,0)' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% center' },
+              '100%': { backgroundPosition: '200% center' }
+            }
           }
         }
       }
-    }
+    };
   </script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-soft: #F5DE8B;
+      --gold-dark: #8B6914;
+      --charcoal: #1A1A1A;
+      --obsidian: #0B0B0B;
+    }
+
     * { -webkit-tap-highlight-color: transparent; }
-    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .glass-card { background: linear-gradient(180deg, rgba(31,31,31,.88), rgba(12,12,12,.92)); border: 1px solid rgba(214,175,86,.18); }
-    .gold-text { background: linear-gradient(135deg, #F4D98B, #D6AF56, #9A742A); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .shine { position: relative; overflow: hidden; }
-    .shine::after { content: ''; position: absolute; inset: -80% auto -80% -40%; width: 38%; transform: rotate(20deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.34), transparent); transition: .75s ease; }
-    .shine:hover::after { left: 120%; }
-    .noise { background-image: radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px); background-size: 18px 18px; }
+
+    body {
+      min-height: 100vh;
+      color: #f6f1df;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(212,175,55,.16), transparent 27%),
+        radial-gradient(circle at 88% 18%, rgba(245,222,139,.10), transparent 28%),
+        radial-gradient(circle at 50% 110%, rgba(212,175,55,.09), transparent 35%),
+        linear-gradient(180deg, #070707 0%, #111 45%, #080808 100%);
+      overflow-x: hidden;
+    }
+
+    body.light-mode {
+      color: #1a1306;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(212,175,55,.23), transparent 27%),
+        radial-gradient(circle at 88% 18%, rgba(139,105,20,.13), transparent 28%),
+        linear-gradient(180deg, #fffaf0 0%, #f7efd7 50%, #fffaf0 100%);
+    }
+
+    body.light-mode .lux-card,
+    body.light-mode .nav-shell,
+    body.light-mode .mobile-drawer,
+    body.light-mode .modal-card {
+      background: rgba(255,255,255,.72);
+      color: #1a1306;
+      border-color: rgba(139,105,20,.22);
+    }
+
+    body.light-mode .muted { color: rgba(42,31,11,.72); }
+    body.light-mode .deep-panel { background: rgba(255,255,255,.62); }
+    body.light-mode .input-lux { background: rgba(255,255,255,.72); color: #1a1306; }
+
+    .font-display { letter-spacing: -.02em; }
+
+    .gold-text {
+      background: linear-gradient(135deg, #fff6bd 0%, #f5de8b 24%, #d4af37 52%, #8b6914 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gold-line {
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,.65), transparent);
+      height: 1px;
+    }
+
+    .lux-card {
+      background: linear-gradient(180deg, rgba(35,35,35,.80), rgba(17,17,17,.82));
+      border: 1px solid rgba(212,175,55,.16);
+      box-shadow: 0 25px 70px rgba(0,0,0,.38);
+      backdrop-filter: blur(18px);
+    }
+
+    .deep-panel {
+      background: rgba(0,0,0,.24);
+      border: 1px solid rgba(212,175,55,.12);
+    }
+
+    .btn-gold {
+      color: #0d0d0d;
+      background: linear-gradient(135deg, #fff2a8 0%, #d4af37 42%, #9d7517 100%);
+      transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+      box-shadow: 0 18px 50px rgba(212,175,55,.18);
+    }
+    .btn-gold:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 24px 65px rgba(212,175,55,.25); }
+    .btn-gold:active { transform: translateY(0) scale(.98); }
+
+    .btn-ghost {
+      border: 1px solid rgba(212,175,55,.18);
+      background: rgba(255,255,255,.025);
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: rgba(212,175,55,.42); background: rgba(212,175,55,.07); }
+
+    .card-hover { transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+    .card-hover:hover { transform: translateY(-7px); border-color: rgba(245,222,139,.38); box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 18px 60px rgba(212,175,55,.08); }
+
+    .nav-shell {
+      background: rgba(10,10,10,.68);
+      border: 1px solid rgba(212,175,55,.13);
+      backdrop-filter: blur(18px);
+    }
+
+    .input-lux {
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(212,175,55,.16);
+      color: #fff8df;
+      outline: none;
+      transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .input-lux:focus { border-color: rgba(245,222,139,.62); box-shadow: 0 0 0 4px rgba(212,175,55,.08); }
+    .input-lux option { background: #111; color: #fff8df; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    .grid-pattern {
+      background-image:
+        linear-gradient(rgba(212,175,55,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,175,55,.045) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at center, black, transparent 75%);
+    }
+
+    .noise::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .055;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .shimmer-text {
+      background: linear-gradient(90deg, #d4af37, #fff6bd, #d4af37);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .service-tab.active,
+    .portfolio-filter.active {
+      background: linear-gradient(135deg, rgba(245,222,139,.95), rgba(212,175,55,.95));
+      color: #0b0b0b;
+      border-color: transparent;
+    }
+
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .faq-answer { max-height: 260px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform .25s ease; }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      z-index: 70;
+      background: linear-gradient(90deg, #8b6914, #f5de8b, #d4af37);
+      box-shadow: 0 0 18px rgba(212,175,55,.65);
+    }
+
+    .modal-backdrop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .modal-backdrop.show { opacity: 1; pointer-events: auto; }
+
+    .modal-card { transform: translateY(18px) scale(.98); transition: transform .25s ease; }
+    .modal-backdrop.show .modal-card { transform: translateY(0) scale(1); }
+
+    .marquee-track { animation: marquee 28s linear infinite; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
+<body class="noise font-sans">
+  <div class="progress-bar" id="progressBar"></div>
 
-<body class="bg-obsidian text-cream antialiased selection:bg-gold selection:text-black">
-  <div class="fixed inset-0 -z-10 bg-dark-radial noise"></div>
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute inset-0 grid-pattern"></div>
+    <div class="absolute top-20 left-[-120px] w-80 h-80 bg-gold/10 blur-3xl rounded-full animate-float"></div>
+    <div class="absolute top-36 right-[-100px] w-96 h-96 bg-goldSoft/8 blur-3xl rounded-full animate-float" style="animation-delay: -2s"></div>
+    <div class="absolute bottom-[-160px] left-1/2 -translate-x-1/2 w-[700px] h-[320px] bg-gold/8 blur-3xl rounded-full"></div>
+  </div>
 
-  <!-- Navbar -->
-  <header class="sticky top-0 z-50 border-b border-gold/10 bg-obsidian/80 backdrop-blur-xl">
-    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="#home" class="group flex items-center gap-3">
-        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold-gradient font-black text-black shadow-gold transition group-hover:scale-105">A</div>
-        <div>
-          <p class="text-sm font-semibold tracking-[.22em] text-goldLight uppercase">Angga</p>
-          <p class="-mt-1 text-lg font-black text-white">Web Design</p>
+  <header class="fixed top-3 inset-x-0 z-50 px-4">
+    <div class="nav-shell max-w-7xl mx-auto rounded-3xl px-4 sm:px-5 py-3">
+      <div class="flex items-center justify-between gap-4">
+        <a href="#home" class="flex items-center gap-3 min-w-0">
+          <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-goldSoft via-gold to-goldDark text-black font-black grid place-items-center shadow-gold animate-pulseGold">A</div>
+          <div class="min-w-0">
+            <div class="font-extrabold tracking-tight truncate">Angga Web Design</div>
+            <div class="text-xs muted text-zinc-400 truncate">By Angga Pradana Putra</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1 text-sm">
+          <a class="px-4 py-2 rounded-full hover:bg-white/5 hover:text-gold transition" href="#layanan">Layanan</a>
+          <a class="px-4 py-2 rounded-full hover:bg-white/5 hover:text-gold transition" href="#harga">Harga</a>
+          <a class="px-4 py-2 rounded-full hover:bg-white/5 hover:text-gold transition" href="#portfolio">Portfolio</a>
+          <a class="px-4 py-2 rounded-full hover:bg-white/5 hover:text-gold transition" href="#kalkulator">Kalkulator</a>
+          <a class="px-4 py-2 rounded-full hover:bg-white/5 hover:text-gold transition" href="#faq">FAQ</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" class="hidden sm:inline-flex w-11 h-11 items-center justify-center rounded-2xl btn-ghost" aria-label="Ganti tema">◐</button>
+          <button data-quick-wa class="hidden md:inline-flex px-5 py-3 rounded-2xl btn-gold font-bold text-sm">Konsultasi</button>
+          <button id="menuToggle" class="lg:hidden w-11 h-11 rounded-2xl btn-ghost text-gold font-bold" aria-label="Buka menu">☰</button>
         </div>
-      </a>
-
-      <div class="hidden items-center gap-7 text-sm text-cream/75 md:flex">
-        <a href="#katalog" class="transition hover:text-goldLight">Katalog</a>
-        <a href="#harga" class="transition hover:text-goldLight">Harga</a>
-        <a href="#proses" class="transition hover:text-goldLight">Proses</a>
-        <a href="#faq" class="transition hover:text-goldLight">FAQ</a>
       </div>
 
-      <button class="wa-btn shine rounded-full bg-gold-gradient px-5 py-3 text-sm font-extrabold text-black shadow-gold transition hover:-translate-y-0.5 hover:shadow-lg" data-type="Konsultasi Website" data-package="Belum memilih paket">
-        Konsultasi WA
-      </button>
-    </nav>
+      <div id="mobileMenu" class="mobile-drawer hidden lg:hidden mt-3 rounded-2xl lux-card p-4">
+        <div class="grid gap-2 text-sm">
+          <a class="px-4 py-3 rounded-xl hover:bg-white/5" href="#layanan">Layanan Website</a>
+          <a class="px-4 py-3 rounded-xl hover:bg-white/5" href="#harga">Daftar Harga</a>
+          <a class="px-4 py-3 rounded-xl hover:bg-white/5" href="#portfolio">Portfolio</a>
+          <a class="px-4 py-3 rounded-xl hover:bg-white/5" href="#kalkulator">Kalkulator Estimasi</a>
+          <a class="px-4 py-3 rounded-xl hover:bg-white/5" href="#faq">FAQ</a>
+          <button data-quick-wa class="mt-2 px-5 py-3 rounded-2xl btn-gold font-bold">Chat WhatsApp Sekarang</button>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <main id="home">
-    <section class="relative overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
-      <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
-        <div>
-          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-gold/20 bg-gold/10 px-4 py-2 text-xs font-bold uppercase tracking-[.22em] text-goldLight">
-            Website Premium Harga Lokal
+  <main class="relative z-10">
+    <section id="home" class="min-h-screen pt-32 pb-16 flex items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-10 xl:gap-14 items-center">
+          <div class="reveal">
+            <div class="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white/[.03] px-4 py-2 text-xs sm:text-sm text-gold">
+              <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+              Jasa Website Premium, Rapi, dan Terjangkau untuk Aceh Tenggara
+            </div>
+
+            <h1 class="mt-7 font-display text-4xl sm:text-6xl lg:text-7xl leading-[.95] font-bold">
+              Saatnya usaha lokal tampil <span class="gold-text">mahal, dipercaya,</span> dan mudah dipesan lewat website.
+            </h1>
+
+            <p class="mt-6 text-base sm:text-lg leading-8 muted text-zinc-300 max-w-2xl">
+              Angga Web Design membantu UKM, pedagang, sekolah, jasa lokal, event, dan perusahaan di Aceh Tenggara punya website yang terlihat profesional, cepat dibuka dari HP, dan langsung terhubung ke WhatsApp untuk mempercepat calon pelanggan menghubungi Anda.
+            </p>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <button data-quick-wa class="px-7 py-4 rounded-2xl btn-gold font-black">Konsultasi Gratis via WhatsApp</button>
+              <a href="#layanan" class="px-7 py-4 rounded-2xl btn-ghost font-bold text-center">Lihat Semua Jenis Website</a>
+            </div>
+
+            <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div class="lux-card rounded-3xl p-4">
+                <div class="text-2xl font-black gold-text" data-counter="8">0</div>
+                <div class="mt-1 text-xs muted text-zinc-400">Jenis website</div>
+              </div>
+              <div class="lux-card rounded-3xl p-4">
+                <div class="text-2xl font-black gold-text" data-counter="150">0</div>
+                <div class="mt-1 text-xs muted text-zinc-400">Mulai ribuan</div>
+              </div>
+              <div class="lux-card rounded-3xl p-4">
+                <div class="text-2xl font-black gold-text">WA</div>
+                <div class="mt-1 text-xs muted text-zinc-400">Order otomatis</div>
+              </div>
+              <div class="lux-card rounded-3xl p-4">
+                <div class="text-2xl font-black gold-text">SEO</div>
+                <div class="mt-1 text-xs muted text-zinc-400">Dasar tersedia</div>
+              </div>
+            </div>
           </div>
 
-          <h1 class="max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-7xl">
-            Bantu UKM & Pedagang Aceh Tenggara <span class="gold-text">Go Digital</span> dengan Website Elegan.
-          </h1>
+          <div class="reveal lg:pl-4">
+            <div class="relative">
+              <div class="absolute -inset-4 bg-gold/10 blur-3xl rounded-[40px]"></div>
+              <div class="relative lux-card rounded-[34px] p-4 sm:p-6 shadow-luxury overflow-hidden">
+                <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
 
-          <p class="mt-6 max-w-2xl text-base leading-8 text-cream/75 sm:text-lg">
-            Angga Web Design membantu toko, usaha rumahan, sekolah, jasa rental, salon, kontraktor, hingga brand lokal tampil lebih profesional di internet. Website dibuat rapi, ringan, mobile-friendly, dan langsung terhubung ke WhatsApp agar calon pelanggan mudah menghubungi Anda.
+                <div class="rounded-[28px] deep-panel p-4 sm:p-5">
+                  <div class="flex items-center justify-between gap-4 border-b border-gold/10 pb-4">
+                    <div>
+                      <div class="text-xs text-gold uppercase tracking-[.22em]">Live Preview</div>
+                      <div class="mt-1 text-lg font-bold">Website Usaha Lokal</div>
+                    </div>
+                    <div class="flex gap-2">
+                      <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+                      <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+                      <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+                    </div>
+                  </div>
+
+                  <div class="mt-5 grid gap-4">
+                    <div class="rounded-3xl bg-gradient-to-br from-gold/18 to-white/[.02] border border-gold/14 p-5">
+                      <div class="text-xs text-gold uppercase tracking-[.18em]">Hero Bisnis</div>
+                      <div class="mt-3 h-7 rounded-xl bg-white/12 w-4/5"></div>
+                      <div class="mt-3 h-3 rounded-xl bg-white/10 w-full"></div>
+                      <div class="mt-2 h-3 rounded-xl bg-white/10 w-2/3"></div>
+                      <div class="mt-5 flex gap-3">
+                        <div class="h-11 rounded-2xl bg-gold w-36"></div>
+                        <div class="h-11 rounded-2xl border border-gold/20 w-28"></div>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3">
+                      <div class="rounded-2xl deep-panel p-3">
+                        <div class="h-9 rounded-xl bg-gold/20"></div>
+                        <div class="mt-3 h-2 rounded bg-white/10"></div>
+                        <div class="mt-2 h-2 rounded bg-white/10 w-2/3"></div>
+                      </div>
+                      <div class="rounded-2xl deep-panel p-3">
+                        <div class="h-9 rounded-xl bg-gold/20"></div>
+                        <div class="mt-3 h-2 rounded bg-white/10"></div>
+                        <div class="mt-2 h-2 rounded bg-white/10 w-2/3"></div>
+                      </div>
+                      <div class="rounded-2xl deep-panel p-3">
+                        <div class="h-9 rounded-xl bg-gold/20"></div>
+                        <div class="mt-3 h-2 rounded bg-white/10"></div>
+                        <div class="mt-2 h-2 rounded bg-white/10 w-2/3"></div>
+                      </div>
+                    </div>
+
+                    <div class="rounded-3xl deep-panel p-4 flex items-center justify-between gap-4">
+                      <div>
+                        <div class="text-sm font-bold">Tombol Order WhatsApp</div>
+                        <div class="text-xs muted text-zinc-400 mt-1">Pesan otomatis sesuai layanan</div>
+                      </div>
+                      <div class="w-12 h-12 rounded-2xl bg-gold text-black grid place-items-center font-black">↗</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+                  <div class="rounded-2xl border border-gold/12 bg-white/[.025] p-3">
+                    <div class="text-sm font-black gold-text">Cepat</div>
+                    <div class="text-[11px] muted text-zinc-500 mt-1">Ringan</div>
+                  </div>
+                  <div class="rounded-2xl border border-gold/12 bg-white/[.025] p-3">
+                    <div class="text-sm font-black gold-text">Elegan</div>
+                    <div class="text-[11px] muted text-zinc-500 mt-1">Premium</div>
+                  </div>
+                  <div class="rounded-2xl border border-gold/12 bg-white/[.025] p-3">
+                    <div class="text-sm font-black gold-text">Jelas</div>
+                    <div class="text-[11px] muted text-zinc-500 mt-1">CTA kuat</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 overflow-hidden border-y border-gold/10 bg-black/20">
+      <div class="marquee-track flex gap-4 whitespace-nowrap w-max">
+        <div class="flex gap-4 pl-4">
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Toko Online</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Company Profile</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Landing Page</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Katalog Digital</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Undangan Digital</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Portofolio</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Booking</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Sekolah</span>
+        </div>
+        <div class="flex gap-4 pl-4" aria-hidden="true">
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Toko Online</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Company Profile</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Landing Page</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Katalog Digital</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Undangan Digital</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Portofolio</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Booking</span>
+          <span class="px-5 py-2 rounded-full border border-gold/15 text-gold">Sekolah</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="layanan" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[.8fr_1.2fr] gap-8 items-end">
+          <div class="reveal">
+            <div class="text-sm text-gold uppercase tracking-[.24em]">Katalog Lengkap</div>
+            <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Jenis website sesuai kebutuhan usaha Anda.</h2>
+          </div>
+          <p class="reveal muted text-zinc-400 leading-8 lg:pb-2">
+            Pilih layanan berdasarkan tujuan. Mau jualan, branding, undangan, portofolio, reservasi, atau profil sekolah, semuanya bisa dibuat dengan tampilan rapi, bahasa mudah dipahami, dan tombol WhatsApp siap order.
           </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#katalog" class="shine rounded-full bg-gold-gradient px-7 py-4 text-center font-extrabold text-black shadow-gold transition hover:-translate-y-1">
-              Lihat Jenis Website
-            </a>
-            <button class="wa-btn rounded-full border border-gold/30 bg-charcoal px-7 py-4 font-extrabold text-goldLight transition hover:-translate-y-1 hover:border-goldLight hover:bg-charcoalSoft" data-type="Konsultasi awal pembuatan website" data-package="Belum memilih paket">
-              Tanya Harga ke Angga
-            </button>
-          </div>
-
-          <div class="mt-10 grid grid-cols-3 gap-3 max-w-xl">
-            <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4">
-              <p class="text-2xl font-black text-white">150rb</p>
-              <p class="mt-1 text-xs text-cream/60">Mulai dari</p>
-            </div>
-            <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4">
-              <p class="text-2xl font-black text-white">WA</p>
-              <p class="mt-1 text-xs text-cream/60">Checkout cepat</p>
-            </div>
-            <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4">
-              <p class="text-2xl font-black text-white">Mobile</p>
-              <p class="mt-1 text-xs text-cream/60">Responsif</p>
-            </div>
-          </div>
         </div>
 
-        <div class="relative">
-          <div class="absolute -inset-4 rounded-[2rem] bg-gold/10 blur-3xl"></div>
-          <div class="relative overflow-hidden rounded-[2rem] border border-gold/20 bg-charcoal p-5 shadow-luxury">
-            <div class="rounded-[1.5rem] border border-white/10 bg-black/40 p-5">
-              <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                <div>
-                  <p class="text-xs uppercase tracking-[.22em] text-goldLight">Preview</p>
-                  <h2 class="mt-1 text-2xl font-black text-white">Website Bisnis Lokal</h2>
-                </div>
-                <div class="h-12 w-12 rounded-2xl bg-gold-gradient"></div>
+        <div class="mt-9 flex gap-3 overflow-x-auto pb-2" id="serviceTabs"></div>
+        <div id="serviceGrid" class="mt-8 grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <section id="harga" class="py-16 sm:py-24 bg-black/20 border-y border-gold/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto reveal">
+          <div class="text-sm text-gold uppercase tracking-[.24em]">Paket Harga</div>
+          <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Mulai dari Rp150.000 sampai Rp300.000.</h2>
+          <p class="mt-5 muted text-zinc-400 leading-8">Pilih paket sesuai kebutuhan. Semua paket bisa diarahkan ke WhatsApp, cocok untuk pedagang lokal yang ingin mulai promosi digital tanpa ribet.</p>
+        </div>
+
+        <div id="pricingGrid" class="mt-12 grid lg:grid-cols-3 gap-6"></div>
+
+        <div class="mt-12 reveal lux-card rounded-[32px] overflow-hidden">
+          <div class="p-6 border-b border-gold/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <div class="text-gold text-sm uppercase tracking-[.22em]">Perbandingan Cepat</div>
+              <h3 class="mt-2 text-2xl font-bold">Mana paket yang paling cocok?</h3>
+            </div>
+            <button data-quick-wa class="px-5 py-3 rounded-2xl btn-gold font-bold">Tanya Rekomendasi Paket</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[760px] text-sm">
+              <thead class="bg-white/[.03] text-gold">
+                <tr>
+                  <th class="text-left p-4">Fitur</th>
+                  <th class="text-left p-4">Basic</th>
+                  <th class="text-left p-4">Menengah</th>
+                  <th class="text-left p-4">Sultan</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gold/10 muted text-zinc-300">
+                <tr><td class="p-4 font-semibold">Jumlah halaman</td><td class="p-4">1 halaman</td><td class="p-4">Beberapa halaman</td><td class="p-4">Custom sesuai kebutuhan</td></tr>
+                <tr><td class="p-4 font-semibold">Desain</td><td class="p-4">Template rapi</td><td class="p-4">Lebih lengkap</td><td class="p-4">Custom mewah</td></tr>
+                <tr><td class="p-4 font-semibold">WhatsApp CTA</td><td class="p-4">Ada</td><td class="p-4">Ada</td><td class="p-4">Ada, lebih detail</td></tr>
+                <tr><td class="p-4 font-semibold">SEO dasar</td><td class="p-4">Ringan</td><td class="p-4">Ada</td><td class="p-4">Lebih dirapikan</td></tr>
+                <tr><td class="p-4 font-semibold">Google Maps</td><td class="p-4">Opsional</td><td class="p-4">Ada</td><td class="p-4">Ada</td></tr>
+                <tr><td class="p-4 font-semibold">Support</td><td class="p-4">Standar</td><td class="p-4">Standar+</td><td class="p-4">Prioritas</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="addons" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-3xl">
+          <div class="text-sm text-gold uppercase tracking-[.24em]">Fitur Tambahan</div>
+          <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Website bisa dibuat lebih lengkap sesuai usaha.</h2>
+          <p class="mt-5 muted text-zinc-400 leading-8">Fitur di bawah ini bisa disesuaikan saat konsultasi. Tujuannya supaya website tidak hanya cantik, tapi juga membantu calon pelanggan lebih mudah mengambil keputusan.</p>
+        </div>
+        <div id="addonGrid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="py-16 sm:py-24 bg-black/20 border-y border-gold/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[.8fr_1.2fr] gap-8 items-end">
+          <div class="reveal">
+            <div class="text-sm text-gold uppercase tracking-[.24em]">Contoh Konsep</div>
+            <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Gambaran hasil website yang bisa dibuat.</h2>
+          </div>
+          <p class="reveal muted text-zinc-400 leading-8 lg:pb-2">Ini contoh konsep tampilan, bukan batasan desain. Nanti warna, foto, teks, dan struktur halaman bisa disesuaikan dengan brand usaha Anda.</p>
+        </div>
+        <div class="mt-8 flex gap-3 overflow-x-auto pb-2" id="portfolioFilters"></div>
+        <div id="portfolioGrid" class="mt-8 grid md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <section id="kalkulator" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[.95fr_1.05fr] gap-8 items-start">
+          <div class="reveal lux-card rounded-[32px] p-6 sm:p-8">
+            <div class="text-sm text-gold uppercase tracking-[.24em]">Kalkulator Estimasi</div>
+            <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Cek perkiraan paket yang cocok.</h2>
+            <p class="mt-5 muted text-zinc-400 leading-8">Pilih jenis website dan paket. Tombol WhatsApp akan otomatis membuat pesan yang lebih rapi agar konsultasi cepat jelas.</p>
+
+            <div class="mt-7 grid gap-5">
+              <label class="block">
+                <span class="text-sm font-semibold">Jenis website</span>
+                <select id="calcService" class="input-lux mt-2 w-full rounded-2xl px-4 py-4"></select>
+              </label>
+              <label class="block">
+                <span class="text-sm font-semibold">Paket harga</span>
+                <select id="calcPackage" class="input-lux mt-2 w-full rounded-2xl px-4 py-4"></select>
+              </label>
+              <label class="block">
+                <span class="text-sm font-semibold">Nama usaha / acara</span>
+                <input id="calcBusiness" class="input-lux mt-2 w-full rounded-2xl px-4 py-4" placeholder="Contoh: Toko Baju Barokah" />
+              </label>
+              <label class="block">
+                <span class="text-sm font-semibold">Catatan kebutuhan</span>
+                <textarea id="calcNote" class="input-lux mt-2 w-full rounded-2xl px-4 py-4 min-h-[110px] resize-none" placeholder="Contoh: butuh katalog produk, tombol WA, maps, dan tampilan mewah."></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="reveal lux-card rounded-[32px] p-6 sm:p-8 sticky top-28">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="text-sm text-gold uppercase tracking-[.24em]">Ringkasan Order</div>
+                <h3 class="mt-3 text-3xl font-bold" id="summaryPrice">Rp 150.000</h3>
               </div>
-
-              <div class="mt-5 space-y-4">
-                <div class="rounded-2xl bg-white/[.04] p-4">
-                  <p class="text-sm font-bold text-goldLight">Etalase Produk</p>
-                  <div class="mt-3 grid grid-cols-3 gap-3">
-                    <div class="h-24 rounded-xl bg-gradient-to-br from-charcoalSoft to-black"></div>
-                    <div class="h-24 rounded-xl bg-gradient-to-br from-charcoalSoft to-black"></div>
-                    <div class="h-24 rounded-xl bg-gradient-to-br from-charcoalSoft to-black"></div>
-                  </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                  <div class="rounded-2xl border border-gold/20 bg-gold/10 p-4">
-                    <p class="text-xs text-cream/60">Order Masuk</p>
-                    <p class="mt-1 text-2xl font-black text-white">WhatsApp</p>
-                  </div>
-                  <div class="rounded-2xl border border-white/10 bg-white/[.04] p-4">
-                    <p class="text-xs text-cream/60">Tampilan</p>
-                    <p class="mt-1 text-2xl font-black text-white">Mewah</p>
-                  </div>
-                </div>
-                <button class="wa-btn shine w-full rounded-2xl bg-gold-gradient py-4 font-black text-black" data-type="Website bisnis lokal seperti preview hero" data-package="Belum memilih paket">
-                  Buat Website Seperti Ini
-                </button>
-              </div>
+              <div class="w-14 h-14 rounded-2xl bg-gold text-black grid place-items-center font-black text-xl">WA</div>
             </div>
+
+            <div class="mt-6 space-y-3 text-sm">
+              <div class="deep-panel rounded-2xl p-4 flex justify-between gap-4"><span class="muted text-zinc-400">Jenis</span><strong id="summaryService" class="text-right">Website Toko Online</strong></div>
+              <div class="deep-panel rounded-2xl p-4 flex justify-between gap-4"><span class="muted text-zinc-400">Paket</span><strong id="summaryPackage" class="text-right">Paket Basic</strong></div>
+              <div class="deep-panel rounded-2xl p-4"><span class="muted text-zinc-400 block mb-2">Pesan otomatis</span><p id="summaryMessage" class="leading-7 muted text-zinc-300"></p></div>
+            </div>
+
+            <button id="calcWaBtn" class="mt-6 w-full rounded-2xl px-6 py-4 btn-gold font-black">Kirim Ringkasan ke WhatsApp</button>
+            <button id="copyMessageBtn" class="mt-3 w-full rounded-2xl px-6 py-4 btn-ghost font-bold">Salin Pesan</button>
+            <p id="copyStatus" class="mt-3 text-center text-sm text-gold hidden">Pesan berhasil disalin.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Catalog -->
-    <section id="katalog" class="px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl">
-        <div class="mx-auto max-w-3xl text-center">
-          <p class="text-sm font-bold uppercase tracking-[.24em] text-goldLight">Katalog Jenis Website</p>
-          <h2 class="mt-4 text-3xl font-black text-white sm:text-5xl">Pilih Website yang Paling Cocok untuk Usaha Anda</h2>
-          <p class="mt-5 text-cream/70 leading-8">Setiap jenis website bisa disesuaikan dengan kebutuhan usaha, mulai dari jualan produk, profil perusahaan, portofolio, sampai sistem booking sederhana.</p>
+    <section id="proses" class="py-16 sm:py-24 bg-black/20 border-y border-gold/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto reveal">
+          <div class="text-sm text-gold uppercase tracking-[.24em]">Alur Pengerjaan</div>
+          <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Proses jelas dari konsultasi sampai website siap dipakai.</h2>
         </div>
-
-        <div id="websiteGrid" class="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4"></div>
-      </div>
-    </section>
-
-    <!-- Pricing -->
-    <section id="harga" class="px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl">
-        <div class="grid items-end gap-6 lg:grid-cols-[.8fr_1.2fr]">
-          <div>
-            <p class="text-sm font-bold uppercase tracking-[.24em] text-goldLight">Daftar Harga</p>
-            <h2 class="mt-4 text-3xl font-black text-white sm:text-5xl">Harga Terjangkau, Tampilan Tetap Berkelas.</h2>
-          </div>
-          <p class="text-cream/70 leading-8">Paket dibuat sederhana agar pedagang lokal, UKM, dan pemilik jasa bisa mulai punya website tanpa biaya besar. Harga dapat disesuaikan lagi jika ada fitur khusus.</p>
-        </div>
-
-        <div id="pricingGrid" class="mt-10 grid gap-5 lg:grid-cols-3"></div>
-      </div>
-    </section>
-
-    <!-- Process -->
-    <section id="proses" class="px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl rounded-[2rem] border border-gold/15 bg-charcoal/80 p-6 shadow-luxury sm:p-10">
-        <div class="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <p class="text-sm font-bold uppercase tracking-[.24em] text-goldLight">Alur Pengerjaan</p>
-            <h2 class="mt-4 text-3xl font-black text-white sm:text-5xl">Cara pesan mudah, tidak ribet.</h2>
-            <p class="mt-5 leading-8 text-cream/70">Cocok untuk pemilik usaha yang belum paham teknis. Cukup jelaskan usaha Anda, kirim bahan, lalu website disusun menjadi tampilan profesional.</p>
-          </div>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-3xl border border-white/10 bg-black/25 p-5">
-              <span class="gold-text text-3xl font-black">01</span>
-              <h3 class="mt-3 text-xl font-black text-white">Konsultasi</h3>
-              <p class="mt-2 text-sm leading-7 text-cream/65">Diskusikan jenis usaha, target pembeli, contoh desain, dan paket yang paling sesuai.</p>
-            </div>
-            <div class="rounded-3xl border border-white/10 bg-black/25 p-5">
-              <span class="gold-text text-3xl font-black">02</span>
-              <h3 class="mt-3 text-xl font-black text-white">Kirim Bahan</h3>
-              <p class="mt-2 text-sm leading-7 text-cream/65">Kirim logo, foto produk, daftar harga, alamat, nomor WA, dan teks singkat usaha.</p>
-            </div>
-            <div class="rounded-3xl border border-white/10 bg-black/25 p-5">
-              <span class="gold-text text-3xl font-black">03</span>
-              <h3 class="mt-3 text-xl font-black text-white">Desain Dibuat</h3>
-              <p class="mt-2 text-sm leading-7 text-cream/65">Website dirancang rapi, elegan, responsif, dan diarahkan untuk meningkatkan kepercayaan calon pelanggan.</p>
-            </div>
-            <div class="rounded-3xl border border-white/10 bg-black/25 p-5">
-              <span class="gold-text text-3xl font-black">04</span>
-              <h3 class="mt-3 text-xl font-black text-white">Siap Dipakai</h3>
-              <p class="mt-2 text-sm leading-7 text-cream/65">Tombol WhatsApp, Maps, katalog, dan konten utama dicek agar siap dipromosikan.</p>
-            </div>
-          </div>
+        <div class="mt-12 grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div class="reveal lux-card card-hover rounded-[30px] p-6"><div class="w-14 h-14 rounded-2xl bg-gold text-black grid place-items-center font-black text-xl">1</div><h3 class="mt-5 text-xl font-bold">Konsultasi</h3><p class="mt-3 muted text-zinc-400 leading-7 text-sm">Ceritakan usaha, target pelanggan, jenis website, dan tampilan yang diinginkan.</p></div>
+          <div class="reveal lux-card card-hover rounded-[30px] p-6"><div class="w-14 h-14 rounded-2xl bg-gold text-black grid place-items-center font-black text-xl">2</div><h3 class="mt-5 text-xl font-bold">Kirim Materi</h3><p class="mt-3 muted text-zinc-400 leading-7 text-sm">Siapkan logo, foto, deskripsi, alamat, nomor WhatsApp, daftar produk, atau detail acara.</p></div>
+          <div class="reveal lux-card card-hover rounded-[30px] p-6"><div class="w-14 h-14 rounded-2xl bg-gold text-black grid place-items-center font-black text-xl">3</div><h3 class="mt-5 text-xl font-bold">Pembuatan</h3><p class="mt-3 muted text-zinc-400 leading-7 text-sm">Website dibuat rapi, responsif, dan diarahkan agar pengunjung mudah paham serta mudah menghubungi.</p></div>
+          <div class="reveal lux-card card-hover rounded-[30px] p-6"><div class="w-14 h-14 rounded-2xl bg-gold text-black grid place-items-center font-black text-xl">4</div><h3 class="mt-5 text-xl font-bold">Siap Promosi</h3><p class="mt-3 muted text-zinc-400 leading-7 text-sm">Website siap dibagikan ke WhatsApp, Facebook, Instagram, TikTok, kartu nama, atau profil bisnis.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-gold/20 bg-gradient-to-br from-charcoal via-black to-charcoal p-7 shadow-luxury sm:p-12">
-        <div class="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-          <div>
-            <p class="text-sm font-bold uppercase tracking-[.24em] text-goldLight">Mulai Go Digital</p>
-            <h2 class="mt-4 text-3xl font-black text-white sm:text-5xl">Jadikan usaha Anda terlihat lebih dipercaya pelanggan.</h2>
-            <p class="mt-5 max-w-3xl leading-8 text-cream/70">Website bukan cuma pajangan. Untuk usaha lokal, website bisa menjadi kartu nama online, katalog produk, tempat promosi, dan jalur cepat calon pembeli masuk ke WhatsApp.</p>
-          </div>
-          <button class="wa-btn shine rounded-full bg-gold-gradient px-8 py-5 font-black text-black shadow-gold transition hover:-translate-y-1" data-type="Website untuk usaha lokal" data-package="Belum memilih paket">
-            Pesan Sekarang
-          </button>
+    <section id="testimoni" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-3xl">
+          <div class="text-sm text-gold uppercase tracking-[.24em]">Kesan Pelanggan</div>
+          <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Website yang terasa rapi membuat usaha lebih dipercaya.</h2>
+        </div>
+        <div class="mt-10 grid md:grid-cols-3 gap-6">
+          <div class="reveal lux-card rounded-[30px] p-6 card-hover"><div class="text-gold text-2xl">★★★★★</div><p class="mt-5 muted text-zinc-300 leading-8">“Tampilannya elegan, cocok untuk usaha yang ingin terlihat lebih serius. Tombol WhatsApp juga memudahkan calon pembeli.”</p><div class="mt-6 font-bold">Pemilik Toko Lokal</div></div>
+          <div class="reveal lux-card rounded-[30px] p-6 card-hover"><div class="text-gold text-2xl">★★★★★</div><p class="mt-5 muted text-zinc-300 leading-8">“Bahasanya mudah dipahami, tidak terlalu rumit. Website jadi enak dibagikan ke pelanggan dan rekan bisnis.”</p><div class="mt-6 font-bold">Pelaku Jasa</div></div>
+          <div class="reveal lux-card rounded-[30px] p-6 card-hover"><div class="text-gold text-2xl">★★★★★</div><p class="mt-5 muted text-zinc-300 leading-8">“Untuk harga segitu hasilnya sudah terasa premium. Cocok untuk UMKM yang baru mulai go digital.”</p><div class="mt-6 font-bold">UMKM Aceh Tenggara</div></div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="px-4 pb-28 pt-10 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl">
-        <div class="text-center">
-          <p class="text-sm font-bold uppercase tracking-[.24em] text-goldLight">FAQ</p>
-          <h2 class="mt-4 text-3xl font-black text-white sm:text-5xl">Pertanyaan yang Sering Ditanyakan</h2>
+    <section id="faq" class="py-16 sm:py-24 bg-black/20 border-y border-gold/10">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center reveal">
+          <div class="text-sm text-gold uppercase tracking-[.24em]">FAQ</div>
+          <h2 class="mt-4 font-display text-4xl sm:text-5xl font-bold">Pertanyaan yang sering ditanyakan.</h2>
         </div>
+        <div id="faqList" class="mt-10 space-y-4"></div>
+      </div>
+    </section>
 
-        <div class="mt-10 space-y-4">
-          <details class="group rounded-3xl border border-gold/15 bg-charcoal p-5 open:bg-charcoalSoft">
-            <summary class="cursor-pointer list-none font-black text-white flex items-center justify-between">Apakah cocok untuk pedagang kecil?<span class="text-goldLight transition group-open:rotate-45">+</span></summary>
-            <p class="mt-4 leading-8 text-cream/70">Sangat cocok. Website bisa dibuat sederhana namun tetap profesional, lengkap dengan katalog dan tombol WhatsApp agar pelanggan mudah bertanya atau memesan.</p>
-          </details>
-          <details class="group rounded-3xl border border-gold/15 bg-charcoal p-5 open:bg-charcoalSoft">
-            <summary class="cursor-pointer list-none font-black text-white flex items-center justify-between">Apakah bisa langsung checkout ke WhatsApp?<span class="text-goldLight transition group-open:rotate-45">+</span></summary>
-            <p class="mt-4 leading-8 text-cream/70">Bisa. Tombol order dapat dibuat langsung membuka WhatsApp penjual dengan pesan otomatis berisi nama produk, paket, atau kebutuhan pembeli.</p>
-          </details>
-          <details class="group rounded-3xl border border-gold/15 bg-charcoal p-5 open:bg-charcoalSoft">
-            <summary class="cursor-pointer list-none font-black text-white flex items-center justify-between">Apakah desain bisa custom?<span class="text-goldLight transition group-open:rotate-45">+</span></summary>
-            <p class="mt-4 leading-8 text-cream/70">Bisa. Paket Sultan cocok untuk desain yang lebih mewah, warna khusus, layout custom, fitur lebih lengkap, dan prioritas support.</p>
-          </details>
+    <section class="py-16 sm:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal relative overflow-hidden lux-card rounded-[38px] p-8 sm:p-12 text-center">
+          <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+          <div class="absolute -right-24 -top-24 w-72 h-72 rounded-full bg-gold/10 blur-3xl"></div>
+          <div class="text-sm text-gold uppercase tracking-[.24em]">Mulai Sekarang</div>
+          <h2 class="mt-4 font-display text-4xl sm:text-6xl font-bold">Jangan tunggu usaha terlihat kecil terus.</h2>
+          <p class="mt-5 muted text-zinc-300 leading-8 max-w-2xl mx-auto">Dengan website yang rapi, pelanggan lebih mudah percaya, produk lebih mudah dijelaskan, dan order bisa diarahkan langsung ke WhatsApp.</p>
+          <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+            <button data-quick-wa class="px-8 py-4 rounded-2xl btn-gold font-black">Saya Mau Buat Website</button>
+            <a href="#kalkulator" class="px-8 py-4 rounded-2xl btn-ghost font-bold">Cek Estimasi Dulu</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-gold/10 bg-black/40 px-4 py-8 sm:px-6 lg:px-8">
-    <div class="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-cream/60 sm:flex-row sm:items-center sm:justify-between">
-      <p>© <span id="year"></span> Angga Web Design. Dibuat untuk usaha lokal yang ingin naik kelas.</p>
-      <button class="wa-btn text-goldLight hover:text-gold transition" data-type="Konsultasi website dari footer" data-package="Belum memilih paket">Hubungi Angga Pradana Putra</button>
+  <footer class="relative z-10 border-t border-gold/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-goldSoft via-gold to-goldDark text-black font-black grid place-items-center shadow-gold">A</div>
+            <div>
+              <div class="text-xl font-black">Angga Web Design</div>
+              <div class="text-sm muted text-zinc-400">Milik Angga Pradana Putra</div>
+            </div>
+          </div>
+          <p class="mt-5 muted text-zinc-400 leading-8 max-w-2xl">Jasa pembuatan website elegan, mobile-friendly, dan terjangkau untuk UKM, pedagang, sekolah, event, dan usaha lokal di Aceh Tenggara dan sekitarnya.</p>
+        </div>
+        <div class="lg:text-right">
+          <div class="font-bold">WhatsApp Pemesanan</div>
+          <div class="mt-2 gold-text text-2xl font-black">+62 822-1998-9497</div>
+          <button data-quick-wa class="mt-5 px-6 py-3 rounded-2xl btn-gold font-bold">Chat Sekarang</button>
+          <p class="mt-5 text-sm muted text-zinc-500">© 2026 Angga Web Design. Semua hak dilindungi.</p>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- Sticky Mobile CTA -->
-  <div class="fixed bottom-4 left-4 right-4 z-50 md:hidden">
-    <button class="wa-btn shine w-full rounded-full bg-gold-gradient px-6 py-4 font-black text-black shadow-gold" data-type="Konsultasi cepat via tombol sticky" data-package="Belum memilih paket">
-      Chat Angga Sekarang
-    </button>
+  <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+    <button id="backToTop" class="hidden w-12 h-12 rounded-2xl btn-ghost bg-black/50 backdrop-blur-md font-bold" aria-label="Kembali ke atas">↑</button>
+    <button data-quick-wa class="rounded-full px-5 py-4 btn-gold font-black shadow-gold">WhatsApp</button>
+  </div>
+
+  <div id="orderModal" class="modal-backdrop fixed inset-0 z-[80] bg-black/70 backdrop-blur-md p-4 flex items-center justify-center">
+    <div class="modal-card lux-card rounded-[32px] w-full max-w-xl p-6 sm:p-8 relative">
+      <button id="closeModal" class="absolute top-4 right-4 w-10 h-10 rounded-2xl btn-ghost font-bold" aria-label="Tutup">×</button>
+      <div class="text-sm text-gold uppercase tracking-[.24em]">Konfirmasi Minat</div>
+      <h3 class="mt-3 text-3xl font-black">Kirim pesan WhatsApp?</h3>
+      <p class="mt-4 muted text-zinc-400 leading-7">Pesan akan otomatis terisi sesuai layanan dan paket yang Anda pilih.</p>
+      <div class="mt-5 deep-panel rounded-2xl p-4">
+        <p id="modalMessage" class="muted text-zinc-300 leading-7 text-sm"></p>
+      </div>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <button id="modalSend" class="flex-1 px-5 py-4 rounded-2xl btn-gold font-black">Lanjut ke WhatsApp</button>
+        <button id="modalCancel" class="flex-1 px-5 py-4 rounded-2xl btn-ghost font-bold">Batal</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    const phoneNumber = '6282219989497';
+    const WA_NUMBER = '6282219989497';
 
-    const websites = [
+    const services = [
       {
+        key: 'toko-online',
         icon: '🛒',
         title: 'Website Toko Online (E-Commerce)',
-        desc: 'Website untuk menjual produk secara online dengan tampilan etalase yang rapi. Cocok untuk toko baju, elektronik, sembako, kosmetik, parfum, makanan, dan kebutuhan harian. Bisa menampilkan foto produk, kategori, harga, deskripsi barang, stok sederhana, detail ukuran atau varian, serta tombol checkout langsung ke WhatsApp penjual agar pembeli tidak bingung saat ingin order.'
+        short: 'Untuk jualan produk dengan etalase, detail barang, dan checkout WhatsApp.',
+        bestFor: 'Toko baju, elektronik, sembako, reseller, grosir, produk rumahan.',
+        description: 'Website toko online membantu usaha menampilkan produk secara lebih rapi seperti toko digital. Pelanggan bisa melihat foto, detail barang, harga, kategori, dan tombol pemesanan tanpa harus bertanya dari awal. Sistemnya bisa dibuat sederhana agar cocok untuk pedagang lokal yang ingin tetap menerima order lewat WhatsApp.',
+        features: [
+          'Etalase produk lengkap dengan foto, harga, kategori, dan keterangan barang.',
+          'Halaman detail produk untuk menjelaskan ukuran, warna, stok, manfaat, dan spesifikasi.',
+          'Simulasi ringkasan harga sederhana sebelum pelanggan menghubungi penjual.',
+          'Tombol checkout langsung ke WhatsApp dengan pesan order yang rapi.',
+          'Cocok untuk jualan online tanpa sistem pembayaran yang rumit.'
+        ]
       },
       {
+        key: 'company-profile',
         icon: '🏢',
         title: 'Website Company Profile',
-        desc: 'Website profesional untuk perusahaan PT, CV, kontraktor, agen, pabrik, koperasi, atau lembaga usaha. Bisa memuat sejarah perusahaan, visi misi, legalitas, struktur tim, layanan, portofolio proyek, galeri kegiatan, alamat kantor, dan kontak resmi. Tujuannya membuat bisnis terlihat lebih terpercaya saat calon klien mencari informasi di internet.'
+        short: 'Untuk PT, CV, kontraktor, agen, distributor, atau bisnis jasa agar terlihat resmi.',
+        bestFor: 'Kontraktor, agen, pabrik, distributor, konsultan, travel, vendor.',
+        description: 'Website company profile membuat perusahaan terlihat lebih terpercaya saat dicek calon klien. Isinya bisa menjelaskan profil perusahaan, sejarah, visi misi, layanan, legalitas, tim, proyek, dan kontak resmi. Sangat cocok untuk bisnis yang ingin terlihat profesional dalam kerja sama atau tender.',
+        features: [
+          'Profil perusahaan lengkap dengan sejarah, visi, misi, dan nilai bisnis.',
+          'Halaman layanan yang menjelaskan keunggulan perusahaan secara jelas.',
+          'Galeri proyek, daftar klien, testimoni, dan bukti kredibilitas usaha.',
+          'Tampilan formal, elegan, dan cocok untuk kebutuhan presentasi bisnis.',
+          'Kontak dan lokasi perusahaan dibuat mudah ditemukan.'
+        ]
       },
       {
-        icon: '🚀',
+        key: 'landing-page',
+        icon: '🎯',
         title: 'Landing Page Penjualan (Single Product)',
-        desc: 'Website satu halaman yang fokus menjual satu produk unggulan, promo khusus, atau layanan tertentu. Isinya dibuat padat dan meyakinkan: headline tajam, manfaat produk, keunggulan, testimoni, bonus, harga promo, garansi, dan tombol order. Cocok untuk produk viral, jasa lokal, kelas online, paket promo, atau campaign iklan.'
+        short: 'Satu halaman fokus menjual satu produk atau promo dengan copywriting tajam.',
+        bestFor: 'Produk unggulan, promo khusus, jasa tertentu, campaign iklan.',
+        description: 'Landing page dibuat untuk satu tujuan utama: membuat pengunjung tertarik dan melakukan aksi. Struktur halaman dibangun dari headline kuat, masalah pelanggan, solusi, manfaat, bukti, testimoni, FAQ, hingga tombol beli. Cocok untuk produk unggulan atau promosi yang ingin diarahkan langsung ke WhatsApp.',
+        features: [
+          'Headline dan copywriting dibuat lebih persuasif untuk menarik perhatian.',
+          'Struktur halaman fokus pada manfaat produk dan alasan kenapa harus membeli.',
+          'Bisa menampilkan testimoni, bonus, promo, garansi, dan FAQ.',
+          'Tombol CTA ditempatkan strategis agar pengunjung mudah melakukan order.',
+          'Cocok untuk iklan Facebook, Instagram, TikTok, atau broadcast WhatsApp.'
+        ]
       },
       {
+        key: 'katalog-digital',
         icon: '📚',
         title: 'Website Katalog Digital',
-        desc: 'Website seperti brosur digital interaktif untuk memajang banyak produk tanpa checkout otomatis. Cocok untuk toko yang punya ratusan item namun ingin pembeli tetap bertanya lewat WhatsApp. Produk bisa dikelompokkan berdasarkan kategori, dilengkapi foto, keterangan, harga, dan tombol tanya produk agar proses jual beli tetap sederhana.'
+        short: 'Brosur digital interaktif untuk menampilkan banyak produk tanpa checkout otomatis.',
+        bestFor: 'Toko grosir, toko alat bangunan, fashion, perlengkapan rumah, sparepart.',
+        description: 'Website katalog digital cocok untuk bisnis yang punya banyak produk tetapi belum perlu fitur keranjang atau pembayaran online. Fungsinya seperti brosur digital yang bisa dibuka kapan saja. Pelanggan tinggal melihat katalog, lalu klik WhatsApp untuk bertanya atau memesan.',
+        features: [
+          'Menampilkan banyak produk dalam kategori yang rapi dan mudah dicari.',
+          'Setiap produk bisa diberi foto, harga, deskripsi, dan detail singkat.',
+          'Tidak perlu checkout otomatis sehingga lebih simpel dan ringan.',
+          'Cocok dibagikan sebagai link katalog ke pelanggan lama maupun baru.',
+          'Membantu usaha terlihat lebih modern daripada hanya kirim foto satu-satu.'
+        ]
       },
       {
+        key: 'undangan-digital',
         icon: '💍',
         title: 'Website Undangan Digital',
-        desc: 'Website undangan online untuk pernikahan, akikah, syukuran, ulang tahun, atau event perusahaan. Bisa dilengkapi nama acara, foto pasangan atau keluarga, hitung mundur, galeri foto, detail waktu, peta lokasi, tombol buka Maps, ucapan tamu, dan informasi rekening hadiah bila diperlukan. Tampilannya bisa dibuat elegan, romantis, atau formal.'
+        short: 'Undangan online elegan untuk pernikahan, akikah, syukuran, atau event.',
+        bestFor: 'Pernikahan, akikah, ulang tahun, event keluarga, gathering perusahaan.',
+        description: 'Website undangan digital memudahkan acara dibagikan melalui link. Tamu bisa melihat detail acara, waktu, lokasi, galeri, peta, dan countdown. Desainnya bisa dibuat mewah, romantis, formal, atau sesuai tema acara.',
+        features: [
+          'Detail acara lengkap: nama, tanggal, tempat, waktu, dan rangkaian kegiatan.',
+          'Countdown menuju hari acara agar tamu mudah mengingat tanggal penting.',
+          'Galeri foto, cerita singkat, kutipan, dan peta lokasi.',
+          'Tombol navigasi ke Google Maps dan tombol konfirmasi ke WhatsApp.',
+          'Cocok untuk acara yang ingin terlihat modern dan praktis dibagikan.'
+        ]
       },
       {
+        key: 'portfolio',
         icon: '🎨',
         title: 'Website Portofolio',
-        desc: 'Website untuk seniman, fotografer, MUA, desainer, editor video, penjahit, tukang dekorasi, pekerja lepas, atau kreator lokal. Fokusnya memamerkan hasil karya terbaik agar calon klien yakin sebelum memesan jasa. Bisa berisi galeri, profil singkat, daftar layanan, pengalaman, testimoni, harga mulai, dan tombol booking konsultasi.'
+        short: 'Untuk menampilkan karya terbaik agar calon klien lebih percaya.',
+        bestFor: 'Fotografer, MUA, desainer, videografer, seniman, freelancer.',
+        description: 'Website portofolio membantu pekerja kreatif menampilkan hasil karya secara lebih profesional. Calon klien bisa langsung melihat kualitas, gaya, pengalaman, dan layanan yang ditawarkan. Ini cocok untuk personal branding dan mendapatkan order jasa.',
+        features: [
+          'Galeri karya dengan tampilan premium dan mudah dilihat dari HP.',
+          'Setiap proyek bisa diberi cerita singkat, kategori, dan detail pekerjaan.',
+          'Halaman profil untuk memperkenalkan keahlian dan pengalaman.',
+          'Tombol booking atau konsultasi langsung ke WhatsApp.',
+          'Meningkatkan kesan profesional dibanding hanya mengandalkan media sosial.'
+        ]
       },
       {
+        key: 'booking',
         icon: '📅',
         title: 'Website Booking / Reservasi',
-        desc: 'Website untuk usaha yang membutuhkan pemesanan jadwal seperti rental mobil, penginapan, salon, barbershop, klinik kecantikan, jasa servis, studio foto, atau tempat wisata. Bisa menampilkan daftar layanan, pilihan jadwal, formulir pemesanan sederhana, detail paket, lokasi, aturan booking, dan tombol konfirmasi ke WhatsApp.'
+        short: 'Untuk usaha yang butuh jadwal, pemesanan layanan, atau reservasi.',
+        bestFor: 'Rental mobil, penginapan, salon, barbershop, studio, jasa MUA.',
+        description: 'Website booking membantu pelanggan memahami layanan, harga, jadwal, dan cara pemesanan. Sistem bisa diarahkan ke WhatsApp agar pemilik usaha tetap mudah mengonfirmasi jadwal. Sangat membantu mengurangi pertanyaan berulang.',
+        features: [
+          'Daftar layanan, harga, durasi, jam operasional, dan ketentuan booking.',
+          'Form atau tombol reservasi yang langsung mengarah ke WhatsApp.',
+          'Informasi jadwal dan alur booking dibuat jelas untuk pelanggan.',
+          'Cocok untuk usaha yang mengandalkan slot waktu atau ketersediaan layanan.',
+          'Membantu usaha terlihat lebih tertata dan profesional.'
+        ]
       },
       {
-        icon: '🎓',
+        key: 'edukasi',
+        icon: '🏫',
         title: 'Website Edukasi / Sekolah',
-        desc: 'Website untuk sekolah, yayasan, pesantren, bimbingan belajar, kursus komputer, les privat, atau komunitas pendidikan. Bisa berisi profil lembaga, program belajar, fasilitas, guru atau pengajar, galeri kegiatan, pengumuman, pendaftaran siswa baru, lokasi, dan kontak admin. Membantu lembaga terlihat lebih resmi dan mudah ditemukan.'
+        short: 'Untuk sekolah, yayasan, pesantren, kursus, atau bimbingan belajar.',
+        bestFor: 'Sekolah, yayasan, TPA, pesantren, kursus, bimbel lokal.',
+        description: 'Website edukasi membantu lembaga pendidikan menyampaikan profil, program, fasilitas, pengumuman, dan informasi pendaftaran. Orang tua atau calon siswa bisa mengenal lembaga lebih mudah dan melihat keseriusan pengelola.',
+        features: [
+          'Profil sekolah, visi misi, sejarah, program, dan fasilitas.',
+          'Informasi pendaftaran, kontak, lokasi, dan pengumuman penting.',
+          'Galeri kegiatan siswa, guru, prestasi, dan dokumentasi acara.',
+          'Struktur halaman dibuat informatif dan mudah dipahami masyarakat.',
+          'Meningkatkan kepercayaan orang tua dan calon peserta didik.'
+        ]
       }
     ];
 
     const packages = [
       {
+        key: 'basic',
         name: 'Paket Basic',
-        price: 'Rp 150.000',
-        badge: 'Mulai Hemat',
-        desc: 'Pilihan terbaik untuk usaha kecil yang ingin punya halaman online rapi dan mudah dibagikan.',
-        features: ['1 halaman website responsif', 'Desain template rapi dan elegan', 'Tombol WhatsApp langsung order', 'Cocok untuk profil singkat atau promo sederhana']
+        price: 150000,
+        priceText: 'Rp 150.000',
+        badge: 'Hemat Mulai Dulu',
+        desc: 'Cocok untuk usaha yang ingin punya halaman website sederhana, rapi, dan langsung bisa diarahkan ke WhatsApp.',
+        features: ['1 halaman website', 'Desain template rapi', 'Tombol WhatsApp', 'Mobile friendly', 'Copywriting sederhana', 'Cocok untuk mulai promosi']
       },
       {
+        key: 'menengah',
         name: 'Paket Menengah',
-        price: 'Rp 225.000',
+        price: 225000,
+        priceText: 'Rp 225.000',
         badge: 'Paling Seimbang',
-        desc: 'Cocok untuk usaha yang butuh tampilan lebih lengkap dengan beberapa halaman dan informasi bisnis yang lebih jelas.',
-        features: ['Website multipage sederhana', 'SEO dasar untuk judul dan deskripsi', 'Integrasi Google Maps', 'Bagian layanan, katalog, galeri, dan kontak']
+        desc: 'Cocok untuk usaha yang butuh halaman lebih lengkap, tampilan lebih matang, SEO dasar, dan integrasi Maps.',
+        features: ['Multipage', 'SEO dasar', 'Integrasi Google Maps', 'Struktur konten lebih lengkap', 'CTA WhatsApp dinamis', 'Cocok untuk profil bisnis']
       },
       {
+        key: 'sultan',
         name: 'Paket Sultan',
-        price: 'Rp 300.000',
+        price: 300000,
+        priceText: 'Rp 300.000',
         badge: 'Paling Premium',
-        desc: 'Untuk bisnis yang ingin tampil lebih mewah, custom, dan siap dipromosikan dengan kesan profesional.',
-        features: ['Desain custom mewah', 'Fitur lengkap sesuai kebutuhan', 'Copywriting lebih kuat', 'Prioritas support dan revisi lebih diperhatikan']
+        desc: 'Cocok untuk yang ingin tampilan custom mewah, fitur lebih lengkap, dan prioritas support agar hasil lebih maksimal.',
+        features: ['Desain custom mewah', 'Fitur lengkap', 'Prioritas support', 'Animasi halus', 'Copywriting lebih kuat', 'Cocok untuk tampil paling serius']
       }
     ];
 
-    const websiteGrid = document.getElementById('websiteGrid');
-    const pricingGrid = document.getElementById('pricingGrid');
+    const addons = [
+      ['🗺️', 'Integrasi Maps', 'Alamat usaha lebih mudah ditemukan pelanggan.'],
+      ['🔍', 'SEO Dasar', 'Judul, deskripsi, dan struktur halaman dirapikan.'],
+      ['📲', 'WhatsApp Dinamis', 'Pesan otomatis sesuai layanan, paket, atau produk.'],
+      ['🖼️', 'Galeri Foto', 'Tampilkan produk, proyek, karya, atau dokumentasi acara.'],
+      ['📦', 'Katalog Produk', 'Produk ditata dengan kategori agar mudah dilihat.'],
+      ['⏳', 'Countdown Event', 'Cocok untuk undangan digital dan peluncuran promo.'],
+      ['⭐', 'Testimoni', 'Bukti sosial agar calon pelanggan lebih percaya.'],
+      ['📝', 'Form Ringkas', 'Data calon pelanggan bisa diarahkan ke WhatsApp.']
+    ];
 
-    websites.forEach((item) => {
-      const card = document.createElement('article');
-      card.className = 'glass-card group flex h-full flex-col rounded-[1.75rem] p-5 shadow-luxury transition duration-300 hover:-translate-y-2 hover:border-gold/45 hover:shadow-gold';
-      card.innerHTML = `
-        <div class="flex items-start justify-between gap-4">
-          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-gold/20 bg-gold/10 text-2xl transition group-hover:scale-110">${item.icon}</div>
-          <span class="rounded-full border border-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-cream/50">Website</span>
-        </div>
-        <h3 class="mt-5 text-xl font-black leading-snug text-white">${item.title}</h3>
-        <p class="mt-4 flex-1 text-sm leading-7 text-cream/68">${item.desc}</p>
-        <button class="wa-btn shine mt-6 rounded-2xl bg-gold-gradient px-5 py-3 text-sm font-black text-black transition hover:-translate-y-0.5" data-type="${item.title}" data-package="Belum memilih paket">
-          Pesan Jenis Ini
-        </button>
-      `;
-      websiteGrid.appendChild(card);
-    });
+    const portfolios = [
+      { category: 'Toko Online', title: 'Toko Baju Elegan', desc: 'Etalase produk, kategori, detail harga, dan tombol checkout WhatsApp.', icon: '🛍️' },
+      { category: 'Company Profile', title: 'Profil Kontraktor', desc: 'Halaman perusahaan, layanan, proyek, legalitas, dan kontak resmi.', icon: '🏗️' },
+      { category: 'Landing Page', title: 'Promo Produk Herbal', desc: 'Copywriting tajam, manfaat produk, testimoni, dan tombol order.', icon: '🌿' },
+      { category: 'Katalog Digital', title: 'Katalog Sembako', desc: 'Daftar produk banyak, kategori rapi, dan pemesanan via WhatsApp.', icon: '🧺' },
+      { category: 'Undangan', title: 'Undangan Pernikahan', desc: 'Countdown, galeri, lokasi acara, dan desain mewah.', icon: '💌' },
+      { category: 'Booking', title: 'Reservasi Rental Mobil', desc: 'Daftar armada, harga sewa, ketentuan, dan tombol booking.', icon: '🚗' }
+    ];
 
-    packages.forEach((pkg, index) => {
-      const card = document.createElement('article');
-      const featured = index === 1;
-      card.className = `${featured ? 'border-gold/50 bg-gradient-to-b from-gold/15 to-charcoal scale-[1.01]' : 'border-gold/15 bg-charcoal'} rounded-[2rem] border p-6 shadow-luxury transition duration-300 hover:-translate-y-2 hover:shadow-gold`;
-      card.innerHTML = `
-        <div class="flex items-center justify-between gap-4">
-          <span class="rounded-full ${featured ? 'bg-gold-gradient text-black' : 'border border-gold/20 text-goldLight'} px-4 py-2 text-xs font-black uppercase tracking-[.16em]">${pkg.badge}</span>
-        </div>
-        <h3 class="mt-6 text-2xl font-black text-white">${pkg.name}</h3>
-        <p class="mt-2 gold-text text-4xl font-black">${pkg.price}</p>
-        <p class="mt-4 leading-7 text-cream/68">${pkg.desc}</p>
-        <ul class="mt-6 space-y-3">
-          ${pkg.features.map(feature => `<li class="flex gap-3 text-sm leading-6 text-cream/78"><span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/15 text-xs text-goldLight">✓</span>${feature}</li>`).join('')}
-        </ul>
-        <button class="wa-btn shine mt-7 w-full rounded-2xl bg-gold-gradient px-5 py-4 font-black text-black transition hover:-translate-y-0.5" data-type="Website untuk usaha saya" data-package="${pkg.name} ${pkg.price}">
-          Pilih ${pkg.name}
-        </button>
-      `;
-      pricingGrid.appendChild(card);
-    });
+    const faqs = [
+      ['Apakah website bisa dibuka dari HP?', 'Ya. Website dibuat mobile-first sehingga nyaman dibuka dari HP, tablet, maupun laptop. Ini penting karena kebanyakan pelanggan lokal membuka link dari smartphone.'],
+      ['Apakah tombol bisa langsung ke WhatsApp?', 'Bisa. Tombol WhatsApp menjadi fitur utama. Pesan bisa dibuat otomatis sesuai jenis website, paket, produk, atau kebutuhan pelanggan.'],
+      ['Apakah cocok untuk pedagang kecil?', 'Sangat cocok. Paket dibuat agar UKM, pedagang, dan jasa lokal bisa mulai go digital tanpa biaya terlalu berat.'],
+      ['Apakah bisa pakai foto dan teks dari saya?', 'Bisa. Anda bisa mengirim logo, foto produk, alamat, deskripsi usaha, nomor WhatsApp, dan materi lain yang ingin dimasukkan.'],
+      ['Kalau belum tahu pilih paket apa bagaimana?', 'Klik konsultasi WhatsApp. Nanti bisa dibantu pilih jenis website dan paket yang paling cocok berdasarkan kebutuhan usaha.'],
+      ['Apakah website bisa untuk sekolah atau undangan?', 'Bisa. Website tidak hanya untuk jualan, tetapi juga cocok untuk sekolah, yayasan, undangan digital, portofolio, dan sistem booking.']
+    ];
 
-    function openWhatsApp(type, packageName) {
-      const message = `Halo Bapak Angga Pradana Putra, saya tertarik membuat ${type} dengan pilihan ${packageName}. Boleh minta info lebih lanjut?`;
-      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank', 'noopener,noreferrer');
+    let activeService = 'all';
+    let activePortfolio = 'Semua';
+    let pendingMessage = '';
+
+    const rupiah = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
+    const waLink = (message) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+    const quickMessage = () => 'Halo Bapak Angga Pradana Putra, saya tertarik dengan jasa pembuatan website dari Angga Web Design. Boleh bantu rekomendasikan jenis website dan paket yang cocok untuk kebutuhan saya?';
+
+    function openModal(message) {
+      pendingMessage = message;
+      document.getElementById('modalMessage').textContent = message;
+      document.getElementById('orderModal').classList.add('show');
     }
 
-    document.addEventListener('click', function(event) {
-      const button = event.target.closest('.wa-btn');
-      if (!button) return;
-      const type = button.dataset.type || 'Website';
-      const packageName = button.dataset.package || 'Belum memilih paket';
-      openWhatsApp(type, packageName);
-    });
+    function closeModal() {
+      document.getElementById('orderModal').classList.remove('show');
+    }
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+    function renderServiceTabs() {
+      const wrapper = document.getElementById('serviceTabs');
+      const tabs = [{ key: 'all', title: 'Semua' }, ...services.map(s => ({ key: s.key, title: s.title.replace('Website ', '').replace(' (E-Commerce)', '') }))];
+      wrapper.innerHTML = tabs.map(tab => `
+        <button class="service-tab shrink-0 rounded-full border border-gold/15 px-5 py-3 text-sm font-bold btn-ghost ${activeService === tab.key ? 'active' : ''}" data-service-tab="${tab.key}">${tab.title}</button>
+      `).join('');
+    }
+
+    function renderServices() {
+      const grid = document.getElementById('serviceGrid');
+      const filtered = activeService === 'all' ? services : services.filter(s => s.key === activeService);
+      grid.innerHTML = filtered.map((service, index) => `
+        <article class="reveal show lux-card card-hover rounded-[32px] p-6 flex flex-col">
+          <div class="flex items-start justify-between gap-4">
+            <div class="w-15 h-15 min-w-15 rounded-3xl bg-gold/12 border border-gold/16 grid place-items-center text-3xl p-4">${service.icon}</div>
+            <span class="rounded-full border border-gold/16 px-3 py-1 text-xs text-gold">Layanan ${String(index + 1).padStart(2, '0')}</span>
+          </div>
+          <h3 class="mt-6 text-2xl font-black leading-tight">${service.title}</h3>
+          <p class="mt-3 muted text-zinc-400 leading-7 text-sm">${service.short}</p>
+          <div class="mt-5 deep-panel rounded-2xl p-4">
+            <div class="text-sm font-bold text-gold">Penjelasan lengkap</div>
+            <p class="mt-2 muted text-zinc-300 leading-7 text-sm">${service.description}</p>
+          </div>
+          <ul class="mt-5 space-y-3 flex-1">
+            ${service.features.map(feature => `<li class="flex gap-3 text-sm muted text-zinc-300 leading-7"><span class="text-gold mt-1">✦</span><span>${feature}</span></li>`).join('')}
+          </ul>
+          <div class="mt-5 rounded-2xl bg-gold/8 border border-gold/14 p-4">
+            <div class="text-sm font-bold">Cocok untuk:</div>
+            <p class="mt-1 muted text-zinc-400 text-sm leading-7">${service.bestFor}</p>
+          </div>
+          <div class="mt-5 grid gap-3">
+            <select class="servicePkg input-lux rounded-2xl px-4 py-3 text-sm" data-service="${service.title}">
+              ${packages.map(pkg => `<option value="${pkg.name}">${pkg.name} - ${pkg.priceText}</option>`).join('')}
+            </select>
+            <button class="orderService rounded-2xl px-5 py-4 btn-gold font-black" data-service="${service.title}">Pesan ${service.title.replace('Website ', '').split('(')[0].trim()}</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderPricing() {
+      const grid = document.getElementById('pricingGrid');
+      grid.innerHTML = packages.map((pkg, index) => `
+        <article class="reveal lux-card card-hover rounded-[34px] p-6 sm:p-7 relative ${index === 1 ? 'ring-1 ring-gold/30 shadow-gold' : ''}">
+          ${index === 1 ? '<div class="absolute -top-4 right-6 rounded-full bg-gold text-black px-4 py-2 text-xs font-black">PALING PAS</div>' : ''}
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <div class="text-sm text-gold uppercase tracking-[.18em]">${pkg.badge}</div>
+              <h3 class="mt-2 text-3xl font-black">${pkg.name}</h3>
+            </div>
+            <div class="w-14 h-14 rounded-2xl bg-gold text-black grid place-items-center font-black">★</div>
+          </div>
+          <div class="mt-6 font-black text-4xl gold-text">${pkg.priceText}</div>
+          <p class="mt-4 muted text-zinc-400 leading-7 text-sm">${pkg.desc}</p>
+          <ul class="mt-6 space-y-3">
+            ${pkg.features.map(f => `<li class="flex gap-3 muted text-zinc-300 text-sm leading-7"><span class="text-gold">✓</span><span>${f}</span></li>`).join('')}
+          </ul>
+          <div class="mt-6 grid gap-3">
+            <select class="packageService input-lux rounded-2xl px-4 py-3 text-sm" data-package="${pkg.name}">
+              ${services.map(service => `<option value="${service.title}">${service.title}</option>`).join('')}
+            </select>
+            <button class="orderPackage rounded-2xl px-5 py-4 ${index === 1 ? 'btn-gold' : 'btn-ghost'} font-black" data-package="${pkg.name}">Pilih ${pkg.name}</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderAddons() {
+      document.getElementById('addonGrid').innerHTML = addons.map(([icon, title, desc]) => `
+        <div class="reveal lux-card card-hover rounded-[28px] p-5">
+          <div class="text-3xl">${icon}</div>
+          <h3 class="mt-4 text-lg font-black">${title}</h3>
+          <p class="mt-2 muted text-zinc-400 text-sm leading-7">${desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderPortfolioFilters() {
+      const filters = ['Semua', ...new Set(portfolios.map(p => p.category))];
+      document.getElementById('portfolioFilters').innerHTML = filters.map(filter => `
+        <button class="portfolio-filter shrink-0 rounded-full border border-gold/15 px-5 py-3 text-sm font-bold btn-ghost ${activePortfolio === filter ? 'active' : ''}" data-filter="${filter}">${filter}</button>
+      `).join('');
+    }
+
+    function renderPortfolio() {
+      const items = activePortfolio === 'Semua' ? portfolios : portfolios.filter(p => p.category === activePortfolio);
+      document.getElementById('portfolioGrid').innerHTML = items.map(item => `
+        <article class="reveal show lux-card card-hover rounded-[32px] overflow-hidden">
+          <div class="h-48 bg-gradient-to-br from-gold/22 via-white/[.03] to-black/20 border-b border-gold/10 grid place-items-center relative">
+            <div class="absolute inset-0 grid-pattern opacity-50"></div>
+            <div class="relative w-24 h-24 rounded-[28px] bg-black/24 border border-gold/20 grid place-items-center text-5xl animate-float">${item.icon}</div>
+          </div>
+          <div class="p-6">
+            <div class="text-sm text-gold font-bold">${item.category}</div>
+            <h3 class="mt-2 text-2xl font-black">${item.title}</h3>
+            <p class="mt-3 muted text-zinc-400 leading-7 text-sm">${item.desc}</p>
+            <button class="mt-5 portfolioOrder rounded-2xl px-5 py-3 btn-ghost font-bold w-full" data-title="${item.title}" data-category="${item.category}">Buat Konsep Seperti Ini</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderFaq() {
+      document.getElementById('faqList').innerHTML = faqs.map(([q, a], index) => `
+        <div class="faq-item reveal lux-card rounded-[24px] overflow-hidden ${index === 0 ? 'open' : ''}">
+          <button class="faq-question w-full flex items-center justify-between gap-4 p-5 text-left font-bold">
+            <span>${q}</span>
+            <span class="faq-icon w-9 h-9 rounded-xl bg-gold text-black grid place-items-center font-black">+</span>
+          </button>
+          <div class="faq-answer"><p class="px-5 pb-5 muted text-zinc-400 leading-8">${a}</p></div>
+        </div>
+      `).join('');
+    }
+
+    function setupCalculator() {
+      const calcService = document.getElementById('calcService');
+      const calcPackage = document.getElementById('calcPackage');
+      calcService.innerHTML = services.map(s => `<option value="${s.title}">${s.title}</option>`).join('');
+      calcPackage.innerHTML = packages.map(p => `<option value="${p.name}">${p.name} - ${p.priceText}</option>`).join('');
+
+      ['calcService', 'calcPackage', 'calcBusiness', 'calcNote'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updateCalculator);
+        document.getElementById(id).addEventListener('change', updateCalculator);
+      });
+      updateCalculator();
+    }
+
+    function calculatorMessage() {
+      const service = document.getElementById('calcService').value;
+      const packageName = document.getElementById('calcPackage').value;
+      const business = document.getElementById('calcBusiness').value.trim();
+      const note = document.getElementById('calcNote').value.trim();
+      const pkg = packages.find(p => p.name === packageName) || packages[0];
+      return `Halo Bapak Angga Pradana Putra, saya tertarik membuat ${service} dengan pilihan ${packageName} (${pkg.priceText}).${business ? ' Nama usaha/acara saya: ' + business + '.' : ''}${note ? ' Catatan kebutuhan: ' + note : ''} Boleh minta info lebih lanjut?`;
+    }
+
+    function updateCalculator() {
+      const service = document.getElementById('calcService').value;
+      const packageName = document.getElementById('calcPackage').value;
+      const pkg = packages.find(p => p.name === packageName) || packages[0];
+      document.getElementById('summaryPrice').textContent = pkg.priceText;
+      document.getElementById('summaryService').textContent = service;
+      document.getElementById('summaryPackage').textContent = packageName;
+      document.getElementById('summaryMessage').textContent = calculatorMessage();
+    }
+
+    function revealOnScroll() {
+      const items = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .12 });
+      items.forEach(item => observer.observe(item));
+    }
+
+    function countUp() {
+      const counters = document.querySelectorAll('[data-counter]');
+      counters.forEach(counter => {
+        const target = Number(counter.dataset.counter);
+        let current = 0;
+        const step = Math.max(1, Math.round(target / 40));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            counter.textContent = target;
+            clearInterval(timer);
+          } else {
+            counter.textContent = current;
+          }
+        }, 35);
+      });
+    }
+
+    function bindEvents() {
+      document.addEventListener('click', (e) => {
+        const quick = e.target.closest('[data-quick-wa]');
+        if (quick) openModal(quickMessage());
+
+        const serviceTab = e.target.closest('[data-service-tab]');
+        if (serviceTab) {
+          activeService = serviceTab.dataset.serviceTab;
+          renderServiceTabs();
+          renderServices();
+          bindDynamicAfterRender();
+        }
+
+        const portfolioFilter = e.target.closest('[data-filter]');
+        if (portfolioFilter) {
+          activePortfolio = portfolioFilter.dataset.filter;
+          renderPortfolioFilters();
+          renderPortfolio();
+          bindDynamicAfterRender();
+        }
+
+        const faqQuestion = e.target.closest('.faq-question');
+        if (faqQuestion) faqQuestion.closest('.faq-item').classList.toggle('open');
+      });
+
+      document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('hidden'));
+      document.querySelectorAll('#mobileMenu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden')));
+
+      document.getElementById('themeToggle').addEventListener('click', () => document.body.classList.toggle('light-mode'));
+
+      document.getElementById('modalSend').addEventListener('click', () => window.open(waLink(pendingMessage), '_blank'));
+      document.getElementById('modalCancel').addEventListener('click', closeModal);
+      document.getElementById('closeModal').addEventListener('click', closeModal);
+      document.getElementById('orderModal').addEventListener('click', (e) => { if (e.target.id === 'orderModal') closeModal(); });
+
+      document.getElementById('calcWaBtn').addEventListener('click', () => openModal(calculatorMessage()));
+      document.getElementById('copyMessageBtn').addEventListener('click', async () => {
+        const text = calculatorMessage();
+        try {
+          await navigator.clipboard.writeText(text);
+          document.getElementById('copyStatus').classList.remove('hidden');
+          setTimeout(() => document.getElementById('copyStatus').classList.add('hidden'), 1800);
+        } catch (err) {
+          alert(text);
+        }
+      });
+
+      document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        document.getElementById('progressBar').style.width = `${(scrollTop / height) * 100}%`;
+        document.getElementById('backToTop').classList.toggle('hidden', scrollTop < 650);
+      });
+    }
+
+    function bindDynamicAfterRender() {
+      document.querySelectorAll('.orderService').forEach(btn => {
+        btn.onclick = () => {
+          const card = btn.closest('article');
+          const pkg = card.querySelector('.servicePkg').value;
+          const service = btn.dataset.service;
+          openModal(`Halo Bapak Angga Pradana Putra, saya tertarik membuat ${service} dengan pilihan ${pkg}. Boleh minta info lebih lanjut?`);
+        };
+      });
+
+      document.querySelectorAll('.orderPackage').forEach(btn => {
+        btn.onclick = () => {
+          const card = btn.closest('article');
+          const service = card.querySelector('.packageService').value;
+          const pkg = btn.dataset.package;
+          openModal(`Halo Bapak Angga Pradana Putra, saya tertarik membuat ${service} dengan pilihan ${pkg}. Boleh minta info lebih lanjut?`);
+        };
+      });
+
+      document.querySelectorAll('.portfolioOrder').forEach(btn => {
+        btn.onclick = () => {
+          openModal(`Halo Bapak Angga Pradana Putra, saya tertarik membuat website dengan konsep seperti ${btn.dataset.title} untuk kategori ${btn.dataset.category}. Boleh minta info paket yang cocok?`);
+        };
+      });
+    }
+
+    function init() {
+      renderServiceTabs();
+      renderServices();
+      renderPricing();
+      renderAddons();
+      renderPortfolioFilters();
+      renderPortfolio();
+      renderFaq();
+      setupCalculator();
+      bindEvents();
+      bindDynamicAfterRender();
+      revealOnScroll();
+      countUp();
+    }
+
+    init();
   </script>
 </body>
 </html>
